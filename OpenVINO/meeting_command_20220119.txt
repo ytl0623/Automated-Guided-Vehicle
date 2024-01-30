@@ -1,0 +1,17 @@
+python3 mo_tf.py --input_model /opt/intel/openvino_2021/deployment_tools/open_model_zoo/tools/downloader/public/ssd_mobilenet_v2_coco/ssd_mobilenet_v2_coco_2018_03_29/frozen_inference_graph.pb -o ~/ssd_mobilenet_v2_coco --tensorflow_use_custom_operations_config /opt/intel/openvino_2021/deployment_tools/model_optimizer/extensions/front/tf/ssd_v2_support.json --tensorflow_object_detection_api_pipeline_config /opt/intel/openvino_2021/deployment_tools/open_model_zoo/tools/downloader/public/ssd_mobilenet_v2_coco/ssd_mobilenet_v2_coco_2018_03_29/pipeline.config
+
+python3 object_detection_demo_ssd_async.py -i cam -m ~/ssd_mobilenet_v2_coco/frozen_inference_graph.xml -l /opt/intel/openvino/deployment_tools/inference_engine/lib/intel64/libcpu_extension_sse4.so -d MYRIAD --labels ~/ssd_mobilenet_v2_coco/coco_91cl.txt
+
+python3 object_detection_demo.py -i /dev/video0 -m /media/ros/07F5-08B0/catkin_ws/src/ros_openvino/models/ssd_mobilenet_v2_coco/frozen_inference_graph.xml -d MULTI:MYRIAD.1.3.4-ma2480,MYRIAD.1.8-ma2480 --labels $SD_CARD_PATH/catkin_ws/src/ros_openvino/models/ssd_mobilenet_v2_coco/coco_91cl_bkgr.txt -at ssd
+
+./benchmark_app.py -m /media/ros/07F5-08B0/catkin_ws/src/ros_openvino/models/ssd_mobilenet_v2_coco/frozen_inference_graph.xml -i /opt/intel/openvino_2021/deployment_tools/demo/car.png  -d MULTI:MYRIAD.1.3.4-ma2480,MYRIAD.1.8-ma2480
+
+
+
+
+
+
+
+
+
+

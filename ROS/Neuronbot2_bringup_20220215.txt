@@ -1,0 +1,35 @@
+6.1.1. Motor Test
+
+roscore
+# 開不起來的話可以去 ros_menu 的 config 檔修改 master_ip
+
+cd ~/neuronbot2_ros1_ws/src/neuronbot2/neuronbot2_tools/neuronbot2_init/
+
+./neuronbot2_test.sh 1
+
+6.1.2. LiDAR Test
+
+./neuronbot2_test.sh 2
+
+6.1.3. LED Test
+
+./neuronbot2_test.sh 3
+
+Bringup NeuronBot with ROS1
+
+roscore
+
+roslaunch neuronbot2_bringup bringup.launch
+
+rosrun teleop_twist_keyboard teleop_twist_keyboard.py 
+
+Bringup NeuronBot with ROS2
+
+source /opt/ros/<ROS_DISTROS>/setup.bash
+
+source ~/neuronbot2_ros2_wsinstall/local_setup.bash
+
+ros2 launch neuronbot2_bringup bringup_launch.py
+
+ros2 run teleop_twist_keyboard teleop_twist_keyboard
+

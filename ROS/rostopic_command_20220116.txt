@@ -1,0 +1,7 @@
+roslaunch ydlidar lidar.launch
+
+rostopic list
+
+rostopic info ...
+
+rostopic echo ...

@@ -1,0 +1,26 @@
+1. Generate .pb file
+import tensorflow as tf
+
+image_model = tf.keras.applications.ResNet101(include_top=False, weights='imagenet')
+new_input = image_model.input
+hidden_layer = image_model.layers[-1].output
+image_features_extract_model = tf.keras.Model(new_input, hidden_layer)
+
+image_features_extract_model.save_weights("./resnet101/resnet101")
+
+tf.saved_model.save(image_features_extract_model, "./res/")
+
+2. Generate .xml, .bin file
+ytl@ubuntu:/opt/intel/openvino_2021/deployment_tools/model_optimizer$ python3 mo_tf.py --saved_model_dir /home/ytl/Downloads/res --input_shape [1,224,224,3] --output_dir ~/Downloads/1xx3/
+
+3. Inferenece
+ytl@ubuntu:~$ python3 OpenVINO_Inference_Engine_20220223.py 
+
+
+
+
+
+
+
+
+

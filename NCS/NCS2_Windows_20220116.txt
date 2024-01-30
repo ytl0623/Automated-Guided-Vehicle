@@ -1,0 +1,298 @@
+https://www.intel.com/content/www/us/en/developer/articles/guide/get-started-with-neural-compute-stick.html
+
+Get Started with Intel® Neural Compute Stick 2 Windows
+
+cd C:\Program Files (x86)\Intel\openvino_2021\inference_engine\external\MovidiusDriver
+
+Movidius_VSC_Device.inf -> Right-Click -> Install
+
+cd C:\Program Files (x86)\Intel\openvino_2021\bin
+
+setupvars.bat
+
+cd C:\Program Files (x86)\Intel\openvino_2021\deployment_tools\demo
+
+demo_squeezenet_download_convert_run.bat –d MYRIAD
+
+[ERROR]
+'cmake' 不是內部或外部命令、可執行的程式或批次檔。
+
+[SOLVE]
+https://cmake.org/download/
+
+[ERROR]
+ModuleNotFoundError: No module named 'google.protobuf'
+
+[SOLVE]
+pip uninstall protobuf
+pip install protobuf
+
+[ERROR]
+Can not parse hub and port of the devices: No error
+Can not parse hub and port of the devices: No error
+[ ERROR ] Can not init Myriad device: NC_ERROR
+Error
+
+[SOLVE]
+卸載在VM上的NCS
+
+"""
+(base) C:\Program Files (x86)\Intel\openvino_2021\deployment_tools\demo>demo_squeezenet_download_convert_run.bat -d MYRIAD
+target = MYRIAD
+target_precision = FP16
+Python 3.8.3
+[setupvars.bat] OpenVINO environment initialized
+INTEL_OPENVINO_DIR is set to C:\Program Files (x86)\Intel\openvino_2021
+Python 3.8.3
+ECHO 已關閉。
+WARNING: Ignoring invalid distribution -andas (c:\programdata\anaconda3\lib\site-packages)
+Requirement already satisfied: pyyaml>=5.4.1 in c:\users\ytlwin\appdata\roaming\python\python38\site-packages (from -r C:\Program Files (x86)\Intel\openvino_2021\deployment_tools\demo\..\open_model_zoo\tools\downloader\requirements.in (line 1)) (6.0)
+Requirement already satisfied: requests>=2.25.1 in c:\users\ytlwin\appdata\roaming\python\python38\site-packages (from -r C:\Program Files (x86)\Intel\openvino_2021\deployment_tools\demo\..\open_model_zoo\tools\downloader\requirements.in (line 2)) (2.25.1)
+Requirement already satisfied: certifi>=2017.4.17 in c:\users\ytlwin\appdata\roaming\python\python38\site-packages (from requests>=2.25.1->-r C:\Program Files (x86)\Intel\openvino_2021\deployment_tools\demo\..\open_model_zoo\tools\downloader\requirements.in (line 2)) (2020.12.5)
+Requirement already satisfied: urllib3<1.27,>=1.21.1 in c:\users\ytlwin\appdata\roaming\python\python38\site-packages (from requests>=2.25.1->-r C:\Program Files (x86)\Intel\openvino_2021\deployment_tools\demo\..\open_model_zoo\tools\downloader\requirements.in (line 2)) (1.26.4)
+Requirement already satisfied: idna<3,>=2.5 in c:\users\ytlwin\appdata\roaming\python\python38\site-packages (from requests>=2.25.1->-r C:\Program Files (x86)\Intel\openvino_2021\deployment_tools\demo\..\open_model_zoo\tools\downloader\requirements.in (line 2)) (2.10)
+Requirement already satisfied: chardet<5,>=3.0.2 in c:\users\ytlwin\appdata\roaming\python\python38\site-packages (from requests>=2.25.1->-r C:\Program Files (x86)\Intel\openvino_2021\deployment_tools\demo\..\open_model_zoo\tools\downloader\requirements.in (line 2)) (4.0.0)
+WARNING: Ignoring invalid distribution -andas (c:\programdata\anaconda3\lib\site-packages)
+Download public squeezenet1.1 model
+python "C:\Program Files (x86)\Intel\openvino_2021\deployment_tools\open_model_zoo\tools\downloader\downloader.py" --name "squeezenet1.1" --output_dir "C:\Users\ytlWin\Documents\Intel\OpenVINO\openvino_models\models" --cache_dir "C:\Users\ytlWin\Documents\Intel\OpenVINO\openvino_models\cache"
+################|| Downloading squeezenet1.1 ||################
+
+========== Retrieving C:\Users\ytlWin\Documents\Intel\OpenVINO\openvino_models\models\public\squeezenet1.1\squeezenet1.1.prototxt from the cache
+
+========== Retrieving C:\Users\ytlWin\Documents\Intel\OpenVINO\openvino_models\models\public\squeezenet1.1\squeezenet1.1.caffemodel from the cache
+
+========== Replacing text in C:\Users\ytlWin\Documents\Intel\OpenVINO\openvino_models\models\public\squeezenet1.1\squeezenet1.1.prototxt
+
+squeezenet1.1 model downloading completed
+
+等候  0 秒後，請按任何一個鍵繼續 ...
+
+Target folder C:\Users\ytlWin\Documents\Intel\OpenVINO\openvino_models\ir\public\squeezenet1.1\FP16 already exists. Skipping IR generation with Model Optimizer.
+If you want to convert a model again, remove the entire C:\Users\ytlWin\Documents\Intel\OpenVINO\openvino_models\ir\public\squeezenet1.1\FP16 folder.
+
+等候  0 秒後，請按任何一個鍵繼續 ...
+
+###############|| Generate VS solution for Inference Engine samples using cmake ||###############
+
+
+等候  0 秒後，請按任何一個鍵繼續 ...
+Creating Visual Studio 16 2019 x64 files in C:\Users\ytlWin\Documents\Intel\OpenVINO\inference_engine_samples_build...
+-- Selecting Windows SDK version 10.0.19041.0 to target Windows 10.0.19043.
+-- The C compiler identification is MSVC 19.29.30137.0
+-- The CXX compiler identification is MSVC 19.29.30137.0
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Check for working C compiler: C:/Program Files (x86)/Microsoft Visual Studio/2019/Community/VC/Tools/MSVC/14.29.30133/bin/Hostx64/x64/cl.exe - skipped
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: C:/Program Files (x86)/Microsoft Visual Studio/2019/Community/VC/Tools/MSVC/14.29.30133/bin/Hostx64/x64/cl.exe - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+CMake Warning (dev) at thirdparty/cnpy/CMakeLists.txt:11 (if):
+  Policy CMP0054 is not set: Only interpret if() arguments as variables or
+  keywords when unquoted.  Run "cmake --help-policy CMP0054" for policy
+  details.  Use the cmake_policy command to set the policy and suppress this
+  warning.
+
+  Quoted variables like "MSVC" will no longer be dereferenced when the policy
+  is set to NEW.  Since the policy is not set the OLD behavior will be used.
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+-- Configuring done
+-- Generating done
+-- Build files have been written to: C:/Users/ytlWin/Documents/Intel/OpenVINO/inference_engine_samples_build
+
+等候  0 秒後，請按任何一個鍵繼續 ...
+
+###############|| Build Inference Engine samples using MS Visual Studio (MSBuild.exe) ||###############
+
+
+等候  0 秒後，請按任何一個鍵繼續 ...
+"C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\Current\Bin\MSBuild.exe" Samples.sln /p:Configuration=Release /t:cpp_samples\classification_sample_async /clp:ErrorsOnly /m
+Microsoft (R) Build Engine for .NET Framework 16.11.2+f32259642 版
+Copyright (C) Microsoft Corporation. 著作權所有，並保留一切權利。
+
+
+等候  0 秒後，請按任何一個鍵繼續 ...
+
+###############|| Run Inference Engine classification sample ||###############
+
+等候  0 秒後，請按任何一個鍵繼續 ...
+複製了         1 個檔案。
+classification_sample_async.exe -i "C:\Program Files (x86)\Intel\openvino_2021\deployment_tools\demo\car.png" -m "C:\Users\ytlWin\Documents\Intel\OpenVINO\openvino_models\ir\public\squeezenet1.1\FP16\squeezenet1.1.xml" -d MYRIAD
+[ INFO ] InferenceEngine:
+        IE version ......... 2021.4.2
+        Build ........... 2021.4.2-3974-e2a469a3450-releases/2021/4
+[ INFO ] Parsing input parameters
+[ INFO ] Files were added: 1
+[ INFO ]     C:\Program Files (x86)\Intel\openvino_2021\deployment_tools\demo\car.png
+[ INFO ] Loading Inference Engine
+[ INFO ] Device info:
+        MYRIAD
+        myriadPlugin version ......... 2021.4.2
+        Build ........... 2021.4.2-3974-e2a469a3450-releases/2021/4
+
+[ INFO ] Loading network files:
+[ INFO ] C:\Users\ytlWin\Documents\Intel\OpenVINO\openvino_models\ir\public\squeezenet1.1\FP16\squeezenet1.1.xml
+[ INFO ] Preparing input blobs
+[ WARNING ] Image is resized from (787, 259) to (227, 227)
+[ INFO ] Batch size is 1
+[ INFO ] Loading model to the device
+Can not parse hub and port of the devices: No error
+Can not parse hub and port of the devices: No error
+[ ERROR ] Can not init Myriad device: NC_ERROR
+Error
+
+(base) C:\Program Files (x86)\Intel\openvino_2021\deployment_tools\demo>demo_squeezenet_download_convert_run.bat -d MYRIAD
+target = MYRIAD
+target_precision = FP16
+Python 3.8.3
+[setupvars.bat] OpenVINO environment initialized
+INTEL_OPENVINO_DIR is set to C:\Program Files (x86)\Intel\openvino_2021
+Python 3.8.3
+ECHO 已關閉。
+WARNING: Ignoring invalid distribution -andas (c:\programdata\anaconda3\lib\site-packages)
+Requirement already satisfied: pyyaml>=5.4.1 in c:\users\ytlwin\appdata\roaming\python\python38\site-packages (from -r C:\Program Files (x86)\Intel\openvino_2021\deployment_tools\demo\..\open_model_zoo\tools\downloader\requirements.in (line 1)) (6.0)
+Requirement already satisfied: requests>=2.25.1 in c:\users\ytlwin\appdata\roaming\python\python38\site-packages (from -r C:\Program Files (x86)\Intel\openvino_2021\deployment_tools\demo\..\open_model_zoo\tools\downloader\requirements.in (line 2)) (2.25.1)
+Requirement already satisfied: certifi>=2017.4.17 in c:\users\ytlwin\appdata\roaming\python\python38\site-packages (from requests>=2.25.1->-r C:\Program Files (x86)\Intel\openvino_2021\deployment_tools\demo\..\open_model_zoo\tools\downloader\requirements.in (line 2)) (2020.12.5)
+Requirement already satisfied: idna<3,>=2.5 in c:\users\ytlwin\appdata\roaming\python\python38\site-packages (from requests>=2.25.1->-r C:\Program Files (x86)\Intel\openvino_2021\deployment_tools\demo\..\open_model_zoo\tools\downloader\requirements.in (line 2)) (2.10)
+Requirement already satisfied: chardet<5,>=3.0.2 in c:\users\ytlwin\appdata\roaming\python\python38\site-packages (from requests>=2.25.1->-r C:\Program Files (x86)\Intel\openvino_2021\deployment_tools\demo\..\open_model_zoo\tools\downloader\requirements.in (line 2)) (4.0.0)
+Requirement already satisfied: urllib3<1.27,>=1.21.1 in c:\users\ytlwin\appdata\roaming\python\python38\site-packages (from requests>=2.25.1->-r C:\Program Files (x86)\Intel\openvino_2021\deployment_tools\demo\..\open_model_zoo\tools\downloader\requirements.in (line 2)) (1.26.4)
+WARNING: Ignoring invalid distribution -andas (c:\programdata\anaconda3\lib\site-packages)
+Download public squeezenet1.1 model
+python "C:\Program Files (x86)\Intel\openvino_2021\deployment_tools\open_model_zoo\tools\downloader\downloader.py" --name "squeezenet1.1" --output_dir "C:\Users\ytlWin\Documents\Intel\OpenVINO\openvino_models\models" --cache_dir "C:\Users\ytlWin\Documents\Intel\OpenVINO\openvino_models\cache"
+################|| Downloading squeezenet1.1 ||################
+
+========== Retrieving C:\Users\ytlWin\Documents\Intel\OpenVINO\openvino_models\models\public\squeezenet1.1\squeezenet1.1.prototxt from the cache
+
+========== Retrieving C:\Users\ytlWin\Documents\Intel\OpenVINO\openvino_models\models\public\squeezenet1.1\squeezenet1.1.caffemodel from the cache
+
+========== Replacing text in C:\Users\ytlWin\Documents\Intel\OpenVINO\openvino_models\models\public\squeezenet1.1\squeezenet1.1.prototxt
+
+squeezenet1.1 model downloading completed
+
+等候  0 秒後，請按任何一個鍵繼續 ...
+
+Target folder C:\Users\ytlWin\Documents\Intel\OpenVINO\openvino_models\ir\public\squeezenet1.1\FP16 already exists. Skipping IR generation with Model Optimizer.
+If you want to convert a model again, remove the entire C:\Users\ytlWin\Documents\Intel\OpenVINO\openvino_models\ir\public\squeezenet1.1\FP16 folder.
+
+等候  0 秒後，請按任何一個鍵繼續 ...
+
+###############|| Generate VS solution for Inference Engine samples using cmake ||###############
+
+
+等候  0 秒後，請按任何一個鍵繼續 ...
+Creating Visual Studio 16 2019 x64 files in C:\Users\ytlWin\Documents\Intel\OpenVINO\inference_engine_samples_build...
+-- Selecting Windows SDK version 10.0.19041.0 to target Windows 10.0.19043.
+-- The C compiler identification is MSVC 19.29.30137.0
+-- The CXX compiler identification is MSVC 19.29.30137.0
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Check for working C compiler: C:/Program Files (x86)/Microsoft Visual Studio/2019/Community/VC/Tools/MSVC/14.29.30133/bin/Hostx64/x64/cl.exe - skipped
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: C:/Program Files (x86)/Microsoft Visual Studio/2019/Community/VC/Tools/MSVC/14.29.30133/bin/Hostx64/x64/cl.exe - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+CMake Warning (dev) at thirdparty/cnpy/CMakeLists.txt:11 (if):
+  Policy CMP0054 is not set: Only interpret if() arguments as variables or
+  keywords when unquoted.  Run "cmake --help-policy CMP0054" for policy
+  details.  Use the cmake_policy command to set the policy and suppress this
+  warning.
+
+  Quoted variables like "MSVC" will no longer be dereferenced when the policy
+  is set to NEW.  Since the policy is not set the OLD behavior will be used.
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+-- Configuring done
+-- Generating done
+-- Build files have been written to: C:/Users/ytlWin/Documents/Intel/OpenVINO/inference_engine_samples_build
+
+等候  0 秒後，請按任何一個鍵繼續 ...
+
+###############|| Build Inference Engine samples using MS Visual Studio (MSBuild.exe) ||###############
+
+
+等候  0 秒後，請按任何一個鍵繼續 ...
+"C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\Current\Bin\MSBuild.exe" Samples.sln /p:Configuration=Release /t:cpp_samples\classification_sample_async /clp:ErrorsOnly /m
+Microsoft (R) Build Engine for .NET Framework 16.11.2+f32259642 版
+Copyright (C) Microsoft Corporation. 著作權所有，並保留一切權利。
+
+
+等候  0 秒後，請按任何一個鍵繼續 ...
+
+###############|| Run Inference Engine classification sample ||###############
+
+等候  0 秒後，請按任何一個鍵繼續 ...
+複製了         1 個檔案。
+classification_sample_async.exe -i "C:\Program Files (x86)\Intel\openvino_2021\deployment_tools\demo\car.png" -m "C:\Users\ytlWin\Documents\Intel\OpenVINO\openvino_models\ir\public\squeezenet1.1\FP16\squeezenet1.1.xml" -d MYRIAD
+[ INFO ] InferenceEngine:
+        IE version ......... 2021.4.2
+        Build ........... 2021.4.2-3974-e2a469a3450-releases/2021/4
+[ INFO ] Parsing input parameters
+[ INFO ] Files were added: 1
+[ INFO ]     C:\Program Files (x86)\Intel\openvino_2021\deployment_tools\demo\car.png
+[ INFO ] Loading Inference Engine
+[ INFO ] Device info:
+        MYRIAD
+        myriadPlugin version ......... 2021.4.2
+        Build ........... 2021.4.2-3974-e2a469a3450-releases/2021/4
+
+[ INFO ] Loading network files:
+[ INFO ] C:\Users\ytlWin\Documents\Intel\OpenVINO\openvino_models\ir\public\squeezenet1.1\FP16\squeezenet1.1.xml
+[ INFO ] Preparing input blobs
+[ WARNING ] Image is resized from (787, 259) to (227, 227)
+[ INFO ] Batch size is 1
+[ INFO ] Loading model to the device
+[ INFO ] Create infer request
+[ INFO ] Start inference (10 asynchronous executions)
+[ INFO ] Completed 1 async request execution
+[ INFO ] Completed 2 async request execution
+[ INFO ] Completed 3 async request execution
+[ INFO ] Completed 4 async request execution
+[ INFO ] Completed 5 async request execution
+[ INFO ] Completed 6 async request execution
+[ INFO ] Completed 7 async request execution
+[ INFO ] Completed 8 async request execution
+[ INFO ] Completed 9 async request execution
+[ INFO ] Completed 10 async request execution
+[ INFO ] Processing output blobs
+
+Top 10 results:
+
+Image C:\Program Files (x86)\Intel\openvino_2021\deployment_tools\demo\car.png
+
+classid probability label
+------- ----------- -----
+817     0.6708984   sports car, sport car
+479     0.1922607   car wheel
+511     0.0936890   convertible
+436     0.0216064   beach wagon, station wagon, wagon, estate car, beach waggon, station waggon, waggon
+751     0.0075760   racer, race car, racing car
+656     0.0049667   minivan
+717     0.0027428   pickup, pickup truck
+581     0.0019779   grille, radiator grille
+468     0.0014219   cab, hack, taxi, taxicab
+661     0.0008779   Model T
+
+[ INFO ] Execution successful
+
+[ INFO ] This sample is an API example, for any performance measurements please use the dedicated benchmark_app tool
+
+###############|| Classification demo completed successfully ||###############
+等候   0 秒後，請按任何一個鍵繼續 ...
+
+"""
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,197 @@
+https://docs.openvino.ai/latest/openvino_inference_engine_samples_benchmark_app_README.html
+
+https://www.intel.com/content/www/us/en/support/articles/000055294/boards-and-kits/neural-compute-sticks.html
+
+Benchmark C++ Tool
+
+cd /opt/intel/openvino_2021/deployment_tools/open_model_zoo/tools/downloader
+
+python3 downloader.py --name googlenet-v1
+
+python3 /opt/intel/openvino_2021/deployment_tools/model_optimizer/mo.py --input_model /opt/intel/openvino_2021/deployment_tools/open_model_zoo/tools/downloader/public/googlenet-v1/googlenet-v1.caffemodel --data_type FP32 --output_dir /home/ros/googlenet-v1
+
+cd /opt/intel/openvino_2021/deployment_tools/tools/benchmark_tool
+
+./benchmark_app.py -h
+
+./benchmark_app.py -m /home/ros/googlenet-v1/googlenet-v1.xml -i /opt/intel/openvino_2021/deployment_tools/demo/car.png  -d CPU
+
+"""
+[Step 2/11] Loading Inference Engine
+[ INFO ] InferenceEngine:
+         API version............. 2021.4.0-3839-cd81789d294-releases/2021/4
+[ INFO ] Device info
+         CPU
+         MKLDNNPlugin............ version 2.1
+         Build................... 2021.4.0-3839-cd81789d294-releases/2021/4
+         
+[Step 11/11] Dumping statistics report
+Count:      268 iterations
+Duration:   60240.79 ms
+Latency:    215.69 ms
+Throughput: 4.45 FPS         
+"""
+
+./benchmark_app.py -m /home/ros/googlenet-v1/googlenet-v1.xml -i /opt/intel/openvino_2021/deployment_tools/demo/car.png  -d MYRIAD
+
+"""
+[Step 2/11] Loading Inference Engine
+[ INFO ] InferenceEngine:
+         API version............. 2021.4.0-3839-cd81789d294-releases/2021/4
+[ INFO ] Device info
+         MYRIAD
+         myriadPlugin............ version 2.1
+         Build................... 2021.4.0-3839-cd81789d294-releases/2021/4
+
+[Step 11/11] Dumping statistics report
+Count:      5580 iterations
+Duration:   60065.07 ms
+Latency:    42.72 ms
+Throughput: 92.90 FPS
+"""
+
+./benchmark_app.py -m /home/ros/googlenet-v1/googlenet-v1.xml -i /opt/intel/openvino_2021/deployment_tools/demo/car.png  -d MULTI:MYRIAD.1.4-ma2480,MYRIAD.1.8-ma2480
+
+"""
+[Step 2/11] Loading Inference Engine
+[ INFO ] InferenceEngine:
+         API version............. 2021.4.0-3839-cd81789d294-releases/2021/4
+[ INFO ] Device info
+         MULTI
+         MultiDevicePlugin....... version 2.1
+         Build................... 2021.4.0-3839-cd81789d294-releases/2021/4
+         MYRIAD
+         myriadPlugin............ version 2.1
+         Build................... 2021.4.0-3839-cd81789d294-releases/2021/4
+         
+[Step 11/11] Dumping statistics report
+Count:      11088 iterations
+Duration:   60053.41 ms
+Throughput: 184.64 FPS         
+"""
+
+./benchmark_app.py -m /home/ros/googlenet-v1/googlenet-v1.xml -i /opt/intel/openvino_2021/deployment_tools/demo/car.png  -d MYRIAD.1.4-ma2480
+
+"""
+[Step 2/11] Loading Inference Engine
+[ INFO ] InferenceEngine:
+         API version............. 2021.4.0-3839-cd81789d294-releases/2021/4
+[ INFO ] Device info
+         MYRIAD
+         myriadPlugin............ version 2.1
+         Build................... 2021.4.0-3839-cd81789d294-releases/2021/4
+         
+[Step 11/11] Dumping statistics report
+Count:      5564 iterations
+Duration:   60062.50 ms
+Latency:    42.79 ms
+Throughput: 92.64 FPS         
+"""
+
+./benchmark_app.py -m /home/ros/googlenet-v1/googlenet-v1.xml -i /opt/intel/openvino_2021/deployment_tools/demo/car.png  -d MYRIAD.1.8-ma2480
+
+"""
+[Step 2/11] Loading Inference Engine
+[ INFO ] InferenceEngine:
+         API version............. 2021.4.0-3839-cd81789d294-releases/2021/4
+[ INFO ] Device info
+         MYRIAD
+         myriadPlugin............ version 2.1
+         Build................... 2021.4.0-3839-cd81789d294-releases/2021/4
+         
+[Step 11/11] Dumping statistics report
+Count:      5568 iterations
+Duration:   60048.69 ms
+Latency:    42.74 ms
+Throughput: 92.72 FPS         
+"""
+
+./benchmark_app.py -m /home/ros/googlenet-v1/googlenet-v1.xml -i /opt/intel/openvino_2021/deployment_tools/demo/car.png  -d MULTI:MYRIAD.1.8-ma2480,CPU
+
+"""
+[Step 2/11] Loading Inference Engine
+[ INFO ] InferenceEngine:
+         API version............. 2021.4.0-3839-cd81789d294-releases/2021/4
+[ INFO ] Device info
+         CPU
+         MKLDNNPlugin............ version 2.1
+         Build................... 2021.4.0-3839-cd81789d294-releases/2021/4
+         MULTI
+         MultiDevicePlugin....... version 2.1
+         Build................... 2021.4.0-3839-cd81789d294-releases/2021/4
+         MYRIAD
+         myriadPlugin............ version 2.1
+         Build................... 2021.4.0-3839-cd81789d294-releases/2021/4
+         
+[Step 11/11] Dumping statistics report
+Count:      5710 iterations
+Duration:   60214.83 ms
+Throughput: 94.83 FPS         
+"""
+
+./benchmark_app.py -m /home/ros/googlenet-v1/googlenet-v1.xml -i /opt/intel/openvino_2021/deployment_tools/demo/car.png  -d MULTI:MYRIAD.1.4-ma2480,CPU
+
+"""
+[Step 2/11] Loading Inference Engine
+[ INFO ] InferenceEngine:
+         API version............. 2021.4.0-3839-cd81789d294-releases/2021/4
+[ INFO ] Device info
+         CPU
+         MKLDNNPlugin............ version 2.1
+         Build................... 2021.4.0-3839-cd81789d294-releases/2021/4
+         MULTI
+         MultiDevicePlugin....... version 2.1
+         Build................... 2021.4.0-3839-cd81789d294-releases/2021/4
+         MYRIAD
+         myriadPlugin............ version 2.1
+         Build................... 2021.4.0-3839-cd81789d294-releases/2021/4
+         
+[Step 11/11] Dumping statistics report
+Count:      5705 iterations
+Duration:   60181.48 ms
+Throughput: 94.80 FPS         
+"""
+
+./benchmark_app.py -m /home/ros/googlenet-v1/googlenet-v1.xml -i /opt/intel/openvino_2021/deployment_tools/demo/car.png  -d MULTI:MYRIAD.1.4-ma2480,MYRIAD.1.8-ma2480,CPU
+
+"""
+[Step 2/11] Loading Inference Engine
+[ INFO ] InferenceEngine:
+         API version............. 2021.4.0-3839-cd81789d294-releases/2021/4
+[ INFO ] Device info
+         CPU
+         MKLDNNPlugin............ version 2.1
+         Build................... 2021.4.0-3839-cd81789d294-releases/2021/4
+         MULTI
+         MultiDevicePlugin....... version 2.1
+         Build................... 2021.4.0-3839-cd81789d294-releases/2021/4
+         MYRIAD
+         myriadPlugin............ version 2.1
+         Build................... 2021.4.0-3839-cd81789d294-releases/2021/4
+         
+[Step 11/11] Dumping statistics report
+Count:      11016 iterations
+Duration:   60062.68 ms
+Throughput: 183.41 FPS         
+"""
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

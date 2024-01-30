@@ -1,2 +1,2 @@
-# Automated-Guided-Vehicle
-An intelligent guide robot providing additional information for visually impaired individuals
+# Automated Guided Vehicle with Environment Recognition and Obstacle Avoidance
+

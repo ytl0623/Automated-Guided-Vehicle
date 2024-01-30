@@ -1,0 +1,371 @@
+https://www.intel.com/content/www/us/en/developer/tools/devcloud/edge/build/ovtfoverview.html
+
+https://github.com/openvinotoolkit/openvino_tensorflow
+
+https://openvinotoolkit.github.io/openvino_tensorflow/
+
+安裝OpenVINO™ integration with TensorFlow for Windows
+
+conda install python==3.9.7
+
+pip3 install -U pip
+
+pip3 install https://github.com/openvinotoolkit/openvino_tensorflow/releases/download/v1.1.0/tensorflow-2.7.0-cp39-cp39-win_amd64.whl
+
+pip3 install openvino-tensorflow
+
+確認安裝是否正確
+
+python -c "import tensorflow as tf; print('TensorFlow version: ',tf.__version__); import openvino_tensorflow; print(openvino_tensorflow.__version__); print(openvino_tensorflow.list_backends())"
+
+"""
+(openvino-tensorflow) D:\PyCharm\openvino-tensorflow>python3 -c "import tensorflow as tf; print('TensorFlow vers
+ion: ',tf.__version__); import openvino_tensorflow; print(openvino_tensorflow.__version__); print(openvino_tenso
+rflow.list_backends())"
+
+(openvino-tensorflow) D:\PyCharm\openvino-tensorflow>python -c "import tensorflow as tf; print('TensorFlow versi
+on: ',tf.__version__); import openvino_tensorflow; print(openvino_tensorflow.__version__); print(openvino_tensor
+flow.list_backends())"
+TensorFlow version:  2.7.0
+OpenVINO integration with TensorFlow version: b'1.1.0'
+OpenVINO version used for this build: b'2021.4.2'     
+TensorFlow version used for this build: v2.7.0        
+CXX11_ABI flag used for this build: 0
+
+['CPU', 'GPU']
+"""
+
+OVTF範例
+
+git clone https://github.com/openvinotoolkit/openvino_tensorflow.git
+
+cd openvino_tensorflow
+
+git submodule init
+
+git submodule update --recursive
+
+cd examples
+
+pip3 install -r requirements.txt
+
+"""
+tensorflow-hub>=0.5.0
+pyyaml>=5.4.1
+keras_applications>=1.0.6
+pillow>=8.3.2
+matplotlib>=3.3.4
+opencv-python>=4.5.2.54
+scipy>=1.5.4
+networkx>=2.5.1
+"""
+
+python classification_sample.py  --backend CPU
+
+"""
+(openvino-tensorflow) D:\PyCharm\openvino-tensorflow\openvino_tensorflow\examples>python classification_sample.p
+y  --backend CPU
+2022-01-22 13:33:00.315396: I tensorflow/core/platform/cpu_feature_guard.cc:151] This TensorFlow binary is optim
+ized with oneAPI Deep Neural Network Library (oneDNN) to use the following CPU instructions in performance-criti
+cal operations:  AVX2
+To enable them in other operations, rebuild TensorFlow with the appropriate compiler flags.
+Available Backends:
+CPU
+GPU
+2022-01-22 13:33:02.537768: OVTF Summary -> 149 out of 910 nodes in the graph (16%) are now running with OpenVIN
+O??backend
+Inference time in ms: 26.33
+military uniform 0.79601693
+mortarboard 0.02091024     
+academic gown 0.014557127  
+suit 0.009166162
+comic book 0.007978318
+"""
+
+python classification_sample.py  --backend GPU
+
+"""
+(openvino-tensorflow) D:\PyCharm\openvino-tensorflow\openvino_tensorflow\examples>python classification_sample.p
+y  --backend GPU
+2022-01-22 13:33:48.963785: I tensorflow/core/platform/cpu_feature_guard.cc:151] This TensorFlow binary is optim
+ized with oneAPI Deep Neural Network Library (oneDNN) to use the following CPU instructions in performance-criti
+cal operations:  AVX2
+To enable them in other operations, rebuild TensorFlow with the appropriate compiler flags.
+Available Backends:
+CPU
+GPU
+2022-01-22 13:33:51.171466: OVTF Summary -> 149 out of 910 nodes in the graph (16%) are now running with OpenVIN
+O??backend
+Inference time in ms: 48.82
+military uniform 0.79601663
+mortarboard 0.020910405
+academic gown 0.014557248
+suit 0.009166136
+comic book 0.007978372
+"""
+
+Object Detection with OVTF
+
+cd ~/openvino_tensorflow/examples
+
+convert_yolov4.bat
+
+python object_detection_sample_Windows.py
+
+"""
+(openvino-tensorflow) D:\PyCharm\openvino-tensorflow\openvino_tensorflow\examples>python object_detection_sample
+_Windows.py
+2022-01-22 14:21:05.860727: I tensorflow/core/platform/cpu_feature_guard.cc:151] This TensorFlow binary is optim
+ized with oneAPI Deep Neural Network Library (oneDNN) to use the following CPU instructions in performance-criti
+cal operations:  AVX2
+To enable them in other operations, rebuild TensorFlow with the appropriate compiler flags.
+Available Backends:
+CPU
+GPU
+2022-01-22 14:21:15.614199: OVTF Summary -> 382 out of 1470 nodes in the graph (25%) are now running with OpenVI
+NO??backend
+Inference time in ms: 155.26
+person 0.98
+tie 0.81
+Output image is saved in detections.jpg
+"""
+
+python object_detection_sample_Windows.py --backend GPU
+
+"""
+(openvino-tensorflow) D:\PyCharm\openvino-tensorflow\openvino_tensorflow\examples>python object_detection_sample
+_Windows.py --backend GPU
+2022-01-22 14:24:16.138738: I tensorflow/core/platform/cpu_feature_guard.cc:151] This TensorFlow binary is optim
+ized with oneAPI Deep Neural Network Library (oneDNN) to use the following CPU instructions in performance-criti
+cal operations:  AVX2
+To enable them in other operations, rebuild TensorFlow with the appropriate compiler flags.
+Available Backends:
+CPU
+GPU
+2022-01-22 14:24:25.376860: OVTF Summary -> 382 out of 1470 nodes in the graph (25%) are now running with OpenVI
+NO??backend
+Inference time in ms: 209.95
+person 0.98
+tie 0.81
+Output image is saved in detections.jpg
+"""
+
+安裝OpenVINO™ integration with TensorFlow for Ubuntu 20.04
+
+pip3 install -U pip
+
+pip3 install tensorflow==2.7.0
+
+pip3 install openvino-tensorflow
+
+cd /opt/intel/openvino_2021/install_dependencies
+
+./install_NCS_udev_rules.sh
+
+"""
+ytl@ubuntu:/opt/intel/openvino_2021/install_dependencies$ ./install_NCS_udev_rules.sh
+Updating udev rules...
+[sudo] password for ytl: 
+Udev rules have been successfully installed.
+"""
+
+確認安裝是否正確
+
+python3 -c "import tensorflow as tf; print('TensorFlow version: ',tf.__version__); import openvino_tensorflow; print(openvino_tensorflow.__version__); print(openvino_tensorflow.list_backends())"
+
+"""
+ytl@ubuntu:~/openvino_tensorflow/examples$ python3 -c "import tensorflow as tf; print('TensorFlow version: ',tf.__version__); import openvino_tensorflow; print(openvino_tensorflow.__version__); print(openvino_tensorflow.list_backends())"
+2022-01-20 02:06:14.581023: W tensorflow/stream_executor/platform/default/dso_loader.cc:64] Could not load dynamic library 'libcudart.so.11.0'; dlerror: libcudart.so.11.0: cannot open shared object file: No such file or directory
+2022-01-20 02:06:14.581065: I tensorflow/stream_executor/cuda/cudart_stub.cc:29] Ignore above cudart dlerror if you do not have a GPU set up on your machine.
+TensorFlow version:  2.7.0
+OpenVINO integration with TensorFlow version: b'1.1.0'
+OpenVINO version used for this build: b'2021.4.2'
+TensorFlow version used for this build: v2.7.0
+CXX11_ABI flag used for this build: 0
+
+['CPU', 'MYRIAD']
+"""
+
+OVTF範例
+
+git clone https://github.com/openvinotoolkit/openvino_tensorflow.git
+
+cd openvino_tensorflow
+
+git submodule init
+
+git submodule update --recursive
+
+cd examples
+
+pip3 install -r requirements.txt
+
+"""
+tensorflow-hub>=0.5.0
+pyyaml>=5.4.1
+keras_applications>=1.0.6
+pillow>=8.3.2
+matplotlib>=3.3.4
+opencv-python>=4.5.2.54
+scipy>=1.5.4
+networkx>=2.5.1
+"""
+
+python3 classification_sample.py --backend CPU
+
+[ERROR]
+ImportError: /opt/intel/openvino_2021/opencv/lib/libopencv_dnn.so.4.5: undefined symbol:
+
+"""
+ytl@ubuntu:~/openvino_tensorflow/examples$ python3 classification_sample.py --backend CPU
+2022-01-20 03:20:41.187868: W tensorflow/stream_executor/platform/default/dso_loader.cc:64] Could not load dynamic library 'libcudart.so.11.0'; dlerror: libcudart.so.11.0: cannot open shared object file: No such file or directory; LD_LIBRARY_PATH: /opt/intel/openvino_2021/data_processing/dl_streamer/lib:/opt/intel/openvino_2021/data_processing/gstreamer/lib:/opt/intel/openvino_2021/opencv/lib:/opt/intel/openvino_2021/deployment_tools/ngraph/lib:/opt/intel/openvino_2021/deployment_tools/inference_engine/external/tbb/lib::/opt/intel/openvino_2021/deployment_tools/inference_engine/external/hddl/lib:/opt/intel/openvino_2021/deployment_tools/inference_engine/external/omp/lib:/opt/intel/openvino_2021/deployment_tools/inference_engine/external/gna/lib:/opt/intel/openvino_2021/deployment_tools/inference_engine/external/mkltiny_lnx/lib:/opt/intel/openvino_2021/deployment_tools/inference_engine/lib/intel64
+2022-01-20 03:20:41.187915: I tensorflow/stream_executor/cuda/cudart_stub.cc:29] Ignore above cudart dlerror if you do not have a GPU set up on your machine.
+Traceback (most recent call last):
+  File "classification_sample.py", line 38, in <module>
+    import cv2
+  File "/opt/intel/openvino_2021/python/python3/cv2/__init__.py", line 129, in <module>
+    bootstrap()
+  File "/opt/intel/openvino_2021/python/python3/cv2/__init__.py", line 112, in bootstrap
+    import cv2
+ImportError: /opt/intel/openvino_2021/opencv/lib/libopencv_dnn.so.4.5: undefined symbol: _ZNK6ngraph4Node8evaluateERKSt6vectorISt10shared_ptrINS_7runtime10HostTensorEESaIS5_EES9_RKSt3mapINSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEES2_INS_7VariantEESt4lessISG_ESaISt4pairIKSG_SI_EEE
+"""
+
+[SOLVE]
+PYTHONPATH=/home/ytl/.local/lib/python3.8/site-packages:$PYTHONPATH
+
+"""
+ytl@ubuntu:~/openvino_tensorflow/examples$ python3 classification_sample.py --backend CPU
+2022-01-20 01:58:13.118056: W tensorflow/stream_executor/platform/default/dso_loader.cc:64] Could not load dynamic library 'libcudart.so.11.0'; dlerror: libcudart.so.11.0: cannot open shared object file: No such file or directory
+2022-01-20 01:58:13.118098: I tensorflow/stream_executor/cuda/cudart_stub.cc:29] Ignore above cudart dlerror if you do not have a GPU set up on your machine.
+2022-01-20 01:58:14.335185: W tensorflow/stream_executor/platform/default/dso_loader.cc:64] Could not load dynamic library 'libcuda.so.1'; dlerror: libcuda.so.1: cannot open shared object file: No such file or directory; LD_LIBRARY_PATH: /home/ytl/.local/lib/python3.8/site-packages/cv2/../../lib64:
+2022-01-20 01:58:14.335228: W tensorflow/stream_executor/cuda/cuda_driver.cc:269] failed call to cuInit: UNKNOWN ERROR (303)
+2022-01-20 01:58:14.335247: I tensorflow/stream_executor/cuda/cuda_diagnostics.cc:156] kernel driver does not appear to be running on this host (ubuntu): /proc/driver/nvidia/version does not exist
+2022-01-20 01:58:14.335399: I tensorflow/core/platform/cpu_feature_guard.cc:151] This TensorFlow binary is optimized with oneAPI Deep Neural Network Library (oneDNN) to use the following CPU instructions in performance-critical operations:  AVX2 FMA
+To enable them in other operations, rebuild TensorFlow with the appropriate compiler flags.
+Available Backends:
+CPU
+MYRIAD
+2022-01-20 01:58:16.93397: OVTF Summary -> 149 out of 910 nodes in the graph (16%) are now running with OpenVINO™ backend
+Inference time in ms: 56.95
+military uniform 0.79601693
+mortarboard 0.02091024
+academic gown 0.014557127
+suit 0.009166162
+comic book 0.007978318
+"""
+
+python3 classification_sample.py --backend MYRIAD
+
+"""
+ytl@ubuntu:~/openvino_tensorflow/examples$ python3 classification_sample.py --backend MYRIAD
+2022-01-20 01:57:38.348693: W tensorflow/stream_executor/platform/default/dso_loader.cc:64] Could not load dynamic library 'libcudart.so.11.0'; dlerror: libcudart.so.11.0: cannot open shared object file: No such file or directory
+2022-01-20 01:57:38.348735: I tensorflow/stream_executor/cuda/cudart_stub.cc:29] Ignore above cudart dlerror if you do not have a GPU set up on your machine.
+2022-01-20 01:57:39.616194: W tensorflow/stream_executor/platform/default/dso_loader.cc:64] Could not load dynamic library 'libcuda.so.1'; dlerror: libcuda.so.1: cannot open shared object file: No such file or directory; LD_LIBRARY_PATH: /home/ytl/.local/lib/python3.8/site-packages/cv2/../../lib64:
+2022-01-20 01:57:39.616240: W tensorflow/stream_executor/cuda/cuda_driver.cc:269] failed call to cuInit: UNKNOWN ERROR (303)
+2022-01-20 01:57:39.616259: I tensorflow/stream_executor/cuda/cuda_diagnostics.cc:156] kernel driver does not appear to be running on this host (ubuntu): /proc/driver/nvidia/version does not exist
+2022-01-20 01:57:39.616414: I tensorflow/core/platform/cpu_feature_guard.cc:151] This TensorFlow binary is optimized with oneAPI Deep Neural Network Library (oneDNN) to use the following CPU instructions in performance-critical operations:  AVX2 FMA
+To enable them in other operations, rebuild TensorFlow with the appropriate compiler flags.
+Available Backends:
+CPU
+MYRIAD
+2022-01-20 01:57:41.335356: OVTF Summary -> 149 out of 910 nodes in the graph (16%) are now running with OpenVINO™ backend
+E: [ncAPI] [    676587] [python3] ncDeviceOpen:1017	Failed to find booted device after boot
+Inference time in ms: 86.18
+military uniform 0.7960171
+mortarboard 0.020910205
+academic gown 0.014557096
+suit 0.009166265
+comic book 0.007978301
+"""
+
+Object Detection with OVTF
+
+cd ~/openvino_tensorflow/examples
+
+chmod +x convert_yolov4.sh
+
+./convert_yolov4.sh
+
+python3 object_detection_sample_Linux.py
+
+"""
+ytl@ubuntu:~/openvino_tensorflow/examples$ python3 object_detection_sample_Linux.py
+2022-01-20 23:30:56.062691: W tensorflow/stream_executor/platform/default/dso_loader.cc:64] Could not load dynamic library 'libcudart.so.11.0'; dlerror: libcudart.so.11.0: cannot open shared object file: No such file or directory; LD_LIBRARY_PATH: /opt/intel/openvino_2021/data_processing/dl_streamer/lib:/opt/intel/openvino_2021/data_processing/gstreamer/lib:/opt/intel/openvino_2021/opencv/lib:/opt/intel/openvino_2021/deployment_tools/ngraph/lib:/opt/intel/openvino_2021/deployment_tools/inference_engine/external/tbb/lib::/opt/intel/openvino_2021/deployment_tools/inference_engine/external/hddl/lib:/opt/intel/openvino_2021/deployment_tools/inference_engine/external/omp/lib:/opt/intel/openvino_2021/deployment_tools/inference_engine/external/gna/lib:/opt/intel/openvino_2021/deployment_tools/inference_engine/external/mkltiny_lnx/lib:/opt/intel/openvino_2021/deployment_tools/inference_engine/lib/intel64
+2022-01-20 23:30:56.062753: I tensorflow/stream_executor/cuda/cudart_stub.cc:29] Ignore above cudart dlerror if you do not have a GPU set up on your machine.
+2022-01-20 23:30:58.082934: W tensorflow/stream_executor/platform/default/dso_loader.cc:64] Could not load dynamic library 'libcuda.so.1'; dlerror: libcuda.so.1: cannot open shared object file: No such file or directory; LD_LIBRARY_PATH: /home/ytl/.local/lib/python3.8/site-packages/cv2/../../lib64:/opt/intel/openvino_2021/data_processing/dl_streamer/lib:/opt/intel/openvino_2021/data_processing/gstreamer/lib:/opt/intel/openvino_2021/opencv/lib:/opt/intel/openvino_2021/deployment_tools/ngraph/lib:/opt/intel/openvino_2021/deployment_tools/inference_engine/external/tbb/lib::/opt/intel/openvino_2021/deployment_tools/inference_engine/external/hddl/lib:/opt/intel/openvino_2021/deployment_tools/inference_engine/external/omp/lib:/opt/intel/openvino_2021/deployment_tools/inference_engine/external/gna/lib:/opt/intel/openvino_2021/deployment_tools/inference_engine/external/mkltiny_lnx/lib:/opt/intel/openvino_2021/deployment_tools/inference_engine/lib/intel64
+2022-01-20 23:30:58.082985: W tensorflow/stream_executor/cuda/cuda_driver.cc:269] failed call to cuInit: UNKNOWN ERROR (303)
+2022-01-20 23:30:58.083005: I tensorflow/stream_executor/cuda/cuda_diagnostics.cc:156] kernel driver does not appear to be running on this host (ubuntu): /proc/driver/nvidia/version does not exist
+2022-01-20 23:30:58.083236: I tensorflow/core/platform/cpu_feature_guard.cc:151] This TensorFlow binary is optimized with oneAPI Deep Neural Network Library (oneDNN) to use the following CPU instructions in performance-critical operations:  AVX2 FMA
+To enable them in other operations, rebuild TensorFlow with the appropriate compiler flags.
+Available Backends:
+CPU
+MYRIAD
+2022-01-20 23:31:17.393595: OVTF Summary -> 382 out of 1470 nodes in the graph (25%) are now running with OpenVINO™ backend
+Inference time in ms: 405.20
+person 0.98
+tie 0.81
+Output image is saved in detections.jpg
+"""
+
+python3 object_detection_sample_Linux.py --backend MYRIAD
+
+"""
+ytl@ubuntu:~/openvino_tensorflow/examples$ python3 object_detection_sample_Linux.py --backend MYRIAD
+2022-01-20 23:36:20.697986: W tensorflow/stream_executor/platform/default/dso_loader.cc:64] Could not load dynamic library 'libcudart.so.11.0'; dlerror: libcudart.so.11.0: cannot open shared object file: No such file or directory; LD_LIBRARY_PATH: /opt/intel/openvino_2021/data_processing/dl_streamer/lib:/opt/intel/openvino_2021/data_processing/gstreamer/lib:/opt/intel/openvino_2021/opencv/lib:/opt/intel/openvino_2021/deployment_tools/ngraph/lib:/opt/intel/openvino_2021/deployment_tools/inference_engine/external/tbb/lib::/opt/intel/openvino_2021/deployment_tools/inference_engine/external/hddl/lib:/opt/intel/openvino_2021/deployment_tools/inference_engine/external/omp/lib:/opt/intel/openvino_2021/deployment_tools/inference_engine/external/gna/lib:/opt/intel/openvino_2021/deployment_tools/inference_engine/external/mkltiny_lnx/lib:/opt/intel/openvino_2021/deployment_tools/inference_engine/lib/intel64
+2022-01-20 23:36:20.698048: I tensorflow/stream_executor/cuda/cudart_stub.cc:29] Ignore above cudart dlerror if you do not have a GPU set up on your machine.
+2022-01-20 23:36:22.142617: W tensorflow/stream_executor/platform/default/dso_loader.cc:64] Could not load dynamic library 'libcuda.so.1'; dlerror: libcuda.so.1: cannot open shared object file: No such file or directory; LD_LIBRARY_PATH: /home/ytl/.local/lib/python3.8/site-packages/cv2/../../lib64:/opt/intel/openvino_2021/data_processing/dl_streamer/lib:/opt/intel/openvino_2021/data_processing/gstreamer/lib:/opt/intel/openvino_2021/opencv/lib:/opt/intel/openvino_2021/deployment_tools/ngraph/lib:/opt/intel/openvino_2021/deployment_tools/inference_engine/external/tbb/lib::/opt/intel/openvino_2021/deployment_tools/inference_engine/external/hddl/lib:/opt/intel/openvino_2021/deployment_tools/inference_engine/external/omp/lib:/opt/intel/openvino_2021/deployment_tools/inference_engine/external/gna/lib:/opt/intel/openvino_2021/deployment_tools/inference_engine/external/mkltiny_lnx/lib:/opt/intel/openvino_2021/deployment_tools/inference_engine/lib/intel64
+2022-01-20 23:36:22.142655: W tensorflow/stream_executor/cuda/cuda_driver.cc:269] failed call to cuInit: UNKNOWN ERROR (303)
+2022-01-20 23:36:22.142676: I tensorflow/stream_executor/cuda/cuda_diagnostics.cc:156] kernel driver does not appear to be running on this host (ubuntu): /proc/driver/nvidia/version does not exist
+2022-01-20 23:36:22.142792: I tensorflow/core/platform/cpu_feature_guard.cc:151] This TensorFlow binary is optimized with oneAPI Deep Neural Network Library (oneDNN) to use the following CPU instructions in performance-critical operations:  AVX2 FMA
+To enable them in other operations, rebuild TensorFlow with the appropriate compiler flags.
+Available Backends:
+CPU
+MYRIAD
+2022-01-20 23:36:30.817379: OVTF Summary -> 382 out of 1470 nodes in the graph (25%) are now running with OpenVINO™ backend
+Inference time in ms: 527.42
+Output image is saved in detections.jpg
+"""
+
+安裝OpenVINO™ integration with TensorFlow for Ubuntu 18.04
+
+pip3 install -U pip
+
+pip3 install tensorflow==2.7.0
+
+[ERROR]
+ERROR: No matching distribution found for tensorflow==2.7.0
+
+"""
+ytl@ytl-VirtualBox:~$ pip3 install tensorflow==2.7.0
+Defaulting to user installation because normal site-packages is not writeable
+ERROR: Could not find a version that satisfies the requirement tensorflow==2.7.0 (from versions: 0.12.1, 1.0.0, 1.0.1, 1.1.0, 1.2.0, 1.2.1, 1.3.0, 1.4.0, 1.4.1, 1.5.0, 1.5.1, 1.6.0, 1.7.0, 1.7.1, 1.8.0, 1.9.0, 1.10.0, 1.10.1, 1.11.0, 1.12.0, 1.12.2, 1.12.3, 1.13.1, 1.13.2, 1.14.0, 1.15.0, 1.15.2, 1.15.3, 1.15.4, 1.15.5, 2.0.0, 2.0.1, 2.0.2, 2.0.3, 2.0.4, 2.1.0, 2.1.1, 2.1.2, 2.1.3, 2.1.4, 2.2.0rc0, 2.2.0rc1, 2.2.0rc2, 2.2.0rc3, 2.2.0rc4, 2.2.0, 2.2.1, 2.2.2, 2.2.3, 2.3.0rc0, 2.3.0rc1, 2.3.0rc2, 2.3.0, 2.3.1, 2.3.2, 2.3.3, 2.3.4, 2.4.0rc0, 2.4.0rc1, 2.4.0rc2, 2.4.0rc3, 2.4.0rc4, 2.4.0, 2.4.1, 2.4.2, 2.4.3, 2.4.4, 2.5.0rc0, 2.5.0rc1, 2.5.0rc2, 2.5.0rc3, 2.5.0, 2.5.1, 2.5.2, 2.6.0rc0, 2.6.0rc1, 2.6.0rc2, 2.6.0, 2.6.1, 2.6.2)
+ERROR: No matching distribution found for tensorflow==2.7.0
+"""
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

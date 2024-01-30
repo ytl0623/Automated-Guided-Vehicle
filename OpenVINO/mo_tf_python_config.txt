@@ -1,0 +1,146 @@
+ytl@ubuntu:/opt/intel/openvino_2021.4.752/deployment_tools/model_optimizer$ python3 mo_tf.py -h
+usage: main_tf.py [options]
+
+optional arguments:
+  -h, --help            show this help message and exit
+
+Framework-agnostic parameters:
+  --input_model INPUT_MODEL, -w INPUT_MODEL, -m INPUT_MODEL
+                        Tensorflow*: a file with a pre-trained model (binary or text .pb file after
+                        freezing). Caffe*: a model proto file with model weights
+  --model_name MODEL_NAME, -n MODEL_NAME
+                        Model_name parameter passed to the final create_ir transform. This
+                        parameter is used to name a network in a generated IR and output .xml/.bin
+                        files.
+  --output_dir OUTPUT_DIR, -o OUTPUT_DIR
+                        Directory that stores the generated IR. By default, it is the directory
+                        from where the Model Optimizer is launched.
+  --input_shape INPUT_SHAPE
+                        Input shape(s) that should be fed to an input node(s) of the model. Shape
+                        is defined as a comma-separated list of integer numbers enclosed in
+                        parentheses or square brackets, for example [1,3,227,227] or (1,227,227,3),
+                        where the order of dimensions depends on the framework input layout of the
+                        model. For example, [N,C,H,W] is used for Caffe* models and [N,H,W,C] for
+                        TensorFlow* models. Model Optimizer performs necessary transformations to
+                        convert the shape to the layout required by Inference Engine (N,C,H,W). The
+                        shape should not contain undefined dimensions (? or -1) and should fit the
+                        dimensions defined in the input operation of the graph. If there are
+                        multiple inputs in the model, --input_shape should contain definition of
+                        shape for each input separated by a comma, for example: [1,3,227,227],[2,4]
+                        for a model with two inputs with 4D and 2D shapes. Alternatively, specify
+                        shapes with the --input option.
+  --scale SCALE, -s SCALE
+                        All input values coming from original network inputs will be divided by
+                        this value. When a list of inputs is overridden by the --input parameter,
+                        this scale is not applied for any input that does not match with the
+                        original input of the model.
+  --reverse_input_channels
+                        Switch the input channels order from RGB to BGR (or vice versa). Applied to
+                        original inputs of the model if and only if a number of channels equals 3.
+                        Applied after application of --mean_values and --scale_values options, so
+                        numbers in --mean_values and --scale_values go in the order of channels
+                        used in the original model.
+  --log_level {CRITICAL,ERROR,WARN,WARNING,INFO,DEBUG,NOTSET}
+                        Logger level
+  --input INPUT         Quoted list of comma-separated input nodes names with shapes, data types,
+                        and values for freezing. The shape and value are specified as space-
+                        separated lists. The data type of input node is specified in braces and can
+                        have one of the values: f64 (float64), f32 (float32), f16 (float16), i64
+                        (int64), i32 (int32), u8 (uint8), boolean. For example, use the following
+                        format to set input port 0 of the node `node_name1` with the shape [3 4] as
+                        an input node and freeze output port 1 of the node `node_name2` with the
+                        value [20 15] of the int32 type and shape [2]: "0:node_name1[3
+                        4],node_name2:1[2]{i32}->[20 15]".
+  --output OUTPUT       The name of the output operation of the model. For TensorFlow*, do not add
+                        :0 to this name.
+  --mean_values MEAN_VALUES, -ms MEAN_VALUES
+                        Mean values to be used for the input image per channel. Values to be
+                        provided in the (R,G,B) or [R,G,B] format. Can be defined for desired input
+                        of the model, for example: "--mean_values
+                        data[255,255,255],info[255,255,255]". The exact meaning and order of
+                        channels depend on how the original model was trained.
+  --scale_values SCALE_VALUES
+                        Scale values to be used for the input image per channel. Values are
+                        provided in the (R,G,B) or [R,G,B] format. Can be defined for desired input
+                        of the model, for example: "--scale_values
+                        data[255,255,255],info[255,255,255]". The exact meaning and order of
+                        channels depend on how the original model was trained.
+  --data_type {FP16,FP32,half,float}
+                        Data type for all intermediate tensors and weights. If original model is in
+                        FP32 and --data_type=FP16 is specified, all model weights and biases are
+                        quantized to FP16.
+  --transform TRANSFORM
+                        Apply additional transformations. Usage: "--transform
+                        transformation_name1[args],transformation_name2..." where [args] is
+                        key=value pairs separated by semicolon. Examples: "--transform LowLatency2"
+                        or "--transform LowLatency2[use_const_initializer=False]" Available
+                        transformations: "LowLatency2"
+  --disable_fusing      Turn off fusing of linear operations to Convolution
+  --disable_resnet_optimization
+                        Turn off resnet optimization
+  --finegrain_fusing FINEGRAIN_FUSING
+                        Regex for layers/operations that won't be fused. Example:
+                        --finegrain_fusing Convolution1,.*Scale.*
+  --disable_gfusing     Turn off fusing of grouped convolutions
+  --enable_concat_optimization
+                        Turn on Concat optimization.
+  --move_to_preprocess  Move mean values to IR preprocess section
+  --extensions EXTENSIONS
+                        Directory or a comma separated list of directories with extensions. To
+                        disable all extensions including those that are placed at the default
+                        location, pass an empty string.
+  --batch BATCH, -b BATCH
+                        Input batch size
+  --version             Version of Model Optimizer
+  --silent              Prevent any output messages except those that correspond to log level
+                        equals ERROR, that can be set with the following option: --log_level. By
+                        default, log level is already ERROR.
+  --freeze_placeholder_with_value FREEZE_PLACEHOLDER_WITH_VALUE
+                        Replaces input layer with constant node with provided value, for example:
+                        "node_name->True". It will be DEPRECATED in future releases. Use --input
+                        option to specify a value for freezing.
+  --generate_deprecated_IR_V7
+                        Force to generate deprecated IR V7 with layers from old IR specification.
+  --static_shape        Enables IR generation for fixed input shape (folding `ShapeOf` operations
+                        and shape-calculating sub-graphs to `Constant`). Changing model input shape
+                        using the Inference Engine API in runtime may fail for such an IR.
+  --keep_shape_ops      The option is ignored. Expected behavior is enabled by default.
+  --disable_weights_compression
+                        Disable compression and store weights with original precision.
+  --progress            Enable model conversion progress display.
+  --stream_output       Switch model conversion progress display to a multiline mode.
+  --transformations_config TRANSFORMATIONS_CONFIG
+                        Use the configuration file with transformations description.
+  --legacy_ir_generation
+                        Use legacy IR serialization engine
+
+TensorFlow*-specific parameters:
+  --input_model_is_text
+                        TensorFlow*: treat the input model file as a text protobuf format. If not
+                        specified, the Model Optimizer treats it as a binary file by default.
+  --input_checkpoint INPUT_CHECKPOINT
+                        TensorFlow*: variables file to load.
+  --input_meta_graph INPUT_META_GRAPH
+                        Tensorflow*: a file with a meta-graph of the model before freezing
+  --saved_model_dir SAVED_MODEL_DIR
+                        TensorFlow*: directory with a model in SavedModel formatof TensorFlow 1.x
+                        or 2.x version.
+  --saved_model_tags SAVED_MODEL_TAGS
+                        Group of tag(s) of the MetaGraphDef to load, in string format, separated by
+                        ','. For tag-set contains multiple tags, all tags must be passed in.
+  --tensorflow_custom_operations_config_update TENSORFLOW_CUSTOM_OPERATIONS_CONFIG_UPDATE
+                        TensorFlow*: update the configuration file with node name patterns with
+                        input/output nodes information.
+  --tensorflow_use_custom_operations_config TENSORFLOW_USE_CUSTOM_OPERATIONS_CONFIG
+                        Use the configuration file with custom operation description.
+  --tensorflow_object_detection_api_pipeline_config TENSORFLOW_OBJECT_DETECTION_API_PIPELINE_CONFIG
+                        TensorFlow*: path to the pipeline configuration file used to generate model
+                        created with help of Object Detection API.
+  --tensorboard_logdir TENSORBOARD_LOGDIR
+                        TensorFlow*: dump the input graph to a given directory that should be used
+                        with TensorBoard.
+  --tensorflow_custom_layer_libraries TENSORFLOW_CUSTOM_LAYER_LIBRARIES
+                        TensorFlow*: comma separated list of shared libraries with TensorFlow*
+                        custom operations implementation.
+  --disable_nhwc_to_nchw
+                        Disables default translation from NHWC to NCHW

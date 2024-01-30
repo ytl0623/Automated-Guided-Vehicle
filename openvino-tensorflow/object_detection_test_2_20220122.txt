@@ -1,0 +1,80 @@
+Test on Ubuntu 20.04
+
+pip3 install tensorflow-object-detection-api
+
+python3 object_detection_original.py
+
+"""
+載入模型...共花費 10.773106336593628 秒.
+"""
+
+append OVTF
+
+python3 object_detection_with_OVTF.py
+
+"""
+載入模型...共花費 10.52140998840332 秒.
+
+2022-01-21 01:23:49.532438: OVTF Summary -> 1200 out of 3774 nodes in the graph (31%) are now running with OpenVINO™ backend
+"""
+
+append MYRIAD
+
+python3 object_detection_with_OVTF.py --backend MYRIAD
+
+"""
+載入模型...共花費 9.806207656860352 秒.
+
+2022-01-21 01:26:40.857990: OVTF Summary -> 460 out of 3774 nodes in the graph (12%) are now running with OpenVINO™ backend
+"""
+
+Test on Windows
+
+pip3 install tensorflow-object-detection-api
+
+python object_detection_original.py
+
+"""
+載入模型...共花費 13.47765040397644 秒.
+"""
+
+append OVTF
+
+python object_detection_with_OVTF.py
+
+"""
+載入模型...共花費 10.197622060775757 秒.
+
+2022-01-22 14:33:43.828229: OVTF Summary -> 1200 out of 3774 nodes in the graph (31%) are now running with OpenV
+"""
+
+append MYRIAD
+
+python object_detection_with_OVTF.py --backend GPU
+
+"""
+載入模型...共花費 9.983728885650635 秒.
+
+2022-01-22 14:35:38.502216: OVTF Summary -> 1199 out of 3774 nodes in the graph (31%) are now running with OpenV
+"""
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

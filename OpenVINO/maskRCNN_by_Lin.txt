@@ -1,0 +1,47 @@
+ytl@ubuntu:/opt/intel/openvino_2021/deployment_tools/model_optimizer$ python3 mo_tf.py --saved_model_dir /home/ytl/Downloads/dnn/ --output_dir ~/Downloads/maskRCNN
+Model Optimizer arguments:
+Common parameters:
+	- Path to the Input Model: 	None
+	- Path for generated IR: 	/home/ytl/Downloads/maskRCNN
+	- IR output name: 	saved_model
+	- Log level: 	ERROR
+	- Batch: 	Not specified, inherited from the model
+	- Input layers: 	Not specified, inherited from the model
+	- Output layers: 	Not specified, inherited from the model
+	- Input shapes: 	Not specified, inherited from the model
+	- Mean values: 	Not specified
+	- Scale values: 	Not specified
+	- Scale factor: 	Not specified
+	- Precision of IR: 	FP32
+	- Enable fusing: 	True
+	- Enable grouped convolutions fusing: 	True
+	- Move mean values to preprocess section: 	None
+	- Reverse input channels: 	False
+TensorFlow specific parameters:
+	- Input model in text protobuf format: 	False
+	- Path to model dump for TensorBoard: 	None
+	- List of shared libraries with TensorFlow custom layers implementation: 	None
+	- Update the configuration file with input/output node names: 	None
+	- Use configuration file used to generate the model with Object Detection API: 	None
+	- Use the config file: 	None
+	- Inference Engine found in: 	/opt/intel/openvino_2021/python/python3.8/openvino
+Inference Engine version: 	2021.4.2-3974-e2a469a3450-releases/2021/4
+Model Optimizer version: 	2021.4.2-3974-e2a469a3450-releases/2021/4
+2022-03-14 21:00:19.533408: W tensorflow/stream_executor/platform/default/dso_loader.cc:64] Could not load dynamic library 'libcudart.so.11.0'; dlerror: libcudart.so.11.0: cannot open shared object file: No such file or directory; LD_LIBRARY_PATH: /opt/intel/openvino_2021/data_processing/dl_streamer/lib:/opt/intel/openvino_2021/data_processing/gstreamer/lib:/opt/intel/openvino_2021/opencv/lib:/opt/intel/openvino_2021/deployment_tools/ngraph/lib:/opt/intel/openvino_2021/deployment_tools/inference_engine/external/tbb/lib::/opt/intel/openvino_2021/deployment_tools/inference_engine/external/hddl/lib:/opt/intel/openvino_2021/deployment_tools/inference_engine/external/omp/lib:/opt/intel/openvino_2021/deployment_tools/inference_engine/external/gna/lib:/opt/intel/openvino_2021/deployment_tools/inference_engine/external/mkltiny_lnx/lib:/opt/intel/openvino_2021/deployment_tools/inference_engine/lib/intel64:/opt/ros/noetic/lib
+2022-03-14 21:00:19.533465: I tensorflow/stream_executor/cuda/cudart_stub.cc:29] Ignore above cudart dlerror if you do not have a GPU set up on your machine.
+/home/ytl/.local/lib/python3.8/site-packages/flatbuffers/compat.py:19: DeprecationWarning: the imp module is deprecated in favour of importlib; see the module's documentation for alternative uses
+  import imp
+[ WARNING ]  
+Detected not satisfied dependencies:
+	tensorflow: installed: 2.7.0, required: ~= 2.4.1
+
+Please install required versions of components or use install_prerequisites script
+/opt/intel/openvino_2021.4.752/deployment_tools/model_optimizer/install_prerequisites/install_prerequisites_tf2.sh
+Note that install_prerequisites scripts may install additional components.
+2022-03-14 21:00:28.392073: W tensorflow/stream_executor/platform/default/dso_loader.cc:64] Could not load dynamic library 'libcuda.so.1'; dlerror: libcuda.so.1: cannot open shared object file: No such file or directory; LD_LIBRARY_PATH: /opt/intel/openvino_2021/data_processing/dl_streamer/lib:/opt/intel/openvino_2021/data_processing/gstreamer/lib:/opt/intel/openvino_2021/opencv/lib:/opt/intel/openvino_2021/deployment_tools/ngraph/lib:/opt/intel/openvino_2021/deployment_tools/inference_engine/external/tbb/lib::/opt/intel/openvino_2021/deployment_tools/inference_engine/external/hddl/lib:/opt/intel/openvino_2021/deployment_tools/inference_engine/external/omp/lib:/opt/intel/openvino_2021/deployment_tools/inference_engine/external/gna/lib:/opt/intel/openvino_2021/deployment_tools/inference_engine/external/mkltiny_lnx/lib:/opt/intel/openvino_2021/deployment_tools/inference_engine/lib/intel64:/opt/ros/noetic/lib
+2022-03-14 21:00:28.392141: W tensorflow/stream_executor/cuda/cuda_driver.cc:269] failed call to cuInit: UNKNOWN ERROR (303)
+2022-03-14 21:00:28.392168: I tensorflow/stream_executor/cuda/cuda_diagnostics.cc:156] kernel driver does not appear to be running on this host (ubuntu): /proc/driver/nvidia/version does not exist
+2022-03-14 21:00:28.392394: I tensorflow/core/platform/cpu_feature_guard.cc:151] This TensorFlow binary is optimized with oneAPI Deep Neural Network Library (oneDNN) to use the following CPU instructions in performance-critical operations:  AVX2 FMA
+To enable them in other operations, rebuild TensorFlow with the appropriate compiler flags.
+[ FRAMEWORK ERROR ]  Cannot load input model: MetaGraphDef associated with tags 'serve' could not be found in SavedModel, with available tags '[set()]'. To inspect available tag-sets in the SavedModel, please use the SavedModel CLI: `saved_model_cli`.
+ytl@ubuntu:/opt/intel/openvino_2021/deployment_tools/model_optimizer$ 

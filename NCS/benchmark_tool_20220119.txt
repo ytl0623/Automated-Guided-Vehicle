@@ -1,0 +1,2312 @@
+https://docs.openvino.ai/latest/openvino_inference_engine_samples_benchmark_app_README.html
+
+https://www.intel.com/content/www/us/en/support/articles/000055294/boards-and-kits/neural-compute-sticks.html
+
+Benchmark C++ Tool
+
+cd /opt/intel/openvino_2021/deployment_tools/open_model_zoo/tools/downloader
+
+python3 downloader.py --name googlenet-v1
+
+python3 /opt/intel/openvino_2021/deployment_tools/model_optimizer/mo.py --input_model /opt/intel/openvino_2021/deployment_tools/open_model_zoo/tools/downloader/public/googlenet-v1/googlenet-v1.caffemodel --data_type FP32 --output_dir /home/ros/googlenet-v1
+
+cd /opt/intel/openvino_2021/deployment_tools/tools/benchmark_tool
+
+./benchmark_app.py -h
+
+"""
+Available target devices:   CPU  GNA  HDDL  MYRIAD.1.4-ma2480  MYRIAD.1.8-ma2480
+"""
+
+./benchmark_app.py -m /home/ros/googlenet-v1/googlenet-v1.xml -i /opt/intel/openvino_2021/deployment_tools/demo/car.png  -d CPU -api async --progress true
+
+[ERROR]
+benchmark_app.py: error: unrecognized arguments: --progress true
+
+./benchmark_app.py -m /home/ros/googlenet-v1/googlenet-v1.xml -i /opt/intel/openvino_2021/deployment_tools/demo/car.png  -d CPU -api async
+
+"""
+ros@ros-LEC-ALAI:/opt/intel/openvino_2021/deployment_tools/tools/benchmark_tool$ ./benchmark_app.py -m /home/ros/googlenet-v1/googlenet-v1.xml -i /opt/intel/openvino_2021/deployment_tools/demo/car.png  -d CPU -api async
+[Step 1/11] Parsing and validating input arguments
+[ WARNING ]  -nstreams default value is determined automatically for a device. Although the automatic selection usually provides a reasonable performance, but it still may be non-optimal for some cases, for more information look at README. 
+[Step 2/11] Loading Inference Engine
+[ INFO ] InferenceEngine:
+         API version............. 2021.4.0-3839-cd81789d294-releases/2021/4
+[ INFO ] Device info
+         CPU
+         MKLDNNPlugin............ version 2.1
+         Build................... 2021.4.0-3839-cd81789d294-releases/2021/4
+
+[Step 3/11] Setting device configuration
+[ WARNING ] -nstreams default value is determined automatically for CPU device. Although the automatic selection usually provides a reasonable performance,but it still may be non-optimal for some cases, for more information look at README.
+[Step 4/11] Reading network files
+[ INFO ] Read network took 57.64 ms
+[Step 5/11] Resizing network to match image sizes and given batch
+[ INFO ] Network batch size: 1
+[Step 6/11] Configuring input of the model
+[ INFO ] Network input 'data' precision U8, dimensions (NCHW): 1 3 224 224
+[ INFO ] Network output 'prob' precision FP32, dimensions (NC): 1 1000
+[Step 7/11] Loading the model to the device
+[ INFO ] Load network took 743.00 ms
+[Step 8/11] Setting optimal runtime parameters
+[Step 9/11] Creating infer requests and filling input blobs with images
+[ INFO ] Infer Request 0 filling
+[ INFO ] Prepare image /opt/intel/openvino_2021/deployment_tools/demo/car.png
+[ WARNING ] Image is resized from ((259, 787)) to ((224, 224))
+[Step 10/11] Measuring performance (Start inference asynchronously, 1 inference requests using 1 streams for CPU, limits: 60000 ms duration)
+[ INFO ] First inference took 339.40 ms
+[Step 11/11] Dumping statistics report
+Count:      277 iterations
+Duration:   60371.92 ms
+Latency:    215.99 ms
+Throughput: 4.59 FPS
+"""
+
+./benchmark_app.py -m /home/ros/googlenet-v1/googlenet-v1.xml -i /opt/intel/openvino_2021/deployment_tools/demo/car.png  -d CPU
+
+"""
+ros@ros-LEC-ALAI:/opt/intel/openvino_2021/deployment_tools/tools/benchmark_tool$ ./benchmark_app.py -m /home/ros/googlenet-v1/googlenet-v1.xml -i /opt/intel/openvino_2021/deployment_tools/demo/car.png  -d CPU
+[Step 1/11] Parsing and validating input arguments
+[ WARNING ]  -nstreams default value is determined automatically for a device. Although the automatic selection usually provides a reasonable performance, but it still may be non-optimal for some cases, for more information look at README. 
+[Step 2/11] Loading Inference Engine
+[ INFO ] InferenceEngine:
+         API version............. 2021.4.0-3839-cd81789d294-releases/2021/4
+[ INFO ] Device info
+         CPU
+         MKLDNNPlugin............ version 2.1
+         Build................... 2021.4.0-3839-cd81789d294-releases/2021/4
+
+[Step 3/11] Setting device configuration
+[ WARNING ] -nstreams default value is determined automatically for CPU device. Although the automatic selection usually provides a reasonable performance,but it still may be non-optimal for some cases, for more information look at README.
+[Step 4/11] Reading network files
+[ INFO ] Read network took 58.40 ms
+[Step 5/11] Resizing network to match image sizes and given batch
+[ INFO ] Network batch size: 1
+[Step 6/11] Configuring input of the model
+[ INFO ] Network input 'data' precision U8, dimensions (NCHW): 1 3 224 224
+[ INFO ] Network output 'prob' precision FP32, dimensions (NC): 1 1000
+[Step 7/11] Loading the model to the device
+[ INFO ] Load network took 275.36 ms
+[Step 8/11] Setting optimal runtime parameters
+[Step 9/11] Creating infer requests and filling input blobs with images
+[ INFO ] Infer Request 0 filling
+[ INFO ] Prepare image /opt/intel/openvino_2021/deployment_tools/demo/car.png
+[ WARNING ] Image is resized from ((259, 787)) to ((224, 224))
+[Step 10/11] Measuring performance (Start inference asynchronously, 1 inference requests using 1 streams for CPU, limits: 60000 ms duration)
+[ INFO ] First inference took 321.32 ms
+[Step 11/11] Dumping statistics report
+Count:      268 iterations
+Duration:   60240.79 ms
+Latency:    215.69 ms
+Throughput: 4.45 FPS
+"""
+
+./benchmark_app.py -m /home/ros/googlenet-v1/googlenet-v1.xml -i /opt/intel/openvino_2021/deployment_tools/demo/car.png  -d MYRIAD -api async
+
+"""
+ros@ros-LEC-ALAI:/opt/intel/openvino_2021/deployment_tools/tools/benchmark_tool$ ./benchmark_app.py -m /home/ros/googlenet-v1/googlenet-v1.xml -i /opt/intel/openvino_2021/deployment_tools/demo/car.png  -d MYRIAD -api async
+[Step 1/11] Parsing and validating input arguments
+[ WARNING ]  -nstreams default value is determined automatically for a device. Although the automatic selection usually provides a reasonable performance, but it still may be non-optimal for some cases, for more information look at README. 
+[Step 2/11] Loading Inference Engine
+[ INFO ] InferenceEngine:
+         API version............. 2021.4.0-3839-cd81789d294-releases/2021/4
+[ INFO ] Device info
+         MYRIAD
+         myriadPlugin............ version 2.1
+         Build................... 2021.4.0-3839-cd81789d294-releases/2021/4
+
+[Step 3/11] Setting device configuration
+[ WARNING ] -nstreams default value is determined automatically for MYRIAD device. Although the automatic selection usually provides a reasonable performance,but it still may be non-optimal for some cases, for more information look at README.
+[Step 4/11] Reading network files
+[ INFO ] Read network took 57.49 ms
+[Step 5/11] Resizing network to match image sizes and given batch
+[ INFO ] Network batch size: 1
+[Step 6/11] Configuring input of the model
+[ INFO ] Network input 'data' precision U8, dimensions (NCHW): 1 3 224 224
+[ INFO ] Network output 'prob' precision FP32, dimensions (NC): 1 1000
+[Step 7/11] Loading the model to the device
+I: [ncAPI] [    232966] [benchmark_app.p] ncDeviceOpen:926	ncDeviceOpen() XLinkBootRemote is running for 1.8-ma2480...
+
+I: [ncAPI] [    233245] [benchmark_app.p] ncDeviceOpen:945	ncDeviceOpen() XLinkBootRemote returned success X_LINK_SUCCESS for 1.8-ma2480
+I: [xLink] [    233644] [Scheduler00Thr] eventSchedulerRun:612	Scheduler thread started
+I: [xLink] [    233644] [EventRead00Thr] eventReader:539	eventReader thread started
+I: [ncAPI] [    233645] [benchmark_app.p] ncDeviceOpen:1048	XLinkConnect done - link Id 0
+
+I: [ncAPI] [    233645] [benchmark_app.p] ncDeviceOpen:1076	Booted 1.8-ma2480 (2.6-) -> VSC
+
+I: [watchdog] [    234646] [benchmark_app.p] registerDevice:160	register device: 0x7fff9d312140
+
+I: [watchdog] [    234646] [WatchdogThread] watchdogRoutine:262	thread started
+
+I: [watchdog] [    234647] [WatchdogThread] keepAlive:75	[0x2652560] device, ping succeed after 0 ms
+
+I: [ncAPI] [    234647] [benchmark_app.p] getDevAttributes:1272	Device attributes
+
+I: [ncAPI] [    234647] [benchmark_app.p] getDevAttributes:1274	Device FW version: 444c4454.2480.0.0
+
+I: [ncAPI] [    234647] [benchmark_app.p] getDevAttributes:1275	Maximum graphs: 10
+
+I: [ncAPI] [    234648] [benchmark_app.p] getDevAttributes:1276	Maximum fifos: 20
+
+I: [ncAPI] [    234648] [benchmark_app.p] getDevAttributes:1277	Device memory capacity: 507510776
+
+[Info   ][VPU][MyriadPlugin] Device #0 MYRIAD-X (USB protocol) allocated
+I: [ncAPI] [    235255] [benchmark_app.p] ncGraphAllocate:1971	Starting Graph allocation sequence
+
+I: [ncAPI] [    235316] [benchmark_app.p] ncGraphAllocate:2062	Sent graph
+I: [ncAPI] [    235344] [benchmark_app.p] ncGraphAllocate:2188	Graph allocation completed successfully
+
+I: [ncAPI] [    235344] [benchmark_app.p] ncFifoCreate:2886	Init fifo
+I: [ncAPI] [    235344] [benchmark_app.p] ncFifoAllocate:2987	Creating fifo
+I: [ncAPI] [    235348] [benchmark_app.p] ncFifoCreate:2886	Init fifo
+I: [ncAPI] [    235348] [benchmark_app.p] ncFifoAllocate:2987	Creating fifo
+[ INFO ] Load network took 2705.28 ms
+[Step 8/11] Setting optimal runtime parameters
+[Step 9/11] Creating infer requests and filling input blobs with images
+[ WARNING ] Some image input files will be duplicated: 4 files are required, but only 1 were provided
+[ INFO ] Infer Request 0 filling
+[ INFO ] Prepare image /opt/intel/openvino_2021/deployment_tools/demo/car.png
+[ WARNING ] Image is resized from ((259, 787)) to ((224, 224))
+[ INFO ] Infer Request 1 filling
+[ INFO ] Prepare image /opt/intel/openvino_2021/deployment_tools/demo/car.png
+[ WARNING ] Image is resized from ((259, 787)) to ((224, 224))
+[ INFO ] Infer Request 2 filling
+[ INFO ] Prepare image /opt/intel/openvino_2021/deployment_tools/demo/car.png
+[ WARNING ] Image is resized from ((259, 787)) to ((224, 224))
+[ INFO ] Infer Request 3 filling
+[ INFO ] Prepare image /opt/intel/openvino_2021/deployment_tools/demo/car.png
+[ WARNING ] Image is resized from ((259, 787)) to ((224, 224))
+[Step 10/11] Measuring performance (Start inference asynchronously, 4 inference requests, limits: 60000 ms duration)
+[ INFO ] First inference took 28.01 ms
+I: [watchdog] [    235647] [WatchdogThread] keepAlive:75	[0x2652560] device, ping succeed after 999 ms
+
+I: [watchdog] [    236646] [WatchdogThread] keepAlive:75	[0x2652560] device, ping succeed after 999 ms
+
+I: [watchdog] [    237646] [WatchdogThread] keepAlive:75	[0x2652560] device, ping succeed after 999 ms
+
+I: [watchdog] [    238645] [WatchdogThread] keepAlive:75	[0x2652560] device, ping succeed after 999 ms
+
+I: [watchdog] [    239645] [WatchdogThread] keepAlive:75	[0x2652560] device, ping succeed after 999 ms
+
+I: [watchdog] [    240646] [WatchdogThread] keepAlive:75	[0x2652560] device, ping succeed after 999 ms
+
+I: [watchdog] [    241643] [WatchdogThread] keepAlive:75	[0x2652560] device, ping succeed after 999 ms
+
+I: [watchdog] [    242643] [WatchdogThread] keepAlive:75	[0x2652560] device, ping succeed after 999 ms
+
+I: [watchdog] [    243643] [WatchdogThread] keepAlive:75	[0x2652560] device, ping succeed after 999 ms
+
+I: [watchdog] [    244642] [WatchdogThread] keepAlive:75	[0x2652560] device, ping succeed after 999 ms
+
+I: [watchdog] [    245642] [WatchdogThread] keepAlive:75	[0x2652560] device, ping succeed after 999 ms
+
+I: [watchdog] [    246642] [WatchdogThread] keepAlive:75	[0x2652560] device, ping succeed after 999 ms
+
+I: [watchdog] [    247641] [WatchdogThread] keepAlive:75	[0x2652560] device, ping succeed after 999 ms
+
+I: [watchdog] [    248640] [WatchdogThread] keepAlive:75	[0x2652560] device, ping succeed after 999 ms
+
+I: [watchdog] [    249641] [WatchdogThread] keepAlive:75	[0x2652560] device, ping succeed after 999 ms
+
+I: [watchdog] [    250640] [WatchdogThread] keepAlive:75	[0x2652560] device, ping succeed after 999 ms
+
+I: [watchdog] [    251640] [WatchdogThread] keepAlive:75	[0x2652560] device, ping succeed after 999 ms
+
+I: [watchdog] [    252638] [WatchdogThread] keepAlive:75	[0x2652560] device, ping succeed after 999 ms
+
+I: [watchdog] [    253638] [WatchdogThread] keepAlive:75	[0x2652560] device, ping succeed after 999 ms
+
+I: [watchdog] [    254638] [WatchdogThread] keepAlive:75	[0x2652560] device, ping succeed after 999 ms
+
+I: [watchdog] [    255637] [WatchdogThread] keepAlive:75	[0x2652560] device, ping succeed after 999 ms
+
+I: [watchdog] [    256637] [WatchdogThread] keepAlive:75	[0x2652560] device, ping succeed after 999 ms
+
+I: [watchdog] [    257636] [WatchdogThread] keepAlive:75	[0x2652560] device, ping succeed after 999 ms
+
+I: [watchdog] [    258636] [WatchdogThread] keepAlive:75	[0x2652560] device, ping succeed after 999 ms
+
+I: [watchdog] [    259636] [WatchdogThread] keepAlive:75	[0x2652560] device, ping succeed after 999 ms
+
+I: [watchdog] [    260635] [WatchdogThread] keepAlive:75	[0x2652560] device, ping succeed after 999 ms
+
+I: [watchdog] [    261635] [WatchdogThread] keepAlive:75	[0x2652560] device, ping succeed after 999 ms
+
+I: [watchdog] [    262634] [WatchdogThread] keepAlive:75	[0x2652560] device, ping succeed after 999 ms
+
+I: [watchdog] [    263634] [WatchdogThread] keepAlive:75	[0x2652560] device, ping succeed after 999 ms
+
+I: [watchdog] [    264633] [WatchdogThread] keepAlive:75	[0x2652560] device, ping succeed after 999 ms
+
+I: [watchdog] [    265634] [WatchdogThread] keepAlive:75	[0x2652560] device, ping succeed after 999 ms
+
+I: [watchdog] [    266632] [WatchdogThread] keepAlive:75	[0x2652560] device, ping succeed after 999 ms
+
+I: [watchdog] [    267632] [WatchdogThread] keepAlive:75	[0x2652560] device, ping succeed after 1000 ms
+
+I: [watchdog] [    268632] [WatchdogThread] keepAlive:75	[0x2652560] device, ping succeed after 999 ms
+
+I: [watchdog] [    269632] [WatchdogThread] keepAlive:75	[0x2652560] device, ping succeed after 999 ms
+
+I: [watchdog] [    270632] [WatchdogThread] keepAlive:75	[0x2652560] device, ping succeed after 999 ms
+
+I: [watchdog] [    271631] [WatchdogThread] keepAlive:75	[0x2652560] device, ping succeed after 999 ms
+
+I: [watchdog] [    272631] [WatchdogThread] keepAlive:75	[0x2652560] device, ping succeed after 999 ms
+
+I: [watchdog] [    273631] [WatchdogThread] keepAlive:75	[0x2652560] device, ping succeed after 999 ms
+
+I: [watchdog] [    274629] [WatchdogThread] keepAlive:75	[0x2652560] device, ping succeed after 999 ms
+
+I: [watchdog] [    275629] [WatchdogThread] keepAlive:75	[0x2652560] device, ping succeed after 999 ms
+
+I: [watchdog] [    276629] [WatchdogThread] keepAlive:75	[0x2652560] device, ping succeed after 999 ms
+
+I: [watchdog] [    277628] [WatchdogThread] keepAlive:75	[0x2652560] device, ping succeed after 999 ms
+
+I: [watchdog] [    278628] [WatchdogThread] keepAlive:75	[0x2652560] device, ping succeed after 999 ms
+
+I: [watchdog] [    279628] [WatchdogThread] keepAlive:75	[0x2652560] device, ping succeed after 999 ms
+
+I: [watchdog] [    280627] [WatchdogThread] keepAlive:75	[0x2652560] device, ping succeed after 999 ms
+
+I: [watchdog] [    281627] [WatchdogThread] keepAlive:75	[0x2652560] device, ping succeed after 999 ms
+
+I: [watchdog] [    282626] [WatchdogThread] keepAlive:75	[0x2652560] device, ping succeed after 999 ms
+
+I: [watchdog] [    283626] [WatchdogThread] keepAlive:75	[0x2652560] device, ping succeed after 999 ms
+
+I: [watchdog] [    284627] [WatchdogThread] keepAlive:75	[0x2652560] device, ping succeed after 999 ms
+
+I: [watchdog] [    285626] [WatchdogThread] keepAlive:75	[0x2652560] device, ping succeed after 999 ms
+
+I: [watchdog] [    286625] [WatchdogThread] keepAlive:75	[0x2652560] device, ping succeed after 999 ms
+
+I: [watchdog] [    287625] [WatchdogThread] keepAlive:75	[0x2652560] device, ping succeed after 999 ms
+
+I: [watchdog] [    288624] [WatchdogThread] keepAlive:75	[0x2652560] device, ping succeed after 999 ms
+
+I: [watchdog] [    289624] [WatchdogThread] keepAlive:75	[0x2652560] device, ping succeed after 999 ms
+
+I: [watchdog] [    290624] [WatchdogThread] keepAlive:75	[0x2652560] device, ping succeed after 1000 ms
+
+I: [watchdog] [    291624] [WatchdogThread] keepAlive:75	[0x2652560] device, ping succeed after 999 ms
+
+I: [watchdog] [    292624] [WatchdogThread] keepAlive:75	[0x2652560] device, ping succeed after 999 ms
+
+I: [watchdog] [    293623] [WatchdogThread] keepAlive:75	[0x2652560] device, ping succeed after 999 ms
+
+I: [watchdog] [    294623] [WatchdogThread] keepAlive:75	[0x2652560] device, ping succeed after 999 ms
+
+[Step 11/11] Dumping statistics report
+Count:      5564 iterations
+Duration:   60081.97 ms
+Latency:    42.85 ms
+Throughput: 92.61 FPS
+I: [ncAPI] [    295568] [benchmark_app.p] ncDeviceClose:1705	Removing device...
+I: [watchdog] [    295568] [benchmark_app.p] removeDevice:202	remove device: 0x7fff9d313960
+
+I: [watchdog] [    295568] [WatchdogThread] watchdogRoutine:295	no active devices to watch, stopping  Watchdog thread
+
+I: [watchdog] [    295568] [WatchdogThread] watchdogRoutine:321	thread ended
+
+I: [xLink] [    295571] [Scheduler00Thr] dispatcherClean:866	Start Clean Dispatcher...
+I: [xLink] [    295571] [Scheduler00Thr] dispatcherClean:896	Clean Dispatcher Successfully...
+I: [xLink] [    295571] [Scheduler00Thr] eventSchedulerRun:636	Scheduler thread stopped
+E: [global] [    295571] [benchmark_app.p] XLink_sem_wait:94	 XLink_sem_inc(sem) method call failed with an error: -1
+E: [global] [    295571] [benchmark_app.p] XLinkResetRemote:257	can't wait dispatcherClosedSem
+
+W: [ncAPI] [    295571] [benchmark_app.p] ncDeviceClose:1789	Failed to reset, rc: X_LINK_ERROR
+I: [ncAPI] [    296013] [benchmark_app.p] destroyDeviceHandle:1648	Destroying device handler
+I: [watchdog] [    296013] [benchmark_app.p] ~WatchdogImpl:125	watchdog terminated
+"""
+
+./benchmark_app.py -m /home/ros/googlenet-v1/googlenet-v1.xml -i /opt/intel/openvino_2021/deployment_tools/demo/car.png  -d MYRIAD
+
+"""
+ros@ros-LEC-ALAI:/opt/intel/openvino_2021/deployment_tools/tools/benchmark_tool$ ./benchmark_app.py -m /home/ros/googlenet-v1/googlenet-v1.xml -i /opt/intel/openvino_2021/deployment_tools/demo/car.png  -d MYRIAD
+[Step 1/11] Parsing and validating input arguments
+[ WARNING ]  -nstreams default value is determined automatically for a device. Although the automatic selection usually provides a reasonable performance, but it still may be non-optimal for some cases, for more information look at README. 
+[Step 2/11] Loading Inference Engine
+[ INFO ] InferenceEngine:
+         API version............. 2021.4.0-3839-cd81789d294-releases/2021/4
+[ INFO ] Device info
+         MYRIAD
+         myriadPlugin............ version 2.1
+         Build................... 2021.4.0-3839-cd81789d294-releases/2021/4
+
+[Step 3/11] Setting device configuration
+[ WARNING ] -nstreams default value is determined automatically for MYRIAD device. Although the automatic selection usually provides a reasonable performance,but it still may be non-optimal for some cases, for more information look at README.
+[Step 4/11] Reading network files
+[ INFO ] Read network took 61.43 ms
+[Step 5/11] Resizing network to match image sizes and given batch
+[ INFO ] Network batch size: 1
+[Step 6/11] Configuring input of the model
+[ INFO ] Network input 'data' precision U8, dimensions (NCHW): 1 3 224 224
+[ INFO ] Network output 'prob' precision FP32, dimensions (NC): 1 1000
+[Step 7/11] Loading the model to the device
+I: [ncAPI] [    385809] [benchmark_app.p] ncDeviceOpen:926	ncDeviceOpen() XLinkBootRemote is running for 1.8-ma2480...
+
+I: [ncAPI] [    386066] [benchmark_app.p] ncDeviceOpen:945	ncDeviceOpen() XLinkBootRemote returned success X_LINK_SUCCESS for 1.8-ma2480
+
+I: [xLink] [    386510] [Scheduler00Thr] eventSchedulerRun:612	Scheduler thread started
+I: [xLink] [    386513] [EventRead00Thr] eventReader:539	eventReader thread started
+I: [ncAPI] [    386516] [benchmark_app.p] ncDeviceOpen:1048	XLinkConnect done - link Id 0
+
+I: [ncAPI] [    386516] [benchmark_app.p] ncDeviceOpen:1076	Booted 1.8-ma2480 (2.6-) -> VSC
+
+I: [watchdog] [    387517] [benchmark_app.p] registerDevice:160	register device: 0x7ffe3de04170
+
+I: [watchdog] [    387517] [WatchdogThread] watchdogRoutine:262	thread started
+
+I: [ncAPI] [    387518] [benchmark_app.p] getDevAttributes:1272	Device attributes
+
+I: [ncAPI] [    387518] [benchmark_app.p] getDevAttributes:1274	Device FW version: 444c4454.2480.0.0
+
+I: [ncAPI] [    387518] [benchmark_app.p] getDevAttributes:1275	Maximum graphs: 10
+
+I: [ncAPI] [    387518] [benchmark_app.p] getDevAttributes:1276	Maximum fifos: 20
+
+I: [ncAPI] [    387518] [benchmark_app.p] getDevAttributes:1277	Device memory capacity: 507510776
+
+I: [watchdog] [    387518] [WatchdogThread] keepAlive:75	[0x25abeb0] device, ping succeed after 0 ms
+
+[Info   ][VPU][MyriadPlugin] Device #0 MYRIAD-X (USB protocol) allocated
+I: [ncAPI] [    388091] [benchmark_app.p] ncGraphAllocate:1971	Starting Graph allocation sequence
+
+I: [ncAPI] [    388155] [benchmark_app.p] ncGraphAllocate:2062	Sent graph
+I: [ncAPI] [    388181] [benchmark_app.p] ncGraphAllocate:2188	Graph allocation completed successfully
+
+I: [ncAPI] [    388181] [benchmark_app.p] ncFifoCreate:2886	Init fifo
+I: [ncAPI] [    388181] [benchmark_app.p] ncFifoAllocate:2987	Creating fifo
+I: [ncAPI] [    388183] [benchmark_app.p] ncFifoCreate:2886	Init fifo
+I: [ncAPI] [    388183] [benchmark_app.p] ncFifoAllocate:2987	Creating fifo
+[ INFO ] Load network took 2385.56 ms
+[Step 8/11] Setting optimal runtime parameters
+[Step 9/11] Creating infer requests and filling input blobs with images
+[ WARNING ] Some image input files will be duplicated: 4 files are required, but only 1 were provided
+[ INFO ] Infer Request 0 filling
+[ INFO ] Prepare image /opt/intel/openvino_2021/deployment_tools/demo/car.png
+[ WARNING ] Image is resized from ((259, 787)) to ((224, 224))
+[ INFO ] Infer Request 1 filling
+[ INFO ] Prepare image /opt/intel/openvino_2021/deployment_tools/demo/car.png
+[ WARNING ] Image is resized from ((259, 787)) to ((224, 224))
+[ INFO ] Infer Request 2 filling
+[ INFO ] Prepare image /opt/intel/openvino_2021/deployment_tools/demo/car.png
+[ WARNING ] Image is resized from ((259, 787)) to ((224, 224))
+[ INFO ] Infer Request 3 filling
+[ INFO ] Prepare image /opt/intel/openvino_2021/deployment_tools/demo/car.png
+[ WARNING ] Image is resized from ((259, 787)) to ((224, 224))
+[Step 10/11] Measuring performance (Start inference asynchronously, 4 inference requests, limits: 60000 ms duration)
+[ INFO ] First inference took 23.89 ms
+I: [watchdog] [    388517] [WatchdogThread] keepAlive:75	[0x25abeb0] device, ping succeed after 999 ms
+
+I: [watchdog] [    389518] [WatchdogThread] keepAlive:75	[0x25abeb0] device, ping succeed after 999 ms
+
+I: [watchdog] [    390518] [WatchdogThread] keepAlive:75	[0x25abeb0] device, ping succeed after 999 ms
+
+I: [watchdog] [    391516] [WatchdogThread] keepAlive:75	[0x25abeb0] device, ping succeed after 999 ms
+
+I: [watchdog] [    392516] [WatchdogThread] keepAlive:75	[0x25abeb0] device, ping succeed after 999 ms
+
+I: [watchdog] [    393515] [WatchdogThread] keepAlive:75	[0x25abeb0] device, ping succeed after 999 ms
+
+I: [watchdog] [    394515] [WatchdogThread] keepAlive:75	[0x25abeb0] device, ping succeed after 999 ms
+
+I: [watchdog] [    395515] [WatchdogThread] keepAlive:75	[0x25abeb0] device, ping succeed after 999 ms
+
+I: [watchdog] [    396514] [WatchdogThread] keepAlive:75	[0x25abeb0] device, ping succeed after 999 ms
+
+I: [watchdog] [    397515] [WatchdogThread] keepAlive:75	[0x25abeb0] device, ping succeed after 999 ms
+
+I: [watchdog] [    398513] [WatchdogThread] keepAlive:75	[0x25abeb0] device, ping succeed after 999 ms
+
+I: [watchdog] [    399513] [WatchdogThread] keepAlive:75	[0x25abeb0] device, ping succeed after 999 ms
+
+I: [watchdog] [    400512] [WatchdogThread] keepAlive:75	[0x25abeb0] device, ping succeed after 999 ms
+
+I: [watchdog] [    401512] [WatchdogThread] keepAlive:75	[0x25abeb0] device, ping succeed after 999 ms
+
+I: [watchdog] [    402512] [WatchdogThread] keepAlive:75	[0x25abeb0] device, ping succeed after 999 ms
+
+I: [watchdog] [    403511] [WatchdogThread] keepAlive:75	[0x25abeb0] device, ping succeed after 999 ms
+
+I: [watchdog] [    404511] [WatchdogThread] keepAlive:75	[0x25abeb0] device, ping succeed after 999 ms
+
+I: [watchdog] [    405511] [WatchdogThread] keepAlive:75	[0x25abeb0] device, ping succeed after 999 ms
+
+I: [watchdog] [    406511] [WatchdogThread] keepAlive:75	[0x25abeb0] device, ping succeed after 999 ms
+
+I: [watchdog] [    407510] [WatchdogThread] keepAlive:75	[0x25abeb0] device, ping succeed after 999 ms
+
+I: [watchdog] [    408509] [WatchdogThread] keepAlive:75	[0x25abeb0] device, ping succeed after 999 ms
+
+I: [watchdog] [    409509] [WatchdogThread] keepAlive:75	[0x25abeb0] device, ping succeed after 999 ms
+
+I: [watchdog] [    410509] [WatchdogThread] keepAlive:75	[0x25abeb0] device, ping succeed after 999 ms
+
+I: [watchdog] [    411509] [WatchdogThread] keepAlive:75	[0x25abeb0] device, ping succeed after 999 ms
+
+I: [watchdog] [    412508] [WatchdogThread] keepAlive:75	[0x25abeb0] device, ping succeed after 999 ms
+
+I: [watchdog] [    413507] [WatchdogThread] keepAlive:75	[0x25abeb0] device, ping succeed after 999 ms
+
+I: [watchdog] [    414507] [WatchdogThread] keepAlive:75	[0x25abeb0] device, ping succeed after 999 ms
+
+I: [watchdog] [    415506] [WatchdogThread] keepAlive:75	[0x25abeb0] device, ping succeed after 999 ms
+
+I: [watchdog] [    416506] [WatchdogThread] keepAlive:75	[0x25abeb0] device, ping succeed after 999 ms
+
+I: [watchdog] [    417506] [WatchdogThread] keepAlive:75	[0x25abeb0] device, ping succeed after 999 ms
+
+I: [watchdog] [    418505] [WatchdogThread] keepAlive:75	[0x25abeb0] device, ping succeed after 999 ms
+
+I: [watchdog] [    419505] [WatchdogThread] keepAlive:75	[0x25abeb0] device, ping succeed after 999 ms
+
+I: [watchdog] [    420505] [WatchdogThread] keepAlive:75	[0x25abeb0] device, ping succeed after 999 ms
+
+I: [watchdog] [    421504] [WatchdogThread] keepAlive:75	[0x25abeb0] device, ping succeed after 999 ms
+
+I: [watchdog] [    422504] [WatchdogThread] keepAlive:75	[0x25abeb0] device, ping succeed after 999 ms
+
+I: [watchdog] [    423504] [WatchdogThread] keepAlive:75	[0x25abeb0] device, ping succeed after 999 ms
+
+I: [watchdog] [    424503] [WatchdogThread] keepAlive:75	[0x25abeb0] device, ping succeed after 999 ms
+
+I: [watchdog] [    425503] [WatchdogThread] keepAlive:75	[0x25abeb0] device, ping succeed after 999 ms
+
+I: [watchdog] [    426503] [WatchdogThread] keepAlive:75	[0x25abeb0] device, ping succeed after 999 ms
+
+I: [watchdog] [    427503] [WatchdogThread] keepAlive:75	[0x25abeb0] device, ping succeed after 999 ms
+
+I: [watchdog] [    428506] [WatchdogThread] keepAlive:75	[0x25abeb0] device, ping succeed after 999 ms
+
+I: [watchdog] [    429502] [WatchdogThread] keepAlive:75	[0x25abeb0] device, ping succeed after 999 ms
+
+I: [watchdog] [    430502] [WatchdogThread] keepAlive:75	[0x25abeb0] device, ping succeed after 999 ms
+
+I: [watchdog] [    431500] [WatchdogThread] keepAlive:75	[0x25abeb0] device, ping succeed after 999 ms
+
+I: [watchdog] [    432500] [WatchdogThread] keepAlive:75	[0x25abeb0] device, ping succeed after 999 ms
+
+I: [watchdog] [    433500] [WatchdogThread] keepAlive:75	[0x25abeb0] device, ping succeed after 999 ms
+
+I: [watchdog] [    434499] [WatchdogThread] keepAlive:75	[0x25abeb0] device, ping succeed after 999 ms
+
+I: [watchdog] [    435499] [WatchdogThread] keepAlive:75	[0x25abeb0] device, ping succeed after 999 ms
+
+I: [watchdog] [    436499] [WatchdogThread] keepAlive:75	[0x25abeb0] device, ping succeed after 999 ms
+
+I: [watchdog] [    437499] [WatchdogThread] keepAlive:75	[0x25abeb0] device, ping succeed after 999 ms
+
+I: [watchdog] [    438499] [WatchdogThread] keepAlive:75	[0x25abeb0] device, ping succeed after 999 ms
+
+I: [watchdog] [    439498] [WatchdogThread] keepAlive:75	[0x25abeb0] device, ping succeed after 999 ms
+
+I: [watchdog] [    440498] [WatchdogThread] keepAlive:75	[0x25abeb0] device, ping succeed after 999 ms
+
+I: [watchdog] [    441498] [WatchdogThread] keepAlive:75	[0x25abeb0] device, ping succeed after 999 ms
+
+I: [watchdog] [    442498] [WatchdogThread] keepAlive:75	[0x25abeb0] device, ping succeed after 999 ms
+
+I: [watchdog] [    443498] [WatchdogThread] keepAlive:75	[0x25abeb0] device, ping succeed after 999 ms
+
+I: [watchdog] [    444497] [WatchdogThread] keepAlive:75	[0x25abeb0] device, ping succeed after 999 ms
+
+I: [watchdog] [    445497] [WatchdogThread] keepAlive:75	[0x25abeb0] device, ping succeed after 999 ms
+
+I: [watchdog] [    446495] [WatchdogThread] keepAlive:75	[0x25abeb0] device, ping succeed after 999 ms
+
+I: [watchdog] [    447495] [WatchdogThread] keepAlive:75	[0x25abeb0] device, ping succeed after 999 ms
+
+[Step 11/11] Dumping statistics report
+Count:      5580 iterations
+Duration:   60065.07 ms
+Latency:    42.72 ms
+Throughput: 92.90 FPS
+I: [ncAPI] [    448371] [benchmark_app.p] ncDeviceClose:1705	Removing device...
+I: [watchdog] [    448371] [benchmark_app.p] removeDevice:202	remove device: 0x7ffe3de05990
+
+I: [watchdog] [    448371] [WatchdogThread] watchdogRoutine:295	no active devices to watch, stopping  Watchdog thread
+
+I: [watchdog] [    448371] [WatchdogThread] watchdogRoutine:321	thread ended
+
+I: [xLink] [    448375] [Scheduler00Thr] dispatcherClean:866	Start Clean Dispatcher...
+I: [xLink] [    448375] [Scheduler00Thr] dispatcherClean:896	Clean Dispatcher Successfully...
+I: [xLink] [    448375] [Scheduler00Thr] eventSchedulerRun:636	Scheduler thread stopped
+E: [global] [    448375] [benchmark_app.p] XLink_sem_wait:94	 XLink_sem_inc(sem) method call failed with an error: -1
+E: [global] [    448375] [benchmark_app.p] XLinkResetRemote:257	can't wait dispatcherClosedSem
+
+W: [ncAPI] [    448375] [benchmark_app.p] ncDeviceClose:1789	Failed to reset, rc: X_LINK_ERROR
+I: [ncAPI] [    448813] [benchmark_app.p] destroyDeviceHandle:1648	Destroying device handler
+I: [watchdog] [    448813] [benchmark_app.p] ~WatchdogImpl:125	watchdog terminated
+"""
+
+./benchmark_app.py -m /home/ros/googlenet-v1/googlenet-v1.xml -i /opt/intel/openvino_2021/deployment_tools/demo/car.png  -d MULTI:MYRIAD.1.4-ma2480,MYRIAD.1.8-ma2480
+
+"""
+ros@ros-LEC-ALAI:/opt/intel/openvino_2021/deployment_tools/tools/benchmark_tool$ ./benchmark_app.py -m /home/ros/googlenet-v1/googlenet-v1.xml -i /opt/intel/openvino_2021/deployment_tools/demo/car.png  -d MULTI:MYRIAD.1.4-ma2480,MYRIAD.1.8-ma2480
+[Step 1/11] Parsing and validating input arguments
+[ WARNING ]  -nstreams default value is determined automatically for a device. Although the automatic selection usually provides a reasonable performance, but it still may be non-optimal for some cases, for more information look at README. 
+[Step 2/11] Loading Inference Engine
+[ INFO ] InferenceEngine:
+         API version............. 2021.4.0-3839-cd81789d294-releases/2021/4
+[ INFO ] Device info
+         MULTI
+         MultiDevicePlugin....... version 2.1
+         Build................... 2021.4.0-3839-cd81789d294-releases/2021/4
+         MYRIAD
+         myriadPlugin............ version 2.1
+         Build................... 2021.4.0-3839-cd81789d294-releases/2021/4
+
+[Step 3/11] Setting device configuration
+[ WARNING ] -nstreams default value is determined automatically for MYRIAD device. Although the automatic selection usually provides a reasonable performance,but it still may be non-optimal for some cases, for more information look at README.
+[ WARNING ] -nstreams default value is determined automatically for MYRIAD device. Although the automatic selection usually provides a reasonable performance,but it still may be non-optimal for some cases, for more information look at README.
+[Step 4/11] Reading network files
+[ INFO ] Read network took 59.92 ms
+[Step 5/11] Resizing network to match image sizes and given batch
+[ INFO ] Network batch size: 1
+[Step 6/11] Configuring input of the model
+[ INFO ] Network input 'data' precision U8, dimensions (NCHW): 1 3 224 224
+[ INFO ] Network output 'prob' precision FP32, dimensions (NC): 1 1000
+[Step 7/11] Loading the model to the device
+I: [ncAPI] [    496788] [benchmark_app.p] ncDeviceOpen:926	ncDeviceOpen() XLinkBootRemote is running for 1.4-ma2480...
+
+I: [ncAPI] [    496992] [benchmark_app.p] ncDeviceOpen:945	ncDeviceOpen() XLinkBootRemote returned success X_LINK_SUCCESS for 1.4-ma2480
+I: [xLink] [    497413] [Scheduler00Thr] eventReader:539	eventReader thread started
+I: [xLink] [    497413] [Scheduler00Thr] eventSchedulerRun:612	Scheduler thread started
+I: [ncAPI] [    497414] [benchmark_app.p] ncDeviceOpen:1048	XLinkConnect done - link Id 0
+
+I: [ncAPI] [    497414] [benchmark_app.p] ncDeviceOpen:1076	Booted 1.4-ma2480 (2.2-) -> VSC
+
+I: [watchdog] [    498415] [benchmark_app.p] registerDevice:160	register device: 0x7f1698d418d0
+
+I: [watchdog] [    498415] [WatchdogThread] watchdogRoutine:262	thread started
+
+I: [watchdog] [    498417] [WatchdogThread] keepAlive:75	[0x7f1690003230] device, ping succeed after 0 ms
+I: [ncAPI] [    498417] [benchmark_app.p] getDevAttributes:1272	Device attributes
+
+I: [ncAPI] [    498417] [benchmark_app.p] getDevAttributes:1274	Device FW version: 444c4454.2480.0.0
+
+I: [ncAPI] [    498417] [benchmark_app.p] getDevAttributes:1275	Maximum graphs: 10
+
+I: [ncAPI] [    498417] [benchmark_app.p] getDevAttributes:1276	Maximum fifos: 20
+
+I: [ncAPI] [    498418] [benchmark_app.p] getDevAttributes:1277	Device memory capacity: 507510776
+
+
+[Info   ][VPU][MyriadPlugin] Device #0 MYRIAD-X (USB protocol) allocated
+I: [ncAPI] [    498425] [benchmark_app.p] ncDeviceOpen:926	ncDeviceOpen() XLinkBootRemote is running for 1.8-ma2480...
+
+I: [ncAPI] [    498678] [benchmark_app.p] ncDeviceOpen:945	ncDeviceOpen() XLinkBootRemote returned success X_LINK_SUCCESS for 1.8-ma2480
+I: [xLink] [    499086] [Scheduler01Thr] eventSchedulerRun:612	Scheduler thread started
+I: [xLink] [    499086] [EventRead01Thr] eventReader:539	eventReader thread started
+I: [ncAPI] [    499090] [benchmark_app.p] ncDeviceOpen:1048	XLinkConnect done - link Id 1
+
+I: [ncAPI] [    499090] [benchmark_app.p] ncDeviceOpen:1076	Booted 1.8-ma2480 (2.6-) -> VSC
+
+I: [watchdog] [    499415] [WatchdogThread] keepAlive:75	[0x7f1690003230] device, ping succeed after 999 ms
+
+I: [ncAPI] [    500090] [benchmark_app.p] ncGraphAllocate:1971	Starting Graph allocation sequence
+
+I: [watchdog] [    500091] [benchmark_app.p] registerDevice:160	register device: 0x7f16985408d0
+
+I: [watchdog] [    500092] [WatchdogThread] keepAlive:75	[0x7f1688002f40] device, ping succeed after 0 ms
+
+I: [ncAPI] [    500092] [benchmark_app.p] getDevAttributes:1272	Device attributes
+
+I: [ncAPI] [    500092] [benchmark_app.p] getDevAttributes:1274	Device FW version: 444c4454.2480.0.0
+
+I: [ncAPI] [    500092] [benchmark_app.p] getDevAttributes:1275	Maximum graphs: 10
+
+I: [ncAPI] [    500092] [benchmark_app.p] getDevAttributes:1276	Maximum fifos: 20
+
+I: [ncAPI] [    500092] [benchmark_app.p] getDevAttributes:1277	Device memory capacity: 507510776
+
+I: [ncAPI] [    500150] [benchmark_app.p] ncGraphAllocate:2062	Sent graph
+I: [ncAPI] [    500183] [benchmark_app.p] ncGraphAllocate:2188	Graph allocation completed successfully
+
+I: [ncAPI] [    500183] [benchmark_app.p] ncFifoCreate:2886	Init fifo
+I: [ncAPI] [    500183] [benchmark_app.p] ncFifoAllocate:2987	Creating fifo
+[Info   ][VPU][MyriadPlugin] Device #1 MYRIAD-X (USB protocol) allocated
+I: [ncAPI] [    500198] [benchmark_app.p] ncFifoCreate:2886	Init fifo
+I: [ncAPI] [    500198] [benchmark_app.p] ncFifoAllocate:2987	Creating fifo
+I: [watchdog] [    500419] [WatchdogThread] keepAlive:75	[0x7f1690003230] device, ping succeed after 999 ms
+
+I: [ncAPI] [    500862] [benchmark_app.p] ncGraphAllocate:1971	Starting Graph allocation sequence
+
+I: [ncAPI] [    500921] [benchmark_app.p] ncGraphAllocate:2062	Sent graph
+I: [ncAPI] [    500948] [benchmark_app.p] ncGraphAllocate:2188	Graph allocation completed successfully
+
+I: [ncAPI] [    500948] [benchmark_app.p] ncFifoCreate:2886	Init fifo
+I: [ncAPI] [    500948] [benchmark_app.p] ncFifoAllocate:2987	Creating fifo
+I: [ncAPI] [    500950] [benchmark_app.p] ncFifoCreate:2886	Init fifo
+I: [ncAPI] [    500950] [benchmark_app.p] ncFifoAllocate:2987	Creating fifo
+[ INFO ] Load network took 4176.18 ms
+[Step 8/11] Setting optimal runtime parameters
+[Step 9/11] Creating infer requests and filling input blobs with images
+[ WARNING ] Some image input files will be duplicated: 8 files are required, but only 1 were provided
+[ INFO ] Infer Request 0 filling
+[ INFO ] Prepare image /opt/intel/openvino_2021/deployment_tools/demo/car.png
+[ WARNING ] Image is resized from ((259, 787)) to ((224, 224))
+[ INFO ] Infer Request 1 filling
+[ INFO ] Prepare image /opt/intel/openvino_2021/deployment_tools/demo/car.png
+[ WARNING ] Image is resized from ((259, 787)) to ((224, 224))
+[ INFO ] Infer Request 2 filling
+[ INFO ] Prepare image /opt/intel/openvino_2021/deployment_tools/demo/car.png
+[ WARNING ] Image is resized from ((259, 787)) to ((224, 224))
+[ INFO ] Infer Request 3 filling
+[ INFO ] Prepare image /opt/intel/openvino_2021/deployment_tools/demo/car.png
+[ WARNING ] Image is resized from ((259, 787)) to ((224, 224))
+[ INFO ] Infer Request 4 filling
+[ INFO ] Prepare image /opt/intel/openvino_2021/deployment_tools/demo/car.png
+[ WARNING ] Image is resized from ((259, 787)) to ((224, 224))
+[ INFO ] Infer Request 5 filling
+[ INFO ] Prepare image /opt/intel/openvino_2021/deployment_tools/demo/car.png
+[ WARNING ] Image is resized from ((259, 787)) to ((224, 224))
+[ INFO ] Infer Request 6 filling
+[ INFO ] Prepare image /opt/intel/openvino_2021/deployment_tools/demo/car.png
+[ WARNING ] Image is resized from ((259, 787)) to ((224, 224))
+[ INFO ] Infer Request 7 filling
+[ INFO ] Prepare image /opt/intel/openvino_2021/deployment_tools/demo/car.png
+[ WARNING ] Image is resized from ((259, 787)) to ((224, 224))
+I: [watchdog] [    501091] [WatchdogThread] keepAlive:75	[0x7f1688002f40] device, ping succeed after 999 ms
+
+[Step 10/11] Measuring performance (Start inference asynchronously, 8 inference requests, limits: 60000 ms duration)
+[ INFO ] First inference took 23.74 ms
+I: [watchdog] [    501414] [WatchdogThread] keepAlive:75	[0x7f1690003230] device, ping succeed after 999 ms
+
+I: [watchdog] [    502090] [WatchdogThread] keepAlive:75	[0x7f1688002f40] device, ping succeed after 999 ms
+
+I: [watchdog] [    502414] [WatchdogThread] keepAlive:75	[0x7f1690003230] device, ping succeed after 999 ms
+
+I: [watchdog] [    503090] [WatchdogThread] keepAlive:75	[0x7f1688002f40] device, ping succeed after 1000 ms
+
+I: [watchdog] [    503414] [WatchdogThread] keepAlive:75	[0x7f1690003230] device, ping succeed after 999 ms
+
+I: [watchdog] [    504090] [WatchdogThread] keepAlive:75	[0x7f1688002f40] device, ping succeed after 999 ms
+
+I: [watchdog] [    504414] [WatchdogThread] keepAlive:75	[0x7f1690003230] device, ping succeed after 999 ms
+
+I: [watchdog] [    505089] [WatchdogThread] keepAlive:75	[0x7f1688002f40] device, ping succeed after 999 ms
+
+I: [watchdog] [    505413] [WatchdogThread] keepAlive:75	[0x7f1690003230] device, ping succeed after 999 ms
+
+I: [watchdog] [    506097] [WatchdogThread] keepAlive:75	[0x7f1688002f40] device, ping succeed after 999 ms
+
+I: [watchdog] [    506413] [WatchdogThread] keepAlive:75	[0x7f1690003230] device, ping succeed after 999 ms
+
+I: [watchdog] [    507088] [WatchdogThread] keepAlive:75	[0x7f1688002f40] device, ping succeed after 999 ms
+
+I: [watchdog] [    507413] [WatchdogThread] keepAlive:75	[0x7f1690003230] device, ping succeed after 1000 ms
+
+I: [watchdog] [    508088] [WatchdogThread] keepAlive:75	[0x7f1688002f40] device, ping succeed after 999 ms
+
+I: [watchdog] [    508413] [WatchdogThread] keepAlive:75	[0x7f1690003230] device, ping succeed after 1000 ms
+
+I: [watchdog] [    509088] [WatchdogThread] keepAlive:75	[0x7f1688002f40] device, ping succeed after 999 ms
+
+I: [watchdog] [    509412] [WatchdogThread] keepAlive:75	[0x7f1690003230] device, ping succeed after 999 ms
+
+I: [watchdog] [    510087] [WatchdogThread] keepAlive:75	[0x7f1688002f40] device, ping succeed after 999 ms
+
+I: [watchdog] [    510412] [WatchdogThread] keepAlive:75	[0x7f1690003230] device, ping succeed after 999 ms
+
+I: [watchdog] [    511087] [WatchdogThread] keepAlive:75	[0x7f1688002f40] device, ping succeed after 1000 ms
+
+I: [watchdog] [    511412] [WatchdogThread] keepAlive:75	[0x7f1690003230] device, ping succeed after 999 ms
+
+I: [watchdog] [    512086] [WatchdogThread] keepAlive:75	[0x7f1688002f40] device, ping succeed after 999 ms
+
+I: [watchdog] [    512411] [WatchdogThread] keepAlive:75	[0x7f1690003230] device, ping succeed after 1000 ms
+
+I: [watchdog] [    513086] [WatchdogThread] keepAlive:75	[0x7f1688002f40] device, ping succeed after 999 ms
+
+I: [watchdog] [    513412] [WatchdogThread] keepAlive:75	[0x7f1690003230] device, ping succeed after 999 ms
+
+I: [watchdog] [    514085] [WatchdogThread] keepAlive:75	[0x7f1688002f40] device, ping succeed after 999 ms
+
+I: [watchdog] [    514411] [WatchdogThread] keepAlive:75	[0x7f1690003230] device, ping succeed after 1000 ms
+
+I: [watchdog] [    515085] [WatchdogThread] keepAlive:75	[0x7f1688002f40] device, ping succeed after 999 ms
+
+I: [watchdog] [    515411] [WatchdogThread] keepAlive:75	[0x7f1690003230] device, ping succeed after 999 ms
+
+I: [watchdog] [    516085] [WatchdogThread] keepAlive:75	[0x7f1688002f40] device, ping succeed after 999 ms
+
+I: [watchdog] [    516410] [WatchdogThread] keepAlive:75	[0x7f1690003230] device, ping succeed after 1000 ms
+
+I: [watchdog] [    517084] [WatchdogThread] keepAlive:75	[0x7f1688002f40] device, ping succeed after 999 ms
+
+I: [watchdog] [    517410] [WatchdogThread] keepAlive:75	[0x7f1690003230] device, ping succeed after 999 ms
+
+I: [watchdog] [    518084] [WatchdogThread] keepAlive:75	[0x7f1688002f40] device, ping succeed after 999 ms
+
+I: [watchdog] [    518409] [WatchdogThread] keepAlive:75	[0x7f1690003230] device, ping succeed after 999 ms
+
+I: [watchdog] [    519083] [WatchdogThread] keepAlive:75	[0x7f1688002f40] device, ping succeed after 999 ms
+
+I: [watchdog] [    519409] [WatchdogThread] keepAlive:75	[0x7f1690003230] device, ping succeed after 999 ms
+
+I: [watchdog] [    520082] [WatchdogThread] keepAlive:75	[0x7f1688002f40] device, ping succeed after 999 ms
+
+I: [watchdog] [    520408] [WatchdogThread] keepAlive:75	[0x7f1690003230] device, ping succeed after 999 ms
+
+I: [watchdog] [    521082] [WatchdogThread] keepAlive:75	[0x7f1688002f40] device, ping succeed after 999 ms
+
+I: [watchdog] [    521407] [WatchdogThread] keepAlive:75	[0x7f1690003230] device, ping succeed after 999 ms
+
+I: [watchdog] [    522082] [WatchdogThread] keepAlive:75	[0x7f1688002f40] device, ping succeed after 1000 ms
+
+I: [watchdog] [    522407] [WatchdogThread] keepAlive:75	[0x7f1690003230] device, ping succeed after 1000 ms
+
+I: [watchdog] [    523082] [WatchdogThread] keepAlive:75	[0x7f1688002f40] device, ping succeed after 999 ms
+
+I: [watchdog] [    523408] [WatchdogThread] keepAlive:75	[0x7f1690003230] device, ping succeed after 999 ms
+
+I: [watchdog] [    524080] [WatchdogThread] keepAlive:75	[0x7f1688002f40] device, ping succeed after 999 ms
+
+I: [watchdog] [    524407] [WatchdogThread] keepAlive:75	[0x7f1690003230] device, ping succeed after 999 ms
+
+I: [watchdog] [    525079] [WatchdogThread] keepAlive:75	[0x7f1688002f40] device, ping succeed after 999 ms
+
+I: [watchdog] [    525406] [WatchdogThread] keepAlive:75	[0x7f1690003230] device, ping succeed after 999 ms
+
+I: [watchdog] [    526081] [WatchdogThread] keepAlive:75	[0x7f1688002f40] device, ping succeed after 999 ms
+
+I: [watchdog] [    526405] [WatchdogThread] keepAlive:75	[0x7f1690003230] device, ping succeed after 999 ms
+
+I: [watchdog] [    527079] [WatchdogThread] keepAlive:75	[0x7f1688002f40] device, ping succeed after 999 ms
+
+I: [watchdog] [    527404] [WatchdogThread] keepAlive:75	[0x7f1690003230] device, ping succeed after 999 ms
+
+I: [watchdog] [    528078] [WatchdogThread] keepAlive:75	[0x7f1688002f40] device, ping succeed after 999 ms
+
+I: [watchdog] [    528405] [WatchdogThread] keepAlive:75	[0x7f1690003230] device, ping succeed after 999 ms
+
+I: [watchdog] [    529078] [WatchdogThread] keepAlive:75	[0x7f1688002f40] device, ping succeed after 999 ms
+
+I: [watchdog] [    529403] [WatchdogThread] keepAlive:75	[0x7f1690003230] device, ping succeed after 999 ms
+
+I: [watchdog] [    530079] [WatchdogThread] keepAlive:75	[0x7f1688002f40] device, ping succeed after 999 ms
+
+I: [watchdog] [    530403] [WatchdogThread] keepAlive:75	[0x7f1690003230] device, ping succeed after 999 ms
+
+I: [watchdog] [    531077] [WatchdogThread] keepAlive:75	[0x7f1688002f40] device, ping succeed after 999 ms
+
+I: [watchdog] [    531402] [WatchdogThread] keepAlive:75	[0x7f1690003230] device, ping succeed after 999 ms
+
+I: [watchdog] [    532076] [WatchdogThread] keepAlive:75	[0x7f1688002f40] device, ping succeed after 999 ms
+
+I: [watchdog] [    532401] [WatchdogThread] keepAlive:75	[0x7f1690003230] device, ping succeed after 999 ms
+
+I: [watchdog] [    533076] [WatchdogThread] keepAlive:75	[0x7f1688002f40] device, ping succeed after 1000 ms
+
+I: [watchdog] [    533401] [WatchdogThread] keepAlive:75	[0x7f1690003230] device, ping succeed after 999 ms
+
+I: [watchdog] [    534078] [WatchdogThread] keepAlive:75	[0x7f1688002f40] device, ping succeed after 1000 ms
+
+I: [watchdog] [    534400] [WatchdogThread] keepAlive:75	[0x7f1690003230] device, ping succeed after 999 ms
+
+I: [watchdog] [    535077] [WatchdogThread] keepAlive:75	[0x7f1688002f40] device, ping succeed after 1000 ms
+
+I: [watchdog] [    535400] [WatchdogThread] keepAlive:75	[0x7f1690003230] device, ping succeed after 1000 ms
+
+I: [watchdog] [    536077] [WatchdogThread] keepAlive:75	[0x7f1688002f40] device, ping succeed after 999 ms
+
+I: [watchdog] [    536399] [WatchdogThread] keepAlive:75	[0x7f1690003230] device, ping succeed after 999 ms
+
+I: [watchdog] [    537076] [WatchdogThread] keepAlive:75	[0x7f1688002f40] device, ping succeed after 999 ms
+
+I: [watchdog] [    537399] [WatchdogThread] keepAlive:75	[0x7f1690003230] device, ping succeed after 999 ms
+
+I: [watchdog] [    538075] [WatchdogThread] keepAlive:75	[0x7f1688002f40] device, ping succeed after 999 ms
+
+I: [watchdog] [    538400] [WatchdogThread] keepAlive:75	[0x7f1690003230] device, ping succeed after 999 ms
+
+I: [watchdog] [    539075] [WatchdogThread] keepAlive:75	[0x7f1688002f40] device, ping succeed after 1000 ms
+
+I: [watchdog] [    539398] [WatchdogThread] keepAlive:75	[0x7f1690003230] device, ping succeed after 999 ms
+
+I: [watchdog] [    540075] [WatchdogThread] keepAlive:75	[0x7f1688002f40] device, ping succeed after 999 ms
+
+I: [watchdog] [    540397] [WatchdogThread] keepAlive:75	[0x7f1690003230] device, ping succeed after 999 ms
+
+I: [watchdog] [    541074] [WatchdogThread] keepAlive:75	[0x7f1688002f40] device, ping succeed after 999 ms
+
+I: [watchdog] [    541397] [WatchdogThread] keepAlive:75	[0x7f1690003230] device, ping succeed after 999 ms
+
+I: [watchdog] [    542074] [WatchdogThread] keepAlive:75	[0x7f1688002f40] device, ping succeed after 999 ms
+
+I: [watchdog] [    542397] [WatchdogThread] keepAlive:75	[0x7f1690003230] device, ping succeed after 999 ms
+
+I: [watchdog] [    543074] [WatchdogThread] keepAlive:75	[0x7f1688002f40] device, ping succeed after 999 ms
+
+I: [watchdog] [    543397] [WatchdogThread] keepAlive:75	[0x7f1690003230] device, ping succeed after 999 ms
+
+I: [watchdog] [    544074] [WatchdogThread] keepAlive:75	[0x7f1688002f40] device, ping succeed after 999 ms
+
+I: [watchdog] [    544396] [WatchdogThread] keepAlive:75	[0x7f1690003230] device, ping succeed after 1000 ms
+
+I: [watchdog] [    545073] [WatchdogThread] keepAlive:75	[0x7f1688002f40] device, ping succeed after 999 ms
+
+I: [watchdog] [    545396] [WatchdogThread] keepAlive:75	[0x7f1690003230] device, ping succeed after 999 ms
+
+I: [watchdog] [    546072] [WatchdogThread] keepAlive:75	[0x7f1688002f40] device, ping succeed after 999 ms
+
+I: [watchdog] [    546395] [WatchdogThread] keepAlive:75	[0x7f1690003230] device, ping succeed after 999 ms
+
+I: [watchdog] [    547072] [WatchdogThread] keepAlive:75	[0x7f1688002f40] device, ping succeed after 999 ms
+
+I: [watchdog] [    547394] [WatchdogThread] keepAlive:75	[0x7f1690003230] device, ping succeed after 999 ms
+
+I: [watchdog] [    548071] [WatchdogThread] keepAlive:75	[0x7f1688002f40] device, ping succeed after 999 ms
+
+I: [watchdog] [    548395] [WatchdogThread] keepAlive:75	[0x7f1690003230] device, ping succeed after 999 ms
+
+I: [watchdog] [    549070] [WatchdogThread] keepAlive:75	[0x7f1688002f40] device, ping succeed after 999 ms
+
+I: [watchdog] [    549394] [WatchdogThread] keepAlive:75	[0x7f1690003230] device, ping succeed after 999 ms
+
+I: [watchdog] [    550070] [WatchdogThread] keepAlive:75	[0x7f1688002f40] device, ping succeed after 1000 ms
+
+I: [watchdog] [    550394] [WatchdogThread] keepAlive:75	[0x7f1690003230] device, ping succeed after 999 ms
+
+I: [watchdog] [    551070] [WatchdogThread] keepAlive:75	[0x7f1688002f40] device, ping succeed after 999 ms
+
+I: [watchdog] [    551394] [WatchdogThread] keepAlive:75	[0x7f1690003230] device, ping succeed after 999 ms
+
+I: [watchdog] [    552070] [WatchdogThread] keepAlive:75	[0x7f1688002f40] device, ping succeed after 999 ms
+
+I: [watchdog] [    552393] [WatchdogThread] keepAlive:75	[0x7f1690003230] device, ping succeed after 999 ms
+
+I: [watchdog] [    553070] [WatchdogThread] keepAlive:75	[0x7f1688002f40] device, ping succeed after 999 ms
+
+I: [watchdog] [    553392] [WatchdogThread] keepAlive:75	[0x7f1690003230] device, ping succeed after 999 ms
+
+I: [watchdog] [    554069] [WatchdogThread] keepAlive:75	[0x7f1688002f40] device, ping succeed after 999 ms
+
+I: [watchdog] [    554392] [WatchdogThread] keepAlive:75	[0x7f1690003230] device, ping succeed after 999 ms
+
+I: [watchdog] [    555069] [WatchdogThread] keepAlive:75	[0x7f1688002f40] device, ping succeed after 999 ms
+
+I: [watchdog] [    555391] [WatchdogThread] keepAlive:75	[0x7f1690003230] device, ping succeed after 999 ms
+
+I: [watchdog] [    556068] [WatchdogThread] keepAlive:75	[0x7f1688002f40] device, ping succeed after 999 ms
+
+I: [watchdog] [    556391] [WatchdogThread] keepAlive:75	[0x7f1690003230] device, ping succeed after 999 ms
+
+I: [watchdog] [    557068] [WatchdogThread] keepAlive:75	[0x7f1688002f40] device, ping succeed after 999 ms
+
+I: [watchdog] [    557390] [WatchdogThread] keepAlive:75	[0x7f1690003230] device, ping succeed after 1000 ms
+
+I: [watchdog] [    558068] [WatchdogThread] keepAlive:75	[0x7f1688002f40] device, ping succeed after 999 ms
+
+I: [watchdog] [    558390] [WatchdogThread] keepAlive:75	[0x7f1690003230] device, ping succeed after 999 ms
+
+I: [watchdog] [    559067] [WatchdogThread] keepAlive:75	[0x7f1688002f40] device, ping succeed after 999 ms
+
+I: [watchdog] [    559389] [WatchdogThread] keepAlive:75	[0x7f1690003230] device, ping succeed after 999 ms
+
+I: [watchdog] [    560068] [WatchdogThread] keepAlive:75	[0x7f1688002f40] device, ping succeed after 1000 ms
+
+I: [watchdog] [    560388] [WatchdogThread] keepAlive:75	[0x7f1690003230] device, ping succeed after 999 ms
+
+I: [watchdog] [    561067] [WatchdogThread] keepAlive:75	[0x7f1688002f40] device, ping succeed after 999 ms
+
+[Step 11/11] Dumping statistics report
+Count:      11088 iterations
+Duration:   60053.41 ms
+Throughput: 184.64 FPS
+I: [ncAPI] [    561208] [benchmark_app.p] ncDeviceClose:1705	Removing device...
+I: [watchdog] [    561208] [benchmark_app.p] removeDevice:202	remove device: 0x7ffc94166ab0
+
+I: [xLink] [    561211] [Scheduler00Thr] dispatcherClean:866	Start Clean Dispatcher...
+I: [xLink] [    561211] [Scheduler00Thr] dispatcherClean:896	Clean Dispatcher Successfully...
+I: [xLink] [    561211] [Scheduler00Thr] eventSchedulerRun:636	Scheduler thread stopped
+E: [global] [    561212] [benchmark_app.p] XLink_sem_wait:94	 XLink_sem_inc(sem) method call failed with an error: -1
+E: [global] [    561212] [benchmark_app.p] XLinkResetRemote:257	can't wait dispatcherClosedSem
+
+W: [ncAPI] [    561212] [benchmark_app.p] ncDeviceClose:1789	Failed to reset, rc: X_LINK_ERROR
+I: [watchdog] [    562067] [WatchdogThread] keepAlive:75	[0x7f1688002f40] device, ping succeed after 999 ms
+
+I: [watchdog] [    563067] [WatchdogThread] keepAlive:75	[0x7f1688002f40] device, ping succeed after 999 ms
+
+I: [watchdog] [    564066] [WatchdogThread] keepAlive:75	[0x7f1688002f40] device, ping succeed after 999 ms
+
+I: [watchdog] [    565066] [WatchdogThread] keepAlive:75	[0x7f1688002f40] device, ping succeed after 999 ms
+
+I: [watchdog] [    566066] [WatchdogThread] keepAlive:75	[0x7f1688002f40] device, ping succeed after 999 ms
+
+I: [watchdog] [    567066] [WatchdogThread] keepAlive:75	[0x7f1688002f40] device, ping succeed after 999 ms
+
+I: [watchdog] [    568066] [WatchdogThread] keepAlive:75	[0x7f1688002f40] device, ping succeed after 1000 ms
+
+I: [watchdog] [    569065] [WatchdogThread] keepAlive:75	[0x7f1688002f40] device, ping succeed after 999 ms
+
+I: [watchdog] [    570064] [WatchdogThread] keepAlive:75	[0x7f1688002f40] device, ping succeed after 999 ms
+
+I: [watchdog] [    571064] [WatchdogThread] keepAlive:75	[0x7f1688002f40] device, ping succeed after 999 ms
+
+E: [ncAPI] [    571212] [benchmark_app.p] ncDeviceClose:1848	Device didn't appear after reboot
+I: [ncAPI] [    571212] [benchmark_app.p] destroyDeviceHandle:1648	Destroying device handler
+I: [ncAPI] [    571212] [benchmark_app.p] ncDeviceClose:1705	Removing device...
+I: [watchdog] [    571212] [benchmark_app.p] removeDevice:202	remove device: 0x7ffc94166ab0
+
+I: [watchdog] [    571212] [WatchdogThread] watchdogRoutine:295	no active devices to watch, stopping  Watchdog thread
+
+I: [watchdog] [    571212] [WatchdogThread] watchdogRoutine:321	thread ended
+
+I: [xLink] [    571213] [Scheduler01Thr] dispatcherClean:866	Start Clean Dispatcher...
+I: [xLink] [    571213] [Scheduler01Thr] dispatcherClean:896	Clean Dispatcher Successfully...
+I: [xLink] [    571213] [Scheduler01Thr] eventSchedulerRun:636	Scheduler thread stopped
+E: [global] [    571213] [benchmark_app.p] XLink_sem_wait:94	 XLink_sem_inc(sem) method call failed with an error: -1
+E: [global] [    571213] [benchmark_app.p] XLinkResetRemote:257	can't wait dispatcherClosedSem
+
+W: [ncAPI] [    571213] [benchmark_app.p] ncDeviceClose:1789	Failed to reset, rc: X_LINK_ERROR
+I: [ncAPI] [    571664] [benchmark_app.p] destroyDeviceHandle:1648	Destroying device handler
+I: [watchdog] [    571664] [benchmark_app.p] ~WatchdogImpl:125	watchdog terminated
+"""
+
+./benchmark_app.py -m /home/ros/googlenet-v1/googlenet-v1.xml -i /opt/intel/openvino_2021/deployment_tools/demo/car.png  -d MYRIAD.1.4-ma2480
+
+"""
+ros@ros-LEC-ALAI:/opt/intel/openvino_2021/deployment_tools/tools/benchmark_tool$ ./benchmark_app.py -m /home/ros/googlenet-v1/googlenet-v1.xml -i /opt/intel/openvino_2021/deployment_tools/demo/car.png  -d MYRIAD.1.4-ma2480
+[Step 1/11] Parsing and validating input arguments
+[ WARNING ]  -nstreams default value is determined automatically for a device. Although the automatic selection usually provides a reasonable performance, but it still may be non-optimal for some cases, for more information look at README. 
+[Step 2/11] Loading Inference Engine
+[ INFO ] InferenceEngine:
+         API version............. 2021.4.0-3839-cd81789d294-releases/2021/4
+[ INFO ] Device info
+         MYRIAD
+         myriadPlugin............ version 2.1
+         Build................... 2021.4.0-3839-cd81789d294-releases/2021/4
+
+[Step 3/11] Setting device configuration
+[ WARNING ] -nstreams default value is determined automatically for MYRIAD device. Although the automatic selection usually provides a reasonable performance,but it still may be non-optimal for some cases, for more information look at README.
+[Step 4/11] Reading network files
+[ INFO ] Read network took 57.66 ms
+[Step 5/11] Resizing network to match image sizes and given batch
+[ INFO ] Network batch size: 1
+[Step 6/11] Configuring input of the model
+[ INFO ] Network input 'data' precision U8, dimensions (NCHW): 1 3 224 224
+[ INFO ] Network output 'prob' precision FP32, dimensions (NC): 1 1000
+[Step 7/11] Loading the model to the device
+I: [ncAPI] [    797552] [benchmark_app.p] ncDeviceOpen:926	ncDeviceOpen() XLinkBootRemote is running for 1.4-ma2480...
+
+I: [ncAPI] [    797772] [benchmark_app.p] ncDeviceOpen:945	ncDeviceOpen() XLinkBootRemote returned success X_LINK_SUCCESS for 1.4-ma2480
+I: [xLink] [    798159] [Scheduler00Thr] eventSchedulerRun:612	Scheduler thread started
+I: [xLink] [    798159] [EventRead00Thr] eventReader:539	eventReader thread started
+I: [ncAPI] [    798175] [benchmark_app.p] ncDeviceOpen:1048	XLinkConnect done - link Id 0
+
+I: [ncAPI] [    798175] [benchmark_app.p] ncDeviceOpen:1076	Booted 1.4-ma2480 (2.2-) -> VSC
+
+I: [watchdog] [    799175] [benchmark_app.p] registerDevice:160	register device: 0x7fffd078ed90
+
+I: [watchdog] [    799176] [WatchdogThread] watchdogRoutine:262	thread started
+
+I: [watchdog] [    799176] [WatchdogThread] keepAlive:75	[0x217e580] device, ping succeed after 0 ms
+
+I: [ncAPI] [    799176] [benchmark_app.p] getDevAttributes:1272	Device attributes
+
+I: [ncAPI] [    799176] [benchmark_app.p] getDevAttributes:1274	Device FW version: 444c4454.2480.0.0
+
+I: [ncAPI] [    799176] [benchmark_app.p] getDevAttributes:1275	Maximum graphs: 10
+
+I: [ncAPI] [    799176] [benchmark_app.p] getDevAttributes:1276	Maximum fifos: 20
+
+I: [ncAPI] [    799176] [benchmark_app.p] getDevAttributes:1277	Device memory capacity: 507510776
+
+[Info   ][VPU][MyriadPlugin] Device #0 MYRIAD-X (USB protocol) allocated
+I: [ncAPI] [    799743] [benchmark_app.p] ncGraphAllocate:1971	Starting Graph allocation sequence
+
+I: [ncAPI] [    799806] [benchmark_app.p] ncGraphAllocate:2062	Sent graph
+I: [ncAPI] [    799832] [benchmark_app.p] ncGraphAllocate:2188	Graph allocation completed successfully
+
+I: [ncAPI] [    799832] [benchmark_app.p] ncFifoCreate:2886	Init fifo
+I: [ncAPI] [    799832] [benchmark_app.p] ncFifoAllocate:2987	Creating fifo
+I: [ncAPI] [    799834] [benchmark_app.p] ncFifoCreate:2886	Init fifo
+I: [ncAPI] [    799834] [benchmark_app.p] ncFifoAllocate:2987	Creating fifo
+[ INFO ] Load network took 2293.54 ms
+[Step 8/11] Setting optimal runtime parameters
+[Step 9/11] Creating infer requests and filling input blobs with images
+[ WARNING ] Some image input files will be duplicated: 4 files are required, but only 1 were provided
+[ INFO ] Infer Request 0 filling
+[ INFO ] Prepare image /opt/intel/openvino_2021/deployment_tools/demo/car.png
+[ WARNING ] Image is resized from ((259, 787)) to ((224, 224))
+[ INFO ] Infer Request 1 filling
+[ INFO ] Prepare image /opt/intel/openvino_2021/deployment_tools/demo/car.png
+[ WARNING ] Image is resized from ((259, 787)) to ((224, 224))
+[ INFO ] Infer Request 2 filling
+[ INFO ] Prepare image /opt/intel/openvino_2021/deployment_tools/demo/car.png
+[ WARNING ] Image is resized from ((259, 787)) to ((224, 224))
+[ INFO ] Infer Request 3 filling
+[ INFO ] Prepare image /opt/intel/openvino_2021/deployment_tools/demo/car.png
+[ WARNING ] Image is resized from ((259, 787)) to ((224, 224))
+[Step 10/11] Measuring performance (Start inference asynchronously, 4 inference requests, limits: 60000 ms duration)
+[ INFO ] First inference took 26.26 ms
+I: [watchdog] [    800176] [WatchdogThread] keepAlive:75	[0x217e580] device, ping succeed after 999 ms
+
+I: [watchdog] [    801176] [WatchdogThread] keepAlive:75	[0x217e580] device, ping succeed after 999 ms
+
+I: [watchdog] [    802175] [WatchdogThread] keepAlive:75	[0x217e580] device, ping succeed after 999 ms
+
+I: [watchdog] [    803175] [WatchdogThread] keepAlive:75	[0x217e580] device, ping succeed after 999 ms
+
+I: [watchdog] [    804175] [WatchdogThread] keepAlive:75	[0x217e580] device, ping succeed after 999 ms
+
+I: [watchdog] [    805174] [WatchdogThread] keepAlive:75	[0x217e580] device, ping succeed after 999 ms
+
+I: [watchdog] [    806174] [WatchdogThread] keepAlive:75	[0x217e580] device, ping succeed after 999 ms
+
+I: [watchdog] [    807173] [WatchdogThread] keepAlive:75	[0x217e580] device, ping succeed after 999 ms
+
+I: [watchdog] [    808173] [WatchdogThread] keepAlive:75	[0x217e580] device, ping succeed after 999 ms
+
+I: [watchdog] [    809173] [WatchdogThread] keepAlive:75	[0x217e580] device, ping succeed after 999 ms
+
+I: [watchdog] [    810172] [WatchdogThread] keepAlive:75	[0x217e580] device, ping succeed after 999 ms
+
+I: [watchdog] [    811172] [WatchdogThread] keepAlive:75	[0x217e580] device, ping succeed after 999 ms
+
+I: [watchdog] [    812172] [WatchdogThread] keepAlive:75	[0x217e580] device, ping succeed after 1000 ms
+
+I: [watchdog] [    813172] [WatchdogThread] keepAlive:75	[0x217e580] device, ping succeed after 999 ms
+
+I: [watchdog] [    814171] [WatchdogThread] keepAlive:75	[0x217e580] device, ping succeed after 999 ms
+
+I: [watchdog] [    815171] [WatchdogThread] keepAlive:75	[0x217e580] device, ping succeed after 999 ms
+
+I: [watchdog] [    816170] [WatchdogThread] keepAlive:75	[0x217e580] device, ping succeed after 999 ms
+
+I: [watchdog] [    817169] [WatchdogThread] keepAlive:75	[0x217e580] device, ping succeed after 999 ms
+
+I: [watchdog] [    818169] [WatchdogThread] keepAlive:75	[0x217e580] device, ping succeed after 999 ms
+
+I: [watchdog] [    819169] [WatchdogThread] keepAlive:75	[0x217e580] device, ping succeed after 999 ms
+
+I: [watchdog] [    820169] [WatchdogThread] keepAlive:75	[0x217e580] device, ping succeed after 999 ms
+
+I: [watchdog] [    821168] [WatchdogThread] keepAlive:75	[0x217e580] device, ping succeed after 999 ms
+
+I: [watchdog] [    822168] [WatchdogThread] keepAlive:75	[0x217e580] device, ping succeed after 999 ms
+
+I: [watchdog] [    823167] [WatchdogThread] keepAlive:75	[0x217e580] device, ping succeed after 999 ms
+
+I: [watchdog] [    824166] [WatchdogThread] keepAlive:75	[0x217e580] device, ping succeed after 999 ms
+
+I: [watchdog] [    825166] [WatchdogThread] keepAlive:75	[0x217e580] device, ping succeed after 999 ms
+
+I: [watchdog] [    826166] [WatchdogThread] keepAlive:75	[0x217e580] device, ping succeed after 999 ms
+
+I: [watchdog] [    827165] [WatchdogThread] keepAlive:75	[0x217e580] device, ping succeed after 999 ms
+
+I: [watchdog] [    828165] [WatchdogThread] keepAlive:75	[0x217e580] device, ping succeed after 999 ms
+
+I: [watchdog] [    829164] [WatchdogThread] keepAlive:75	[0x217e580] device, ping succeed after 999 ms
+
+I: [watchdog] [    830163] [WatchdogThread] keepAlive:75	[0x217e580] device, ping succeed after 999 ms
+
+I: [watchdog] [    831163] [WatchdogThread] keepAlive:75	[0x217e580] device, ping succeed after 999 ms
+
+I: [watchdog] [    832163] [WatchdogThread] keepAlive:75	[0x217e580] device, ping succeed after 999 ms
+
+I: [watchdog] [    833162] [WatchdogThread] keepAlive:75	[0x217e580] device, ping succeed after 999 ms
+
+I: [watchdog] [    834162] [WatchdogThread] keepAlive:75	[0x217e580] device, ping succeed after 999 ms
+
+I: [watchdog] [    835162] [WatchdogThread] keepAlive:75	[0x217e580] device, ping succeed after 999 ms
+
+I: [watchdog] [    836160] [WatchdogThread] keepAlive:75	[0x217e580] device, ping succeed after 999 ms
+
+I: [watchdog] [    837160] [WatchdogThread] keepAlive:75	[0x217e580] device, ping succeed after 999 ms
+
+I: [watchdog] [    838160] [WatchdogThread] keepAlive:75	[0x217e580] device, ping succeed after 999 ms
+
+I: [watchdog] [    839162] [WatchdogThread] keepAlive:75	[0x217e580] device, ping succeed after 999 ms
+
+I: [watchdog] [    840160] [WatchdogThread] keepAlive:75	[0x217e580] device, ping succeed after 999 ms
+
+I: [watchdog] [    841160] [WatchdogThread] keepAlive:75	[0x217e580] device, ping succeed after 999 ms
+
+I: [watchdog] [    842159] [WatchdogThread] keepAlive:75	[0x217e580] device, ping succeed after 999 ms
+
+I: [watchdog] [    843158] [WatchdogThread] keepAlive:75	[0x217e580] device, ping succeed after 999 ms
+
+I: [watchdog] [    844157] [WatchdogThread] keepAlive:75	[0x217e580] device, ping succeed after 999 ms
+
+I: [watchdog] [    845157] [WatchdogThread] keepAlive:75	[0x217e580] device, ping succeed after 999 ms
+
+I: [watchdog] [    846156] [WatchdogThread] keepAlive:75	[0x217e580] device, ping succeed after 999 ms
+
+I: [watchdog] [    847155] [WatchdogThread] keepAlive:75	[0x217e580] device, ping succeed after 999 ms
+
+I: [watchdog] [    848155] [WatchdogThread] keepAlive:75	[0x217e580] device, ping succeed after 999 ms
+
+I: [watchdog] [    849154] [WatchdogThread] keepAlive:75	[0x217e580] device, ping succeed after 999 ms
+
+I: [watchdog] [    850155] [WatchdogThread] keepAlive:75	[0x217e580] device, ping succeed after 999 ms
+
+I: [watchdog] [    851154] [WatchdogThread] keepAlive:75	[0x217e580] device, ping succeed after 999 ms
+
+I: [watchdog] [    852153] [WatchdogThread] keepAlive:75	[0x217e580] device, ping succeed after 999 ms
+
+I: [watchdog] [    853153] [WatchdogThread] keepAlive:75	[0x217e580] device, ping succeed after 999 ms
+
+I: [watchdog] [    854152] [WatchdogThread] keepAlive:75	[0x217e580] device, ping succeed after 999 ms
+
+I: [watchdog] [    855152] [WatchdogThread] keepAlive:75	[0x217e580] device, ping succeed after 999 ms
+
+I: [watchdog] [    856152] [WatchdogThread] keepAlive:75	[0x217e580] device, ping succeed after 999 ms
+
+I: [watchdog] [    857151] [WatchdogThread] keepAlive:75	[0x217e580] device, ping succeed after 999 ms
+
+I: [watchdog] [    858151] [WatchdogThread] keepAlive:75	[0x217e580] device, ping succeed after 999 ms
+
+I: [watchdog] [    859150] [WatchdogThread] keepAlive:75	[0x217e580] device, ping succeed after 999 ms
+
+[Step 11/11] Dumping statistics report
+Count:      5564 iterations
+Duration:   60062.50 ms
+Latency:    42.79 ms
+Throughput: 92.64 FPS
+I: [ncAPI] [    860022] [benchmark_app.p] ncDeviceClose:1705	Removing device...
+I: [watchdog] [    860022] [benchmark_app.p] removeDevice:202	remove device: 0x7fffd07905b0
+
+I: [watchdog] [    860022] [WatchdogThread] watchdogRoutine:295	no active devices to watch, stopping  Watchdog thread
+
+I: [watchdog] [    860022] [WatchdogThread] watchdogRoutine:321	thread ended
+
+I: [xLink] [    860023] [Scheduler00Thr] dispatcherClean:866	Start Clean Dispatcher...
+I: [xLink] [    860023] [Scheduler00Thr] dispatcherClean:896	Clean Dispatcher Successfully...
+I: [xLink] [    860023] [Scheduler00Thr] eventSchedulerRun:636	Scheduler thread stopped
+E: [global] [    860023] [benchmark_app.p] XLink_sem_wait:94	 XLink_sem_inc(sem) method call failed with an error: -1
+E: [global] [    860023] [benchmark_app.p] XLinkResetRemote:257	can't wait dispatcherClosedSem
+
+W: [ncAPI] [    860023] [benchmark_app.p] ncDeviceClose:1789	Failed to reset, rc: X_LINK_ERROR
+I: [ncAPI] [    860479] [benchmark_app.p] destroyDeviceHandle:1648	Destroying device handler
+I: [watchdog] [    860479] [benchmark_app.p] ~WatchdogImpl:125	watchdog terminated
+"""
+
+./benchmark_app.py -m /home/ros/googlenet-v1/googlenet-v1.xml -i /opt/intel/openvino_2021/deployment_tools/demo/car.png  -d MYRIAD.1.8-ma2480
+
+"""
+ros@ros-LEC-ALAI:/opt/intel/openvino_2021/deployment_tools/tools/benchmark_tool$ ./benchmark_app.py -m /home/ros/googlenet-v1/googlenet-v1.xml -i /opt/intel/openvino_2021/deployment_tools/demo/car.png  -d MYRIAD.1.8-ma2480
+[Step 1/11] Parsing and validating input arguments
+[ WARNING ]  -nstreams default value is determined automatically for a device. Although the automatic selection usually provides a reasonable performance, but it still may be non-optimal for some cases, for more information look at README. 
+[Step 2/11] Loading Inference Engine
+[ INFO ] InferenceEngine:
+         API version............. 2021.4.0-3839-cd81789d294-releases/2021/4
+[ INFO ] Device info
+         MYRIAD
+         myriadPlugin............ version 2.1
+         Build................... 2021.4.0-3839-cd81789d294-releases/2021/4
+
+[Step 3/11] Setting device configuration
+[ WARNING ] -nstreams default value is determined automatically for MYRIAD device. Although the automatic selection usually provides a reasonable performance,but it still may be non-optimal for some cases, for more information look at README.
+[Step 4/11] Reading network files
+
+[ INFO ] Read network took 64.21 ms
+[Step 5/11] Resizing network to match image sizes and given batch
+[ INFO ] Network batch size: 1
+[Step 6/11] Configuring input of the model
+[ INFO ] Network input 'data' precision U8, dimensions (NCHW): 1 3 224 224
+[ INFO ] Network output 'prob' precision FP32, dimensions (NC): 1 1000
+[Step 7/11] Loading the model to the device
+I: [ncAPI] [    965022] [benchmark_app.p] ncDeviceOpen:926	ncDeviceOpen() XLinkBootRemote is running for 1.8-ma2480...
+
+I: [ncAPI] [    965282] [benchmark_app.p] ncDeviceOpen:945	ncDeviceOpen() XLinkBootRemote returned success X_LINK_SUCCESS for 1.8-ma2480
+I: [xLink] [    965698] [Scheduler00Thr] eventSchedulerRun:612	Scheduler thread started
+I: [xLink] [    965698] [EventRead00Thr] eventReader:539	eventReader thread started
+I: [ncAPI] [    965698] [benchmark_app.p] ncDeviceOpen:1048	XLinkConnect done - link Id 0
+
+I: [ncAPI] [    965698] [benchmark_app.p] ncDeviceOpen:1076	Booted 1.8-ma2480 (2.6-) -> VSC
+
+I: [watchdog] [    966699] [benchmark_app.p] registerDevice:160	register device: 0x7ffdb6e43010
+
+I: [watchdog] [    966699] [WatchdogThread] watchdogRoutine:262	thread started
+
+I: [watchdog] [    966700] [WatchdogThread] keepAlive:75	[0x1799fa0] device, ping succeed after 0 ms
+
+I: [ncAPI] [    966700] [benchmark_app.p] getDevAttributes:1272	Device attributes
+
+I: [ncAPI] [    966700] [benchmark_app.p] getDevAttributes:1274	Device FW version: 444c4454.2480.0.0
+
+I: [ncAPI] [    966700] [benchmark_app.p] getDevAttributes:1275	Maximum graphs: 10
+
+I: [ncAPI] [    966700] [benchmark_app.p] getDevAttributes:1276	Maximum fifos: 20
+
+I: [ncAPI] [    966700] [benchmark_app.p] getDevAttributes:1277	Device memory capacity: 507510776
+
+[Info   ][VPU][MyriadPlugin] Device #0 MYRIAD-X (USB protocol) allocated
+I: [ncAPI] [    967348] [benchmark_app.p] ncGraphAllocate:1971	Starting Graph allocation sequence
+
+I: [ncAPI] [    967407] [benchmark_app.p] ncGraphAllocate:2062	Sent graph
+I: [ncAPI] [    967434] [benchmark_app.p] ncGraphAllocate:2188	Graph allocation completed successfully
+
+I: [ncAPI] [    967434] [benchmark_app.p] ncFifoCreate:2886	Init fifo
+I: [ncAPI] [    967434] [benchmark_app.p] ncFifoAllocate:2987	Creating fifo
+I: [ncAPI] [    967436] [benchmark_app.p] ncFifoCreate:2886	Init fifo
+I: [ncAPI] [    967436] [benchmark_app.p] ncFifoAllocate:2987	Creating fifo
+[ INFO ] Load network took 2431.70 ms
+[Step 8/11] Setting optimal runtime parameters
+[Step 9/11] Creating infer requests and filling input blobs with images
+[ WARNING ] Some image input files will be duplicated: 4 files are required, but only 1 were provided
+[ INFO ] Infer Request 0 filling
+[ INFO ] Prepare image /opt/intel/openvino_2021/deployment_tools/demo/car.png
+[ WARNING ] Image is resized from ((259, 787)) to ((224, 224))
+[ INFO ] Infer Request 1 filling
+[ INFO ] Prepare image /opt/intel/openvino_2021/deployment_tools/demo/car.png
+[ WARNING ] Image is resized from ((259, 787)) to ((224, 224))
+[ INFO ] Infer Request 2 filling
+[ INFO ] Prepare image /opt/intel/openvino_2021/deployment_tools/demo/car.png
+[ WARNING ] Image is resized from ((259, 787)) to ((224, 224))
+[ INFO ] Infer Request 3 filling
+[ INFO ] Prepare image /opt/intel/openvino_2021/deployment_tools/demo/car.png
+[ WARNING ] Image is resized from ((259, 787)) to ((224, 224))
+[Step 10/11] Measuring performance (Start inference asynchronously, 4 inference requests, limits: 60000 ms duration)
+[ INFO ] First inference took 23.61 ms
+I: [watchdog] [    967700] [WatchdogThread] keepAlive:75	[0x1799fa0] device, ping succeed after 1000 ms
+
+I: [watchdog] [    968700] [WatchdogThread] keepAlive:75	[0x1799fa0] device, ping succeed after 999 ms
+
+I: [watchdog] [    969700] [WatchdogThread] keepAlive:75	[0x1799fa0] device, ping succeed after 1000 ms
+
+I: [watchdog] [    970699] [WatchdogThread] keepAlive:75	[0x1799fa0] device, ping succeed after 999 ms
+
+I: [watchdog] [    971699] [WatchdogThread] keepAlive:75	[0x1799fa0] device, ping succeed after 999 ms
+
+I: [watchdog] [    972699] [WatchdogThread] keepAlive:75	[0x1799fa0] device, ping succeed after 999 ms
+
+I: [watchdog] [    973698] [WatchdogThread] keepAlive:75	[0x1799fa0] device, ping succeed after 999 ms
+
+I: [watchdog] [    974699] [WatchdogThread] keepAlive:75	[0x1799fa0] device, ping succeed after 999 ms
+
+I: [watchdog] [    975698] [WatchdogThread] keepAlive:75	[0x1799fa0] device, ping succeed after 999 ms
+
+I: [watchdog] [    976697] [WatchdogThread] keepAlive:75	[0x1799fa0] device, ping succeed after 999 ms
+
+I: [watchdog] [    977697] [WatchdogThread] keepAlive:75	[0x1799fa0] device, ping succeed after 999 ms
+
+I: [watchdog] [    978697] [WatchdogThread] keepAlive:75	[0x1799fa0] device, ping succeed after 999 ms
+
+I: [watchdog] [    979697] [WatchdogThread] keepAlive:75	[0x1799fa0] device, ping succeed after 999 ms
+
+I: [watchdog] [    980695] [WatchdogThread] keepAlive:75	[0x1799fa0] device, ping succeed after 999 ms
+
+I: [watchdog] [    981695] [WatchdogThread] keepAlive:75	[0x1799fa0] device, ping succeed after 999 ms
+
+I: [watchdog] [    982695] [WatchdogThread] keepAlive:75	[0x1799fa0] device, ping succeed after 999 ms
+
+I: [watchdog] [    983695] [WatchdogThread] keepAlive:75	[0x1799fa0] device, ping succeed after 999 ms
+
+I: [watchdog] [    984693] [WatchdogThread] keepAlive:75	[0x1799fa0] device, ping succeed after 999 ms
+
+I: [watchdog] [    985693] [WatchdogThread] keepAlive:75	[0x1799fa0] device, ping succeed after 999 ms
+
+I: [watchdog] [    986693] [WatchdogThread] keepAlive:75	[0x1799fa0] device, ping succeed after 999 ms
+
+I: [watchdog] [    987692] [WatchdogThread] keepAlive:75	[0x1799fa0] device, ping succeed after 999 ms
+
+I: [watchdog] [    988691] [WatchdogThread] keepAlive:75	[0x1799fa0] device, ping succeed after 999 ms
+
+I: [watchdog] [    989691] [WatchdogThread] keepAlive:75	[0x1799fa0] device, ping succeed after 999 ms
+
+I: [watchdog] [    990691] [WatchdogThread] keepAlive:75	[0x1799fa0] device, ping succeed after 1000 ms
+
+I: [watchdog] [    991691] [WatchdogThread] keepAlive:75	[0x1799fa0] device, ping succeed after 999 ms
+
+I: [watchdog] [    992690] [WatchdogThread] keepAlive:75	[0x1799fa0] device, ping succeed after 999 ms
+
+I: [watchdog] [    993690] [WatchdogThread] keepAlive:75	[0x1799fa0] device, ping succeed after 999 ms
+
+I: [watchdog] [    994690] [WatchdogThread] keepAlive:75	[0x1799fa0] device, ping succeed after 999 ms
+
+I: [watchdog] [    995689] [WatchdogThread] keepAlive:75	[0x1799fa0] device, ping succeed after 999 ms
+
+I: [watchdog] [    996689] [WatchdogThread] keepAlive:75	[0x1799fa0] device, ping succeed after 999 ms
+
+I: [watchdog] [    997688] [WatchdogThread] keepAlive:75	[0x1799fa0] device, ping succeed after 999 ms
+
+I: [watchdog] [    998688] [WatchdogThread] keepAlive:75	[0x1799fa0] device, ping succeed after 999 ms
+
+I: [watchdog] [    999688] [WatchdogThread] keepAlive:75	[0x1799fa0] device, ping succeed after 999 ms
+
+I: [watchdog] [       687] [WatchdogThread] keepAlive:75	[0x1799fa0] device, ping succeed after 999 ms
+
+I: [watchdog] [      1686] [WatchdogThread] keepAlive:75	[0x1799fa0] device, ping succeed after 999 ms
+
+I: [watchdog] [      2686] [WatchdogThread] keepAlive:75	[0x1799fa0] device, ping succeed after 999 ms
+
+I: [watchdog] [      3685] [WatchdogThread] keepAlive:75	[0x1799fa0] device, ping succeed after 999 ms
+
+I: [watchdog] [      4685] [WatchdogThread] keepAlive:75	[0x1799fa0] device, ping succeed after 999 ms
+
+I: [watchdog] [      5685] [WatchdogThread] keepAlive:75	[0x1799fa0] device, ping succeed after 999 ms
+
+I: [watchdog] [      6685] [WatchdogThread] keepAlive:75	[0x1799fa0] device, ping succeed after 999 ms
+
+I: [watchdog] [      7684] [WatchdogThread] keepAlive:75	[0x1799fa0] device, ping succeed after 999 ms
+
+I: [watchdog] [      8685] [WatchdogThread] keepAlive:75	[0x1799fa0] device, ping succeed after 999 ms
+
+I: [watchdog] [      9683] [WatchdogThread] keepAlive:75	[0x1799fa0] device, ping succeed after 999 ms
+
+I: [watchdog] [     10683] [WatchdogThread] keepAlive:75	[0x1799fa0] device, ping succeed after 999 ms
+
+I: [watchdog] [     11682] [WatchdogThread] keepAlive:75	[0x1799fa0] device, ping succeed after 999 ms
+
+I: [watchdog] [     12683] [WatchdogThread] keepAlive:75	[0x1799fa0] device, ping succeed after 1000 ms
+
+I: [watchdog] [     13682] [WatchdogThread] keepAlive:75	[0x1799fa0] device, ping succeed after 999 ms
+
+I: [watchdog] [     14681] [WatchdogThread] keepAlive:75	[0x1799fa0] device, ping succeed after 999 ms
+
+I: [watchdog] [     15681] [WatchdogThread] keepAlive:75	[0x1799fa0] device, ping succeed after 999 ms
+
+I: [watchdog] [     16680] [WatchdogThread] keepAlive:75	[0x1799fa0] device, ping succeed after 999 ms
+
+I: [watchdog] [     17680] [WatchdogThread] keepAlive:75	[0x1799fa0] device, ping succeed after 999 ms
+
+I: [watchdog] [     18679] [WatchdogThread] keepAlive:75	[0x1799fa0] device, ping succeed after 999 ms
+
+I: [watchdog] [     19679] [WatchdogThread] keepAlive:75	[0x1799fa0] device, ping succeed after 999 ms
+
+I: [watchdog] [     20679] [WatchdogThread] keepAlive:75	[0x1799fa0] device, ping succeed after 999 ms
+
+I: [watchdog] [     21677] [WatchdogThread] keepAlive:75	[0x1799fa0] device, ping succeed after 999 ms
+
+I: [watchdog] [     22677] [WatchdogThread] keepAlive:75	[0x1799fa0] device, ping succeed after 999 ms
+
+I: [watchdog] [     23676] [WatchdogThread] keepAlive:75	[0x1799fa0] device, ping succeed after 999 ms
+
+I: [watchdog] [     24676] [WatchdogThread] keepAlive:75	[0x1799fa0] device, ping succeed after 999 ms
+
+I: [watchdog] [     25676] [WatchdogThread] keepAlive:75	[0x1799fa0] device, ping succeed after 999 ms
+
+I: [watchdog] [     26676] [WatchdogThread] keepAlive:75	[0x1799fa0] device, ping succeed after 999 ms
+
+[Step 11/11] Dumping statistics report
+Count:      5568 iterations
+Duration:   60048.69 ms
+Latency:    42.74 ms
+Throughput: 92.72 FPS
+I: [ncAPI] [     27619] [benchmark_app.p] ncDeviceClose:1705	Removing device...
+I: [watchdog] [     27619] [benchmark_app.p] removeDevice:202	remove device: 0x7ffdb6e44830
+
+I: [watchdog] [     27619] [WatchdogThread] watchdogRoutine:295	no active devices to watch, stopping  Watchdog thread
+
+I: [watchdog] [     27619] [WatchdogThread] watchdogRoutine:321	thread ended
+
+I: [xLink] [     27620] [Scheduler00Thr] dispatcherClean:866	Start Clean Dispatcher...
+I: [xLink] [     27620] [Scheduler00Thr] dispatcherClean:896	Clean Dispatcher Successfully...
+I: [xLink] [     27620] [Scheduler00Thr] eventSchedulerRun:636	Scheduler thread stopped
+E: [global] [     27620] [benchmark_app.p] XLink_sem_wait:94	 XLink_sem_inc(sem) method call failed with an error: -1
+E: [global] [     27620] [benchmark_app.p] XLinkResetRemote:257	can't wait dispatcherClosedSem
+
+W: [ncAPI] [     27620] [benchmark_app.p] ncDeviceClose:1789	Failed to reset, rc: X_LINK_ERROR
+I: [ncAPI] [     28079] [benchmark_app.p] destroyDeviceHandle:1648	Destroying device handler
+I: [watchdog] [     28079] [benchmark_app.p] ~WatchdogImpl:125	watchdog terminated
+"""
+
+./benchmark_app.py -m /home/ros/googlenet-v1/googlenet-v1.xml -i /opt/intel/openvino_2021/deployment_tools/demo/car.png  -d MULTI:MYRIAD.1.8-ma2480,CPU
+
+"""
+ros@ros-LEC-ALAI:/opt/intel/openvino_2021/deployment_tools/tools/benchmark_tool$ ./benchmark_app.py -m /home/ros/googlenet-v1/googlenet-v1.xml -i /opt/intel/openvino_2021/deployment_tools/demo/car.png  -d MULTI:MYRIAD.1.8-ma2480,CPU
+[Step 1/11] Parsing and validating input arguments
+[ WARNING ]  -nstreams default value is determined automatically for a device. Although the automatic selection usually provides a reasonable performance, but it still may be non-optimal for some cases, for more information look at README. 
+[Step 2/11] Loading Inference Engine
+[ INFO ] InferenceEngine:
+         API version............. 2021.4.0-3839-cd81789d294-releases/2021/4
+[ INFO ] Device info
+         CPU
+         MKLDNNPlugin............ version 2.1
+         Build................... 2021.4.0-3839-cd81789d294-releases/2021/4
+         MULTI
+         MultiDevicePlugin....... version 2.1
+         Build................... 2021.4.0-3839-cd81789d294-releases/2021/4
+         MYRIAD
+         myriadPlugin............ version 2.1
+         Build................... 2021.4.0-3839-cd81789d294-releases/2021/4
+
+[Step 3/11] Setting device configuration
+[ WARNING ] -nstreams default value is determined automatically for MYRIAD device. Although the automatic selection usually provides a reasonable performance,but it still may be non-optimal for some cases, for more information look at README.
+[ WARNING ] -nstreams default value is determined automatically for CPU device. Although the automatic selection usually provides a reasonable performance,but it still may be non-optimal for some cases, for more information look at README.
+[Step 4/11] Reading network files
+[ INFO ] Read network took 57.37 ms
+[Step 5/11] Resizing network to match image sizes and given batch
+[ INFO ] Network batch size: 1
+[Step 6/11] Configuring input of the model
+[ INFO ] Network input 'data' precision U8, dimensions (NCHW): 1 3 224 224
+[ INFO ] Network output 'prob' precision FP32, dimensions (NC): 1 1000
+[Step 7/11] Loading the model to the device
+I: [ncAPI] [    162405] [benchmark_app.p] ncDeviceOpen:926	ncDeviceOpen() XLinkBootRemote is running for 1.8-ma2480...
+
+I: [ncAPI] [    162655] [benchmark_app.p] ncDeviceOpen:945	ncDeviceOpen() XLinkBootRemote returned success X_LINK_SUCCESS for 1.8-ma2480
+I: [xLink] [    163045] [Scheduler00Thr] eventSchedulerRun:612	Scheduler thread started
+I: [xLink] [    163045] [EventRead00Thr] eventReader:539	eventReader thread started
+I: [ncAPI] [    163064] [benchmark_app.p] ncDeviceOpen:1048	XLinkConnect done - link Id 0
+
+I: [ncAPI] [    163064] [benchmark_app.p] ncDeviceOpen:1076	Booted 1.8-ma2480 (2.6-) -> VSC
+
+I: [watchdog] [    164066] [benchmark_app.p] registerDevice:160	register device: 0x7f78b01288d0
+
+I: [watchdog] [    164066] [WatchdogThread] watchdogRoutine:262	thread started
+
+I: [watchdog] [    164067] [WatchdogThread] keepAlive:75	[0x7f78a8003250] device, ping succeed after 0 ms
+
+I: [ncAPI] [    164067] [benchmark_app.p] getDevAttributes:1272	Device attributes
+
+I: [ncAPI] [    164067] [benchmark_app.p] getDevAttributes:1274	Device FW version: 444c4454.2480.0.0
+
+I: [ncAPI] [    164067] [benchmark_app.p] getDevAttributes:1275	Maximum graphs: 10
+
+I: [ncAPI] [    164067] [benchmark_app.p] getDevAttributes:1276	Maximum fifos: 20
+
+I: [ncAPI] [    164067] [benchmark_app.p] getDevAttributes:1277	Device memory capacity: 507510776
+
+[Info   ][VPU][MyriadPlugin] Device #0 MYRIAD-X (USB protocol) allocated
+I: [ncAPI] [    164710] [benchmark_app.p] ncGraphAllocate:1971	Starting Graph allocation sequence
+
+I: [ncAPI] [    164768] [benchmark_app.p] ncGraphAllocate:2062	Sent graph
+I: [ncAPI] [    164794] [benchmark_app.p] ncGraphAllocate:2188	Graph allocation completed successfully
+
+I: [ncAPI] [    164794] [benchmark_app.p] ncFifoCreate:2886	Init fifo
+I: [ncAPI] [    164794] [benchmark_app.p] ncFifoAllocate:2987	Creating fifo
+I: [ncAPI] [    164796] [benchmark_app.p] ncFifoCreate:2886	Init fifo
+I: [ncAPI] [    164796] [benchmark_app.p] ncFifoAllocate:2987	Creating fifo
+[ INFO ] Load network took 2402.49 ms
+[Step 8/11] Setting optimal runtime parameters
+[Step 9/11] Creating infer requests and filling input blobs with images
+[ WARNING ] Some image input files will be duplicated: 5 files are required, but only 1 were provided
+[ INFO ] Infer Request 0 filling
+[ INFO ] Prepare image /opt/intel/openvino_2021/deployment_tools/demo/car.png
+[ WARNING ] Image is resized from ((259, 787)) to ((224, 224))
+[ INFO ] Infer Request 1 filling
+[ INFO ] Prepare image /opt/intel/openvino_2021/deployment_tools/demo/car.png
+[ WARNING ] Image is resized from ((259, 787)) to ((224, 224))
+[ INFO ] Infer Request 2 filling
+[ INFO ] Prepare image /opt/intel/openvino_2021/deployment_tools/demo/car.png
+[ WARNING ] Image is resized from ((259, 787)) to ((224, 224))
+[ INFO ] Infer Request 3 filling
+[ INFO ] Prepare image /opt/intel/openvino_2021/deployment_tools/demo/car.png
+[ WARNING ] Image is resized from ((259, 787)) to ((224, 224))
+[ INFO ] Infer Request 4 filling
+[ INFO ] Prepare image /opt/intel/openvino_2021/deployment_tools/demo/car.png
+[ WARNING ] Image is resized from ((259, 787)) to ((224, 224))
+[Step 10/11] Measuring performance (Start inference asynchronously, 5 inference requests using 1 streams for CPU, limits: 60000 ms duration)
+[ INFO ] First inference took 30.18 ms
+I: [watchdog] [    165066] [WatchdogThread] keepAlive:75	[0x7f78a8003250] device, ping succeed after 999 ms
+
+I: [watchdog] [    166066] [WatchdogThread] keepAlive:75	[0x7f78a8003250] device, ping succeed after 999 ms
+
+I: [watchdog] [    167075] [WatchdogThread] keepAlive:75	[0x7f78a8003250] device, ping succeed after 1003 ms
+
+I: [watchdog] [    168068] [WatchdogThread] keepAlive:75	[0x7f78a8003250] device, ping succeed after 999 ms
+
+I: [watchdog] [    169068] [WatchdogThread] keepAlive:75	[0x7f78a8003250] device, ping succeed after 999 ms
+
+I: [watchdog] [    170068] [WatchdogThread] keepAlive:75	[0x7f78a8003250] device, ping succeed after 999 ms
+
+I: [watchdog] [    171067] [WatchdogThread] keepAlive:75	[0x7f78a8003250] device, ping succeed after 999 ms
+
+I: [watchdog] [    172067] [WatchdogThread] keepAlive:75	[0x7f78a8003250] device, ping succeed after 999 ms
+
+I: [watchdog] [    173066] [WatchdogThread] keepAlive:75	[0x7f78a8003250] device, ping succeed after 999 ms
+
+I: [watchdog] [    174066] [WatchdogThread] keepAlive:75	[0x7f78a8003250] device, ping succeed after 999 ms
+
+I: [watchdog] [    175065] [WatchdogThread] keepAlive:75	[0x7f78a8003250] device, ping succeed after 999 ms
+
+I: [watchdog] [    176065] [WatchdogThread] keepAlive:75	[0x7f78a8003250] device, ping succeed after 999 ms
+
+I: [watchdog] [    177065] [WatchdogThread] keepAlive:75	[0x7f78a8003250] device, ping succeed after 1000 ms
+
+I: [watchdog] [    178065] [WatchdogThread] keepAlive:75	[0x7f78a8003250] device, ping succeed after 1000 ms
+
+I: [watchdog] [    179065] [WatchdogThread] keepAlive:75	[0x7f78a8003250] device, ping succeed after 999 ms
+
+I: [watchdog] [    180065] [WatchdogThread] keepAlive:75	[0x7f78a8003250] device, ping succeed after 999 ms
+
+I: [watchdog] [    181065] [WatchdogThread] keepAlive:75	[0x7f78a8003250] device, ping succeed after 999 ms
+
+I: [watchdog] [    182065] [WatchdogThread] keepAlive:75	[0x7f78a8003250] device, ping succeed after 999 ms
+
+I: [watchdog] [    183065] [WatchdogThread] keepAlive:75	[0x7f78a8003250] device, ping succeed after 999 ms
+
+I: [watchdog] [    184065] [WatchdogThread] keepAlive:75	[0x7f78a8003250] device, ping succeed after 999 ms
+
+I: [watchdog] [    185065] [WatchdogThread] keepAlive:75	[0x7f78a8003250] device, ping succeed after 1000 ms
+
+I: [watchdog] [    186065] [WatchdogThread] keepAlive:75	[0x7f78a8003250] device, ping succeed after 1000 ms
+
+I: [watchdog] [    187064] [WatchdogThread] keepAlive:75	[0x7f78a8003250] device, ping succeed after 999 ms
+
+I: [watchdog] [    188064] [WatchdogThread] keepAlive:75	[0x7f78a8003250] device, ping succeed after 999 ms
+
+I: [watchdog] [    189064] [WatchdogThread] keepAlive:75	[0x7f78a8003250] device, ping succeed after 999 ms
+
+I: [watchdog] [    190064] [WatchdogThread] keepAlive:75	[0x7f78a8003250] device, ping succeed after 999 ms
+
+I: [watchdog] [    191064] [WatchdogThread] keepAlive:75	[0x7f78a8003250] device, ping succeed after 999 ms
+
+I: [watchdog] [    192063] [WatchdogThread] keepAlive:75	[0x7f78a8003250] device, ping succeed after 999 ms
+
+I: [watchdog] [    193063] [WatchdogThread] keepAlive:75	[0x7f78a8003250] device, ping succeed after 999 ms
+
+I: [watchdog] [    194063] [WatchdogThread] keepAlive:75	[0x7f78a8003250] device, ping succeed after 999 ms
+
+I: [watchdog] [    195063] [WatchdogThread] keepAlive:75	[0x7f78a8003250] device, ping succeed after 1000 ms
+
+I: [watchdog] [    196062] [WatchdogThread] keepAlive:75	[0x7f78a8003250] device, ping succeed after 999 ms
+
+I: [watchdog] [    197062] [WatchdogThread] keepAlive:75	[0x7f78a8003250] device, ping succeed after 999 ms
+
+I: [watchdog] [    198061] [WatchdogThread] keepAlive:75	[0x7f78a8003250] device, ping succeed after 999 ms
+
+I: [watchdog] [    199061] [WatchdogThread] keepAlive:75	[0x7f78a8003250] device, ping succeed after 999 ms
+
+I: [watchdog] [    200060] [WatchdogThread] keepAlive:75	[0x7f78a8003250] device, ping succeed after 999 ms
+
+I: [watchdog] [    201060] [WatchdogThread] keepAlive:75	[0x7f78a8003250] device, ping succeed after 999 ms
+
+I: [watchdog] [    202059] [WatchdogThread] keepAlive:75	[0x7f78a8003250] device, ping succeed after 999 ms
+
+I: [watchdog] [    203059] [WatchdogThread] keepAlive:75	[0x7f78a8003250] device, ping succeed after 999 ms
+
+I: [watchdog] [    204058] [WatchdogThread] keepAlive:75	[0x7f78a8003250] device, ping succeed after 999 ms
+
+I: [watchdog] [    205058] [WatchdogThread] keepAlive:75	[0x7f78a8003250] device, ping succeed after 999 ms
+
+I: [watchdog] [    206057] [WatchdogThread] keepAlive:75	[0x7f78a8003250] device, ping succeed after 999 ms
+
+I: [watchdog] [    207057] [WatchdogThread] keepAlive:75	[0x7f78a8003250] device, ping succeed after 999 ms
+
+I: [watchdog] [    208056] [WatchdogThread] keepAlive:75	[0x7f78a8003250] device, ping succeed after 999 ms
+
+I: [watchdog] [    209056] [WatchdogThread] keepAlive:75	[0x7f78a8003250] device, ping succeed after 999 ms
+
+I: [watchdog] [    210055] [WatchdogThread] keepAlive:75	[0x7f78a8003250] device, ping succeed after 999 ms
+
+I: [watchdog] [    211055] [WatchdogThread] keepAlive:75	[0x7f78a8003250] device, ping succeed after 999 ms
+
+I: [watchdog] [    212055] [WatchdogThread] keepAlive:75	[0x7f78a8003250] device, ping succeed after 999 ms
+
+I: [watchdog] [    213054] [WatchdogThread] keepAlive:75	[0x7f78a8003250] device, ping succeed after 999 ms
+
+I: [watchdog] [    214054] [WatchdogThread] keepAlive:75	[0x7f78a8003250] device, ping succeed after 1000 ms
+
+I: [watchdog] [    215053] [WatchdogThread] keepAlive:75	[0x7f78a8003250] device, ping succeed after 999 ms
+
+I: [watchdog] [    216053] [WatchdogThread] keepAlive:75	[0x7f78a8003250] device, ping succeed after 999 ms
+
+I: [watchdog] [    217053] [WatchdogThread] keepAlive:75	[0x7f78a8003250] device, ping succeed after 999 ms
+
+I: [watchdog] [    218053] [WatchdogThread] keepAlive:75	[0x7f78a8003250] device, ping succeed after 999 ms
+
+I: [watchdog] [    219052] [WatchdogThread] keepAlive:75	[0x7f78a8003250] device, ping succeed after 999 ms
+
+I: [watchdog] [    220052] [WatchdogThread] keepAlive:75	[0x7f78a8003250] device, ping succeed after 999 ms
+
+I: [watchdog] [    221052] [WatchdogThread] keepAlive:75	[0x7f78a8003250] device, ping succeed after 999 ms
+
+I: [watchdog] [    222052] [WatchdogThread] keepAlive:75	[0x7f78a8003250] device, ping succeed after 999 ms
+
+I: [watchdog] [    223051] [WatchdogThread] keepAlive:75	[0x7f78a8003250] device, ping succeed after 999 ms
+
+I: [watchdog] [    224050] [WatchdogThread] keepAlive:75	[0x7f78a8003250] device, ping succeed after 999 ms
+
+I: [watchdog] [    225050] [WatchdogThread] keepAlive:75	[0x7f78a8003250] device, ping succeed after 999 ms
+
+[Step 11/11] Dumping statistics report
+Count:      5710 iterations
+Duration:   60214.83 ms
+Throughput: 94.83 FPS
+I: [ncAPI] [    225202] [benchmark_app.p] ncDeviceClose:1705	Removing device...
+I: [watchdog] [    225202] [benchmark_app.p] removeDevice:202	remove device: 0x7ffdc493eb70
+
+I: [watchdog] [    225202] [WatchdogThread] watchdogRoutine:295	no active devices to watch, stopping  Watchdog thread
+
+I: [watchdog] [    225202] [WatchdogThread] watchdogRoutine:321	thread ended
+
+I: [xLink] [    225208] [Scheduler00Thr] dispatcherClean:866	Start Clean Dispatcher...
+I: [xLink] [    225208] [Scheduler00Thr] dispatcherClean:896	Clean Dispatcher Successfully...
+I: [xLink] [    225208] [Scheduler00Thr] eventSchedulerRun:636	Scheduler thread stopped
+I: [ncAPI] [    225662] [benchmark_app.p] destroyDeviceHandle:1648	Destroying device handler
+I: [watchdog] [    225663] [benchmark_app.p] ~WatchdogImpl:125	watchdog terminated
+"""
+
+./benchmark_app.py -m /home/ros/googlenet-v1/googlenet-v1.xml -i /opt/intel/openvino_2021/deployment_tools/demo/car.png  -d MULTI:MYRIAD.1.4-ma2480,CPU
+
+"""
+ros@ros-LEC-ALAI:/opt/intel/openvino_2021/deployment_tools/tools/benchmark_tool$ ./benchmark_app.py -m /home/ros/googlenet-v1/googlenet-v1.xml -i /opt/intel/openvino_2021/deployment_tools/demo/car.png  -d MULTI:MYRIAD.1.4-ma2480,CPU
+[Step 1/11] Parsing and validating input arguments
+[ WARNING ]  -nstreams default value is determined automatically for a device. Although the automatic selection usually provides a reasonable performance, but it still may be non-optimal for some cases, for more information look at README. 
+[Step 2/11] Loading Inference Engine
+[ INFO ] InferenceEngine:
+         API version............. 2021.4.0-3839-cd81789d294-releases/2021/4
+[ INFO ] Device info
+         CPU
+         MKLDNNPlugin............ version 2.1
+         Build................... 2021.4.0-3839-cd81789d294-releases/2021/4
+         MULTI
+         MultiDevicePlugin....... version 2.1
+         Build................... 2021.4.0-3839-cd81789d294-releases/2021/4
+         MYRIAD
+         myriadPlugin............ version 2.1
+         Build................... 2021.4.0-3839-cd81789d294-releases/2021/4
+
+[Step 3/11] Setting device configuration
+[ WARNING ] -nstreams default value is determined automatically for MYRIAD device. Although the automatic selection usually provides a reasonable performance,but it still may be non-optimal for some cases, for more information look at README.
+[ WARNING ] -nstreams default value is determined automatically for CPU device. Although the automatic selection usually provides a reasonable performance,but it still may be non-optimal for some cases, for more information look at README.
+[Step 4/11] Reading network files
+[ INFO ] Read network took 69.47 ms
+[Step 5/11] Resizing network to match image sizes and given batch
+[ INFO ] Network batch size: 1
+[Step 6/11] Configuring input of the model
+[ INFO ] Network input 'data' precision U8, dimensions (NCHW): 1 3 224 224
+[ INFO ] Network output 'prob' precision FP32, dimensions (NC): 1 1000
+[Step 7/11] Loading the model to the device
+I: [ncAPI] [    511073] [benchmark_app.p] ncDeviceOpen:926	ncDeviceOpen() XLinkBootRemote is running for 1.4-ma2480...
+
+I: [ncAPI] [    511294] [benchmark_app.p] ncDeviceOpen:945	ncDeviceOpen() XLinkBootRemote returned success X_LINK_SUCCESS for 1.4-ma2480
+I: [xLink] [    511668] [Scheduler00Thr] eventSchedulerRun:612	Scheduler thread started
+I: [xLink] [    511668] [EventRead00Thr] eventReader:539	eventReader thread started
+I: [ncAPI] [    511669] [benchmark_app.p] ncDeviceOpen:1048	XLinkConnect done - link Id 0
+
+I: [ncAPI] [    511670] [benchmark_app.p] ncDeviceOpen:1076	Booted 1.4-ma2480 (2.2-) -> VSC
+
+I: [watchdog] [    512670] [benchmark_app.p] registerDevice:160	register device: 0x7f93562448d0
+
+I: [watchdog] [    512671] [WatchdogThread] watchdogRoutine:262	thread started
+
+I: [ncAPI] [    512671] [benchmark_app.p] getDevAttributes:1272	Device attributes
+
+I: [ncAPI] [    512671] [benchmark_app.p] getDevAttributes:1274	Device FW version: 444c4454.2480.0.0
+
+I: [ncAPI] [    512671] [benchmark_app.p] getDevAttributes:1275	Maximum graphs: 10
+
+I: [ncAPI] [    512671] [benchmark_app.p] getDevAttributes:1276	Maximum fifos: 20
+
+I: [ncAPI] [    512671] [benchmark_app.p] getDevAttributes:1277	Device memory capacity: 507510776
+
+I: [watchdog] [    512672] [WatchdogThread] keepAlive:75	[0x7f9350003250] device, ping succeed after 0 ms
+
+[Info   ][VPU][MyriadPlugin] Device #0 MYRIAD-X (USB protocol) allocated
+I: [ncAPI] [    513344] [benchmark_app.p] ncGraphAllocate:1971	Starting Graph allocation sequence
+
+I: [ncAPI] [    513404] [benchmark_app.p] ncGraphAllocate:2062	Sent graph
+I: [ncAPI] [    513432] [benchmark_app.p] ncGraphAllocate:2188	Graph allocation completed successfully
+
+I: [ncAPI] [    513432] [benchmark_app.p] ncFifoCreate:2886	Init fifo
+I: [ncAPI] [    513432] [benchmark_app.p] ncFifoAllocate:2987	Creating fifo
+I: [ncAPI] [    513434] [benchmark_app.p] ncFifoCreate:2886	Init fifo
+I: [ncAPI] [    513434] [benchmark_app.p] ncFifoAllocate:2987	Creating fifo
+[ INFO ] Load network took 2372.19 ms
+[Step 8/11] Setting optimal runtime parameters
+[Step 9/11] Creating infer requests and filling input blobs with images
+[ WARNING ] Some image input files will be duplicated: 5 files are required, but only 1 were provided
+[ INFO ] Infer Request 0 filling
+[ INFO ] Prepare image /opt/intel/openvino_2021/deployment_tools/demo/car.png
+[ WARNING ] Image is resized from ((259, 787)) to ((224, 224))
+[ INFO ] Infer Request 1 filling
+[ INFO ] Prepare image /opt/intel/openvino_2021/deployment_tools/demo/car.png
+[ WARNING ] Image is resized from ((259, 787)) to ((224, 224))
+[ INFO ] Infer Request 2 filling
+[ INFO ] Prepare image /opt/intel/openvino_2021/deployment_tools/demo/car.png
+[ WARNING ] Image is resized from ((259, 787)) to ((224, 224))
+[ INFO ] Infer Request 3 filling
+[ INFO ] Prepare image /opt/intel/openvino_2021/deployment_tools/demo/car.png
+[ WARNING ] Image is resized from ((259, 787)) to ((224, 224))
+[ INFO ] Infer Request 4 filling
+[ INFO ] Prepare image /opt/intel/openvino_2021/deployment_tools/demo/car.png
+[ WARNING ] Image is resized from ((259, 787)) to ((224, 224))
+[Step 10/11] Measuring performance (Start inference asynchronously, 5 inference requests using 1 streams for CPU, limits: 60000 ms duration)
+[ INFO ] First inference took 24.20 ms
+I: [watchdog] [    513671] [WatchdogThread] keepAlive:75	[0x7f9350003250] device, ping succeed after 999 ms
+
+I: [watchdog] [    514671] [WatchdogThread] keepAlive:75	[0x7f9350003250] device, ping succeed after 999 ms
+
+I: [watchdog] [    515670] [WatchdogThread] keepAlive:75	[0x7f9350003250] device, ping succeed after 999 ms
+
+I: [watchdog] [    516670] [WatchdogThread] keepAlive:75	[0x7f9350003250] device, ping succeed after 999 ms
+
+I: [watchdog] [    517670] [WatchdogThread] keepAlive:75	[0x7f9350003250] device, ping succeed after 999 ms
+
+I: [watchdog] [    518670] [WatchdogThread] keepAlive:75	[0x7f9350003250] device, ping succeed after 999 ms
+
+I: [watchdog] [    519670] [WatchdogThread] keepAlive:75	[0x7f9350003250] device, ping succeed after 999 ms
+
+I: [watchdog] [    520669] [WatchdogThread] keepAlive:75	[0x7f9350003250] device, ping succeed after 999 ms
+
+I: [watchdog] [    521669] [WatchdogThread] keepAlive:75	[0x7f9350003250] device, ping succeed after 999 ms
+
+I: [watchdog] [    522668] [WatchdogThread] keepAlive:75	[0x7f9350003250] device, ping succeed after 999 ms
+
+I: [watchdog] [    523668] [WatchdogThread] keepAlive:75	[0x7f9350003250] device, ping succeed after 999 ms
+
+I: [watchdog] [    524668] [WatchdogThread] keepAlive:75	[0x7f9350003250] device, ping succeed after 999 ms
+
+I: [watchdog] [    525668] [WatchdogThread] keepAlive:75	[0x7f9350003250] device, ping succeed after 999 ms
+
+I: [watchdog] [    526668] [WatchdogThread] keepAlive:75	[0x7f9350003250] device, ping succeed after 999 ms
+
+I: [watchdog] [    527669] [WatchdogThread] keepAlive:75	[0x7f9350003250] device, ping succeed after 999 ms
+
+I: [watchdog] [    528668] [WatchdogThread] keepAlive:75	[0x7f9350003250] device, ping succeed after 999 ms
+
+I: [watchdog] [    529668] [WatchdogThread] keepAlive:75	[0x7f9350003250] device, ping succeed after 999 ms
+
+I: [watchdog] [    530668] [WatchdogThread] keepAlive:75	[0x7f9350003250] device, ping succeed after 1000 ms
+
+I: [watchdog] [    531667] [WatchdogThread] keepAlive:75	[0x7f9350003250] device, ping succeed after 999 ms
+
+I: [watchdog] [    532668] [WatchdogThread] keepAlive:75	[0x7f9350003250] device, ping succeed after 999 ms
+
+I: [watchdog] [    533667] [WatchdogThread] keepAlive:75	[0x7f9350003250] device, ping succeed after 999 ms
+
+I: [watchdog] [    534667] [WatchdogThread] keepAlive:75	[0x7f9350003250] device, ping succeed after 1000 ms
+
+I: [watchdog] [    535666] [WatchdogThread] keepAlive:75	[0x7f9350003250] device, ping succeed after 999 ms
+
+I: [watchdog] [    536666] [WatchdogThread] keepAlive:75	[0x7f9350003250] device, ping succeed after 999 ms
+
+I: [watchdog] [    537666] [WatchdogThread] keepAlive:75	[0x7f9350003250] device, ping succeed after 999 ms
+
+I: [watchdog] [    538666] [WatchdogThread] keepAlive:75	[0x7f9350003250] device, ping succeed after 999 ms
+
+I: [watchdog] [    539666] [WatchdogThread] keepAlive:75	[0x7f9350003250] device, ping succeed after 999 ms
+
+I: [watchdog] [    540667] [WatchdogThread] keepAlive:75	[0x7f9350003250] device, ping succeed after 1000 ms
+
+I: [watchdog] [    541666] [WatchdogThread] keepAlive:75	[0x7f9350003250] device, ping succeed after 999 ms
+
+I: [watchdog] [    542666] [WatchdogThread] keepAlive:75	[0x7f9350003250] device, ping succeed after 999 ms
+
+I: [watchdog] [    543665] [WatchdogThread] keepAlive:75	[0x7f9350003250] device, ping succeed after 999 ms
+
+I: [watchdog] [    544665] [WatchdogThread] keepAlive:75	[0x7f9350003250] device, ping succeed after 1000 ms
+
+I: [watchdog] [    545665] [WatchdogThread] keepAlive:75	[0x7f9350003250] device, ping succeed after 999 ms
+
+I: [watchdog] [    546665] [WatchdogThread] keepAlive:75	[0x7f9350003250] device, ping succeed after 1000 ms
+
+I: [watchdog] [    547665] [WatchdogThread] keepAlive:75	[0x7f9350003250] device, ping succeed after 999 ms
+
+I: [watchdog] [    548664] [WatchdogThread] keepAlive:75	[0x7f9350003250] device, ping succeed after 999 ms
+
+I: [watchdog] [    549664] [WatchdogThread] keepAlive:75	[0x7f9350003250] device, ping succeed after 999 ms
+
+I: [watchdog] [    550664] [WatchdogThread] keepAlive:75	[0x7f9350003250] device, ping succeed after 999 ms
+
+I: [watchdog] [    551664] [WatchdogThread] keepAlive:75	[0x7f9350003250] device, ping succeed after 1000 ms
+
+I: [watchdog] [    552663] [WatchdogThread] keepAlive:75	[0x7f9350003250] device, ping succeed after 999 ms
+
+I: [watchdog] [    553663] [WatchdogThread] keepAlive:75	[0x7f9350003250] device, ping succeed after 999 ms
+
+I: [watchdog] [    554663] [WatchdogThread] keepAlive:75	[0x7f9350003250] device, ping succeed after 1000 ms
+
+I: [watchdog] [    555664] [WatchdogThread] keepAlive:75	[0x7f9350003250] device, ping succeed after 1000 ms
+
+I: [watchdog] [    556663] [WatchdogThread] keepAlive:75	[0x7f9350003250] device, ping succeed after 999 ms
+
+I: [watchdog] [    557663] [WatchdogThread] keepAlive:75	[0x7f9350003250] device, ping succeed after 999 ms
+
+I: [watchdog] [    558662] [WatchdogThread] keepAlive:75	[0x7f9350003250] device, ping succeed after 999 ms
+
+I: [watchdog] [    559663] [WatchdogThread] keepAlive:75	[0x7f9350003250] device, ping succeed after 999 ms
+
+I: [watchdog] [    560662] [WatchdogThread] keepAlive:75	[0x7f9350003250] device, ping succeed after 999 ms
+
+I: [watchdog] [    561662] [WatchdogThread] keepAlive:75	[0x7f9350003250] device, ping succeed after 999 ms
+
+I: [watchdog] [    562661] [WatchdogThread] keepAlive:75	[0x7f9350003250] device, ping succeed after 999 ms
+
+I: [watchdog] [    563662] [WatchdogThread] keepAlive:75	[0x7f9350003250] device, ping succeed after 999 ms
+
+I: [watchdog] [    564661] [WatchdogThread] keepAlive:75	[0x7f9350003250] device, ping succeed after 1000 ms
+
+I: [watchdog] [    565660] [WatchdogThread] keepAlive:75	[0x7f9350003250] device, ping succeed after 999 ms
+
+I: [watchdog] [    566659] [WatchdogThread] keepAlive:75	[0x7f9350003250] device, ping succeed after 999 ms
+
+I: [watchdog] [    567659] [WatchdogThread] keepAlive:75	[0x7f9350003250] device, ping succeed after 999 ms
+
+I: [watchdog] [    568659] [WatchdogThread] keepAlive:75	[0x7f9350003250] device, ping succeed after 999 ms
+
+I: [watchdog] [    569658] [WatchdogThread] keepAlive:75	[0x7f9350003250] device, ping succeed after 999 ms
+
+I: [watchdog] [    570658] [WatchdogThread] keepAlive:75	[0x7f9350003250] device, ping succeed after 999 ms
+
+I: [watchdog] [    571658] [WatchdogThread] keepAlive:75	[0x7f9350003250] device, ping succeed after 1000 ms
+
+I: [watchdog] [    572658] [WatchdogThread] keepAlive:75	[0x7f9350003250] device, ping succeed after 999 ms
+
+I: [watchdog] [    573657] [WatchdogThread] keepAlive:75	[0x7f9350003250] device, ping succeed after 999 ms
+
+[Step 11/11] Dumping statistics report
+Count:      5705 iterations
+Duration:   60181.48 ms
+Throughput: 94.80 FPS
+I: [ncAPI] [    573791] [benchmark_app.p] ncDeviceClose:1705	Removing device...
+I: [watchdog] [    573791] [benchmark_app.p] removeDevice:202	remove device: 0x7ffe0fa77890
+
+I: [watchdog] [    573791] [WatchdogThread] watchdogRoutine:295	no active devices to watch, stopping  Watchdog thread
+
+I: [watchdog] [    573791] [WatchdogThread] watchdogRoutine:321	thread ended
+
+I: [xLink] [    573792] [Scheduler00Thr] dispatcherClean:866	Start Clean Dispatcher...
+I: [xLink] [    573792] [Scheduler00Thr] dispatcherClean:896	Clean Dispatcher Successfully...
+I: [xLink] [    573792] [Scheduler00Thr] eventSchedulerRun:636	Scheduler thread stopped
+E: [global] [    573792] [benchmark_app.p] XLink_sem_wait:94	 XLink_sem_inc(sem) method call failed with an error: -1
+E: [global] [    573792] [benchmark_app.p] XLinkResetRemote:257	can't wait dispatcherClosedSem
+
+W: [ncAPI] [    573792] [benchmark_app.p] ncDeviceClose:1789	Failed to reset, rc: X_LINK_ERROR
+I: [ncAPI] [    574248] [benchmark_app.p] destroyDeviceHandle:1648	Destroying device handler
+I: [watchdog] [    574248] [benchmark_app.p] ~WatchdogImpl:125	watchdog terminated
+
+"""
+
+./benchmark_app.py -m /home/ros/googlenet-v1/googlenet-v1.xml -i /opt/intel/openvino_2021/deployment_tools/demo/car.png  -d MULTI:MYRIAD.1.4-ma2480,MYRIAD.1.8-ma2480,CPU
+
+"""
+ros@ros-LEC-ALAI:/opt/intel/openvino_2021/deployment_tools/tools/benchmark_tool$ ./benchmark_app.py -m /home/ros/googlenet-v1/googlenet-v1.xml -i /opt/intel/openvino_2021/deployment_tools/demo/car.png  -d MULTI:MYRIAD.1.4-ma2480,MYRIAD.1.8-ma2480,CPU
+[Step 1/11] Parsing and validating input arguments
+[ WARNING ]  -nstreams default value is determined automatically for a device. Although the automatic selection usually provides a reasonable performance, but it still may be non-optimal for some cases, for more information look at README. 
+[Step 2/11] Loading Inference Engine
+[ INFO ] InferenceEngine:
+         API version............. 2021.4.0-3839-cd81789d294-releases/2021/4
+[ INFO ] Device info
+         CPU
+         MKLDNNPlugin............ version 2.1
+         Build................... 2021.4.0-3839-cd81789d294-releases/2021/4
+         MULTI
+         MultiDevicePlugin....... version 2.1
+         Build................... 2021.4.0-3839-cd81789d294-releases/2021/4
+         MYRIAD
+         myriadPlugin............ version 2.1
+         Build................... 2021.4.0-3839-cd81789d294-releases/2021/4
+
+[Step 3/11] Setting device configuration
+[ WARNING ] -nstreams default value is determined automatically for MYRIAD device. Although the automatic selection usually provides a reasonable performance,but it still may be non-optimal for some cases, for more information look at README.
+[ WARNING ] -nstreams default value is determined automatically for MYRIAD device. Although the automatic selection usually provides a reasonable performance,but it still may be non-optimal for some cases, for more information look at README.
+[ WARNING ] -nstreams default value is determined automatically for CPU device. Although the automatic selection usually provides a reasonable performance,but it still may be non-optimal for some cases, for more information look at README.
+[Step 4/11] Reading network files
+[ INFO ] Read network took 57.08 ms
+[Step 5/11] Resizing network to match image sizes and given batch
+[ INFO ] Network batch size: 1
+[Step 6/11] Configuring input of the model
+[ INFO ] Network input 'data' precision U8, dimensions (NCHW): 1 3 224 224
+[ INFO ] Network output 'prob' precision FP32, dimensions (NC): 1 1000
+[Step 7/11] Loading the model to the device
+I: [ncAPI] [    717283] [benchmark_app.p] ncDeviceOpen:926	ncDeviceOpen() XLinkBootRemote is running for 1.4-ma2480...
+
+I: [ncAPI] [    717486] [benchmark_app.p] ncDeviceOpen:945	ncDeviceOpen() XLinkBootRemote returned success X_LINK_SUCCESS for 1.4-ma2480
+I: [xLink] [    717893] [Scheduler00Thr] eventReader:539	eventReader thread started
+I: [xLink] [    717893] [Scheduler00Thr] eventSchedulerRun:612	Scheduler thread started
+I: [ncAPI] [    717897] [benchmark_app.p] ncDeviceOpen:1048	XLinkConnect done - link Id 0
+
+I: [ncAPI] [    717898] [benchmark_app.p] ncDeviceOpen:1076	Booted 1.4-ma2480 (2.2-) -> VSC
+
+I: [watchdog] [    718899] [benchmark_app.p] registerDevice:160	register device: 0x7fd78c5fa8d0
+
+I: [watchdog] [    718899] [WatchdogThread] watchdogRoutine:262	thread started
+
+I: [watchdog] [    718900] [WatchdogThread] keepAlive:75	[0x7fd784003250] device, ping succeed after 0 ms
+
+I: [ncAPI] [    718901] [benchmark_app.p] getDevAttributes:1272	Device attributes
+
+I: [ncAPI] [    718901] [benchmark_app.p] getDevAttributes:1274	Device FW version: 444c4454.2480.0.0
+
+I: [ncAPI] [    718901] [benchmark_app.p] getDevAttributes:1275	Maximum graphs: 10
+
+I: [ncAPI] [    718901] [benchmark_app.p] getDevAttributes:1276	Maximum fifos: 20
+
+I: [ncAPI] [    718901] [benchmark_app.p] getDevAttributes:1277	Device memory capacity: 507510776
+
+[Info   ][VPU][MyriadPlugin] Device #0 MYRIAD-X (USB protocol) allocated
+I: [ncAPI] [    718902] [benchmark_app.p] ncDeviceOpen:926	ncDeviceOpen() XLinkBootRemote is running for 1.8-ma2480...
+
+I: [ncAPI] [    719164] [benchmark_app.p] ncDeviceOpen:945	ncDeviceOpen() XLinkBootRemote returned success X_LINK_SUCCESS for 1.8-ma2480
+I: [xLink] [    719583] [Scheduler01Thr] eventSchedulerRun:612	Scheduler thread started
+I: [xLink] [    719586] [EventRead01Thr] eventReader:539	eventReader thread started
+I: [ncAPI] [    719588] [benchmark_app.p] ncDeviceOpen:1048	XLinkConnect done - link Id 1
+
+I: [ncAPI] [    719588] [benchmark_app.p] ncDeviceOpen:1076	Booted 1.8-ma2480 (2.6-) -> VSC
+
+I: [watchdog] [    719899] [WatchdogThread] keepAlive:75	[0x7fd784003250] device, ping succeed after 999 ms
+
+I: [ncAPI] [    720588] [benchmark_app.p] ncGraphAllocate:1971	Starting Graph allocation sequence
+
+I: [watchdog] [    720589] [benchmark_app.p] registerDevice:160	register device: 0x7fd78bdf98d0
+
+I: [watchdog] [    720590] [WatchdogThread] keepAlive:75	[0x7fd77c002f60] device, ping succeed after 0 ms
+
+I: [ncAPI] [    720590] [benchmark_app.p] getDevAttributes:1272	Device attributes
+
+I: [ncAPI] [    720590] [benchmark_app.p] getDevAttributes:1274	Device FW version: 444c4454.2480.0.0
+
+I: [ncAPI] [    720590] [benchmark_app.p] getDevAttributes:1275	Maximum graphs: 10
+
+I: [ncAPI] [    720590] [benchmark_app.p] getDevAttributes:1276	Maximum fifos: 20
+
+I: [ncAPI] [    720590] [benchmark_app.p] getDevAttributes:1277	Device memory capacity: 507510776
+
+I: [ncAPI] [    720647] [benchmark_app.p] ncGraphAllocate:2062	Sent graph
+[Info   ][VPU][MyriadPlugin] Device #1 MYRIAD-X (USB protocol) allocated
+I: [ncAPI] [    720681] [benchmark_app.p] ncGraphAllocate:2188	Graph allocation completed successfully
+
+I: [ncAPI] [    720681] [benchmark_app.p] ncFifoCreate:2886	Init fifo
+I: [ncAPI] [    720681] [benchmark_app.p] ncFifoAllocate:2987	Creating fifo
+I: [ncAPI] [    720690] [benchmark_app.p] ncFifoCreate:2886	Init fifo
+I: [ncAPI] [    720690] [benchmark_app.p] ncFifoAllocate:2987	Creating fifo
+I: [watchdog] [    720899] [WatchdogThread] keepAlive:75	[0x7fd784003250] device, ping succeed after 999 ms
+
+I: [ncAPI] [    721473] [benchmark_app.p] ncGraphAllocate:1971	Starting Graph allocation sequence
+
+I: [ncAPI] [    721534] [benchmark_app.p] ncGraphAllocate:2062	Sent graph
+I: [ncAPI] [    721561] [benchmark_app.p] ncGraphAllocate:2188	Graph allocation completed successfully
+
+I: [ncAPI] [    721561] [benchmark_app.p] ncFifoCreate:2886	Init fifo
+I: [ncAPI] [    721561] [benchmark_app.p] ncFifoAllocate:2987	Creating fifo
+I: [ncAPI] [    721562] [benchmark_app.p] ncFifoCreate:2886	Init fifo
+I: [ncAPI] [    721562] [benchmark_app.p] ncFifoAllocate:2987	Creating fifo
+[ INFO ] Load network took 4292.64 ms
+[Step 8/11] Setting optimal runtime parameters
+[Step 9/11] Creating infer requests and filling input blobs with images
+[ WARNING ] Some image input files will be duplicated: 9 files are required, but only 1 were provided
+[ INFO ] Infer Request 0 filling
+[ INFO ] Prepare image /opt/intel/openvino_2021/deployment_tools/demo/car.png
+[ WARNING ] Image is resized from ((259, 787)) to ((224, 224))
+[ INFO ] Infer Request 1 filling
+[ INFO ] Prepare image /opt/intel/openvino_2021/deployment_tools/demo/car.png
+I: [watchdog] [    721589] [WatchdogThread] keepAlive:75	[0x7fd77c002f60] device, ping succeed after 999 ms
+
+[ WARNING ] Image is resized from ((259, 787)) to ((224, 224))
+[ INFO ] Infer Request 2 filling
+[ INFO ] Prepare image /opt/intel/openvino_2021/deployment_tools/demo/car.png
+[ WARNING ] Image is resized from ((259, 787)) to ((224, 224))
+[ INFO ] Infer Request 3 filling
+[ INFO ] Prepare image /opt/intel/openvino_2021/deployment_tools/demo/car.png
+[ WARNING ] Image is resized from ((259, 787)) to ((224, 224))
+[ INFO ] Infer Request 4 filling
+[ INFO ] Prepare image /opt/intel/openvino_2021/deployment_tools/demo/car.png
+[ WARNING ] Image is resized from ((259, 787)) to ((224, 224))
+[ INFO ] Infer Request 5 filling
+[ INFO ] Prepare image /opt/intel/openvino_2021/deployment_tools/demo/car.png
+[ WARNING ] Image is resized from ((259, 787)) to ((224, 224))
+[ INFO ] Infer Request 6 filling
+[ INFO ] Prepare image /opt/intel/openvino_2021/deployment_tools/demo/car.png
+[ WARNING ] Image is resized from ((259, 787)) to ((224, 224))
+[ INFO ] Infer Request 7 filling
+[ INFO ] Prepare image /opt/intel/openvino_2021/deployment_tools/demo/car.png
+[ WARNING ] Image is resized from ((259, 787)) to ((224, 224))
+[ INFO ] Infer Request 8 filling
+[ INFO ] Prepare image /opt/intel/openvino_2021/deployment_tools/demo/car.png
+[ WARNING ] Image is resized from ((259, 787)) to ((224, 224))
+[Step 10/11] Measuring performance (Start inference asynchronously, 9 inference requests using 1 streams for CPU, limits: 60000 ms duration)
+[ INFO ] First inference took 27.32 ms
+I: [watchdog] [    721925] [WatchdogThread] keepAlive:75	[0x7fd784003250] device, ping succeed after 1003 ms
+
+I: [watchdog] [    722588] [WatchdogThread] keepAlive:75	[0x7fd77c002f60] device, ping succeed after 999 ms
+
+I: [watchdog] [    722902] [WatchdogThread] keepAlive:75	[0x7fd784003250] device, ping succeed after 999 ms
+
+I: [watchdog] [    723588] [WatchdogThread] keepAlive:75	[0x7fd77c002f60] device, ping succeed after 999 ms
+
+I: [watchdog] [    723902] [WatchdogThread] keepAlive:75	[0x7fd784003250] device, ping succeed after 999 ms
+
+I: [watchdog] [    724588] [WatchdogThread] keepAlive:75	[0x7fd77c002f60] device, ping succeed after 999 ms
+
+I: [watchdog] [    724901] [WatchdogThread] keepAlive:75	[0x7fd784003250] device, ping succeed after 999 ms
+
+I: [watchdog] [    725588] [WatchdogThread] keepAlive:75	[0x7fd77c002f60] device, ping succeed after 999 ms
+
+I: [watchdog] [    725902] [WatchdogThread] keepAlive:75	[0x7fd784003250] device, ping succeed after 999 ms
+
+I: [watchdog] [    726587] [WatchdogThread] keepAlive:75	[0x7fd77c002f60] device, ping succeed after 999 ms
+
+I: [watchdog] [    726902] [WatchdogThread] keepAlive:75	[0x7fd784003250] device, ping succeed after 999 ms
+
+I: [watchdog] [    727586] [WatchdogThread] keepAlive:75	[0x7fd77c002f60] device, ping succeed after 999 ms
+
+I: [watchdog] [    727900] [WatchdogThread] keepAlive:75	[0x7fd784003250] device, ping succeed after 999 ms
+
+I: [watchdog] [    728585] [WatchdogThread] keepAlive:75	[0x7fd77c002f60] device, ping succeed after 999 ms
+
+I: [watchdog] [    728900] [WatchdogThread] keepAlive:75	[0x7fd784003250] device, ping succeed after 999 ms
+
+I: [watchdog] [    729585] [WatchdogThread] keepAlive:75	[0x7fd77c002f60] device, ping succeed after 999 ms
+
+I: [watchdog] [    729904] [WatchdogThread] keepAlive:75	[0x7fd784003250] device, ping succeed after 999 ms
+
+I: [watchdog] [    730585] [WatchdogThread] keepAlive:75	[0x7fd77c002f60] device, ping succeed after 999 ms
+
+I: [watchdog] [    730899] [WatchdogThread] keepAlive:75	[0x7fd784003250] device, ping succeed after 999 ms
+
+I: [watchdog] [    731584] [WatchdogThread] keepAlive:75	[0x7fd77c002f60] device, ping succeed after 999 ms
+
+I: [watchdog] [    731899] [WatchdogThread] keepAlive:75	[0x7fd784003250] device, ping succeed after 999 ms
+
+I: [watchdog] [    732584] [WatchdogThread] keepAlive:75	[0x7fd77c002f60] device, ping succeed after 999 ms
+
+I: [watchdog] [    732898] [WatchdogThread] keepAlive:75	[0x7fd784003250] device, ping succeed after 999 ms
+
+I: [watchdog] [    733583] [WatchdogThread] keepAlive:75	[0x7fd77c002f60] device, ping succeed after 999 ms
+
+I: [watchdog] [    733898] [WatchdogThread] keepAlive:75	[0x7fd784003250] device, ping succeed after 999 ms
+
+I: [watchdog] [    734582] [WatchdogThread] keepAlive:75	[0x7fd77c002f60] device, ping succeed after 999 ms
+
+I: [watchdog] [    734897] [WatchdogThread] keepAlive:75	[0x7fd784003250] device, ping succeed after 999 ms
+
+I: [watchdog] [    735582] [WatchdogThread] keepAlive:75	[0x7fd77c002f60] device, ping succeed after 999 ms
+
+I: [watchdog] [    735896] [WatchdogThread] keepAlive:75	[0x7fd784003250] device, ping succeed after 999 ms
+
+I: [watchdog] [    736581] [WatchdogThread] keepAlive:75	[0x7fd77c002f60] device, ping succeed after 999 ms
+
+I: [watchdog] [    736896] [WatchdogThread] keepAlive:75	[0x7fd784003250] device, ping succeed after 1000 ms
+
+I: [watchdog] [    737581] [WatchdogThread] keepAlive:75	[0x7fd77c002f60] device, ping succeed after 1000 ms
+
+I: [watchdog] [    737898] [WatchdogThread] keepAlive:75	[0x7fd784003250] device, ping succeed after 1001 ms
+
+I: [watchdog] [    738581] [WatchdogThread] keepAlive:75	[0x7fd77c002f60] device, ping succeed after 1000 ms
+
+I: [watchdog] [    738899] [WatchdogThread] keepAlive:75	[0x7fd784003250] device, ping succeed after 999 ms
+
+I: [watchdog] [    739581] [WatchdogThread] keepAlive:75	[0x7fd77c002f60] device, ping succeed after 999 ms
+
+I: [watchdog] [    739898] [WatchdogThread] keepAlive:75	[0x7fd784003250] device, ping succeed after 999 ms
+
+I: [watchdog] [    740580] [WatchdogThread] keepAlive:75	[0x7fd77c002f60] device, ping succeed after 999 ms
+
+I: [watchdog] [    740898] [WatchdogThread] keepAlive:75	[0x7fd784003250] device, ping succeed after 999 ms
+
+I: [watchdog] [    741580] [WatchdogThread] keepAlive:75	[0x7fd77c002f60] device, ping succeed after 999 ms
+
+I: [watchdog] [    741897] [WatchdogThread] keepAlive:75	[0x7fd784003250] device, ping succeed after 999 ms
+
+I: [watchdog] [    742580] [WatchdogThread] keepAlive:75	[0x7fd77c002f60] device, ping succeed after 999 ms
+
+I: [watchdog] [    742896] [WatchdogThread] keepAlive:75	[0x7fd784003250] device, ping succeed after 999 ms
+
+I: [watchdog] [    743579] [WatchdogThread] keepAlive:75	[0x7fd77c002f60] device, ping succeed after 999 ms
+
+I: [watchdog] [    743895] [WatchdogThread] keepAlive:75	[0x7fd784003250] device, ping succeed after 999 ms
+
+I: [watchdog] [    744578] [WatchdogThread] keepAlive:75	[0x7fd77c002f60] device, ping succeed after 999 ms
+
+I: [watchdog] [    744895] [WatchdogThread] keepAlive:75	[0x7fd784003250] device, ping succeed after 999 ms
+
+I: [watchdog] [    745578] [WatchdogThread] keepAlive:75	[0x7fd77c002f60] device, ping succeed after 999 ms
+
+I: [watchdog] [    745895] [WatchdogThread] keepAlive:75	[0x7fd784003250] device, ping succeed after 999 ms
+
+I: [watchdog] [    746577] [WatchdogThread] keepAlive:75	[0x7fd77c002f60] device, ping succeed after 999 ms
+
+I: [watchdog] [    746895] [WatchdogThread] keepAlive:75	[0x7fd784003250] device, ping succeed after 1000 ms
+
+I: [watchdog] [    747577] [WatchdogThread] keepAlive:75	[0x7fd77c002f60] device, ping succeed after 999 ms
+
+I: [watchdog] [    747894] [WatchdogThread] keepAlive:75	[0x7fd784003250] device, ping succeed after 999 ms
+
+I: [watchdog] [    748576] [WatchdogThread] keepAlive:75	[0x7fd77c002f60] device, ping succeed after 999 ms
+
+I: [watchdog] [    748894] [WatchdogThread] keepAlive:75	[0x7fd784003250] device, ping succeed after 999 ms
+
+I: [watchdog] [    749576] [WatchdogThread] keepAlive:75	[0x7fd77c002f60] device, ping succeed after 1000 ms
+
+I: [watchdog] [    749894] [WatchdogThread] keepAlive:75	[0x7fd784003250] device, ping succeed after 999 ms
+
+I: [watchdog] [    750576] [WatchdogThread] keepAlive:75	[0x7fd77c002f60] device, ping succeed after 999 ms
+
+I: [watchdog] [    750894] [WatchdogThread] keepAlive:75	[0x7fd784003250] device, ping succeed after 999 ms
+
+I: [watchdog] [    751576] [WatchdogThread] keepAlive:75	[0x7fd77c002f60] device, ping succeed after 999 ms
+
+I: [watchdog] [    751893] [WatchdogThread] keepAlive:75	[0x7fd784003250] device, ping succeed after 999 ms
+
+I: [watchdog] [    752576] [WatchdogThread] keepAlive:75	[0x7fd77c002f60] device, ping succeed after 999 ms
+
+I: [watchdog] [    752893] [WatchdogThread] keepAlive:75	[0x7fd784003250] device, ping succeed after 999 ms
+
+I: [watchdog] [    753576] [WatchdogThread] keepAlive:75	[0x7fd77c002f60] device, ping succeed after 999 ms
+
+I: [watchdog] [    753894] [WatchdogThread] keepAlive:75	[0x7fd784003250] device, ping succeed after 999 ms
+
+I: [watchdog] [    754576] [WatchdogThread] keepAlive:75	[0x7fd77c002f60] device, ping succeed after 999 ms
+
+I: [watchdog] [    754893] [WatchdogThread] keepAlive:75	[0x7fd784003250] device, ping succeed after 999 ms
+
+I: [watchdog] [    755576] [WatchdogThread] keepAlive:75	[0x7fd77c002f60] device, ping succeed after 999 ms
+
+I: [watchdog] [    755893] [WatchdogThread] keepAlive:75	[0x7fd784003250] device, ping succeed after 1000 ms
+
+I: [watchdog] [    756576] [WatchdogThread] keepAlive:75	[0x7fd77c002f60] device, ping succeed after 1000 ms
+
+I: [watchdog] [    756892] [WatchdogThread] keepAlive:75	[0x7fd784003250] device, ping succeed after 999 ms
+
+I: [watchdog] [    757575] [WatchdogThread] keepAlive:75	[0x7fd77c002f60] device, ping succeed after 999 ms
+
+I: [watchdog] [    757892] [WatchdogThread] keepAlive:75	[0x7fd784003250] device, ping succeed after 999 ms
+
+I: [watchdog] [    758574] [WatchdogThread] keepAlive:75	[0x7fd77c002f60] device, ping succeed after 999 ms
+
+I: [watchdog] [    758891] [WatchdogThread] keepAlive:75	[0x7fd784003250] device, ping succeed after 999 ms
+
+I: [watchdog] [    759574] [WatchdogThread] keepAlive:75	[0x7fd77c002f60] device, ping succeed after 999 ms
+
+I: [watchdog] [    759891] [WatchdogThread] keepAlive:75	[0x7fd784003250] device, ping succeed after 999 ms
+
+I: [watchdog] [    760573] [WatchdogThread] keepAlive:75	[0x7fd77c002f60] device, ping succeed after 999 ms
+
+I: [watchdog] [    760890] [WatchdogThread] keepAlive:75	[0x7fd784003250] device, ping succeed after 999 ms
+
+I: [watchdog] [    761573] [WatchdogThread] keepAlive:75	[0x7fd77c002f60] device, ping succeed after 999 ms
+
+I: [watchdog] [    761890] [WatchdogThread] keepAlive:75	[0x7fd784003250] device, ping succeed after 999 ms
+
+I: [watchdog] [    762573] [WatchdogThread] keepAlive:75	[0x7fd77c002f60] device, ping succeed after 1000 ms
+
+I: [watchdog] [    762890] [WatchdogThread] keepAlive:75	[0x7fd784003250] device, ping succeed after 999 ms
+
+I: [watchdog] [    763573] [WatchdogThread] keepAlive:75	[0x7fd77c002f60] device, ping succeed after 1000 ms
+
+I: [watchdog] [    763889] [WatchdogThread] keepAlive:75	[0x7fd784003250] device, ping succeed after 999 ms
+
+I: [watchdog] [    764574] [WatchdogThread] keepAlive:75	[0x7fd77c002f60] device, ping succeed after 999 ms
+
+I: [watchdog] [    764889] [WatchdogThread] keepAlive:75	[0x7fd784003250] device, ping succeed after 1000 ms
+
+I: [watchdog] [    765572] [WatchdogThread] keepAlive:75	[0x7fd77c002f60] device, ping succeed after 999 ms
+
+I: [watchdog] [    765889] [WatchdogThread] keepAlive:75	[0x7fd784003250] device, ping succeed after 999 ms
+
+I: [watchdog] [    766571] [WatchdogThread] keepAlive:75	[0x7fd77c002f60] device, ping succeed after 999 ms
+
+I: [watchdog] [    766888] [WatchdogThread] keepAlive:75	[0x7fd784003250] device, ping succeed after 999 ms
+
+I: [watchdog] [    767570] [WatchdogThread] keepAlive:75	[0x7fd77c002f60] device, ping succeed after 999 ms
+
+I: [watchdog] [    767888] [WatchdogThread] keepAlive:75	[0x7fd784003250] device, ping succeed after 999 ms
+
+I: [watchdog] [    768569] [WatchdogThread] keepAlive:75	[0x7fd77c002f60] device, ping succeed after 999 ms
+
+I: [watchdog] [    768887] [WatchdogThread] keepAlive:75	[0x7fd784003250] device, ping succeed after 999 ms
+
+I: [watchdog] [    769569] [WatchdogThread] keepAlive:75	[0x7fd77c002f60] device, ping succeed after 999 ms
+
+I: [watchdog] [    769886] [WatchdogThread] keepAlive:75	[0x7fd784003250] device, ping succeed after 999 ms
+
+I: [watchdog] [    770569] [WatchdogThread] keepAlive:75	[0x7fd77c002f60] device, ping succeed after 999 ms
+
+I: [watchdog] [    770886] [WatchdogThread] keepAlive:75	[0x7fd784003250] device, ping succeed after 999 ms
+
+I: [watchdog] [    771569] [WatchdogThread] keepAlive:75	[0x7fd77c002f60] device, ping succeed after 999 ms
+
+I: [watchdog] [    771885] [WatchdogThread] keepAlive:75	[0x7fd784003250] device, ping succeed after 999 ms
+
+I: [watchdog] [    772569] [WatchdogThread] keepAlive:75	[0x7fd77c002f60] device, ping succeed after 999 ms
+
+I: [watchdog] [    772884] [WatchdogThread] keepAlive:75	[0x7fd784003250] device, ping succeed after 999 ms
+
+I: [watchdog] [    773568] [WatchdogThread] keepAlive:75	[0x7fd77c002f60] device, ping succeed after 999 ms
+
+I: [watchdog] [    773884] [WatchdogThread] keepAlive:75	[0x7fd784003250] device, ping succeed after 1000 ms
+
+I: [watchdog] [    774568] [WatchdogThread] keepAlive:75	[0x7fd77c002f60] device, ping succeed after 999 ms
+
+I: [watchdog] [    774884] [WatchdogThread] keepAlive:75	[0x7fd784003250] device, ping succeed after 1000 ms
+
+I: [watchdog] [    775568] [WatchdogThread] keepAlive:75	[0x7fd77c002f60] device, ping succeed after 999 ms
+
+I: [watchdog] [    775884] [WatchdogThread] keepAlive:75	[0x7fd784003250] device, ping succeed after 999 ms
+
+I: [watchdog] [    776567] [WatchdogThread] keepAlive:75	[0x7fd77c002f60] device, ping succeed after 999 ms
+
+I: [watchdog] [    776884] [WatchdogThread] keepAlive:75	[0x7fd784003250] device, ping succeed after 1000 ms
+
+I: [watchdog] [    777566] [WatchdogThread] keepAlive:75	[0x7fd77c002f60] device, ping succeed after 999 ms
+
+I: [watchdog] [    777884] [WatchdogThread] keepAlive:75	[0x7fd784003250] device, ping succeed after 999 ms
+
+I: [watchdog] [    778566] [WatchdogThread] keepAlive:75	[0x7fd77c002f60] device, ping succeed after 999 ms
+
+I: [watchdog] [    778884] [WatchdogThread] keepAlive:75	[0x7fd784003250] device, ping succeed after 999 ms
+
+I: [watchdog] [    779566] [WatchdogThread] keepAlive:75	[0x7fd77c002f60] device, ping succeed after 1000 ms
+
+I: [watchdog] [    779883] [WatchdogThread] keepAlive:75	[0x7fd784003250] device, ping succeed after 999 ms
+
+I: [watchdog] [    780566] [WatchdogThread] keepAlive:75	[0x7fd77c002f60] device, ping succeed after 1000 ms
+
+I: [watchdog] [    780882] [WatchdogThread] keepAlive:75	[0x7fd784003250] device, ping succeed after 999 ms
+
+I: [watchdog] [    781566] [WatchdogThread] keepAlive:75	[0x7fd77c002f60] device, ping succeed after 999 ms
+
+[Step 11/11] Dumping statistics report
+Count:      11016 iterations
+Duration:   60062.68 ms
+Throughput: 183.41 FPS
+I: [ncAPI] [    781855] [benchmark_app.p] ncDeviceClose:1705	Removing device...
+I: [watchdog] [    781855] [benchmark_app.p] removeDevice:202	remove device: 0x7ffea7b28990
+
+I: [xLink] [    781856] [Scheduler00Thr] dispatcherClean:866	Start Clean Dispatcher...
+I: [xLink] [    781856] [Scheduler00Thr] dispatcherClean:896	Clean Dispatcher Successfully...
+I: [xLink] [    781856] [Scheduler00Thr] eventSchedulerRun:636	Scheduler thread stopped
+I: [ncAPI] [    782306] [benchmark_app.p] destroyDeviceHandle:1648	Destroying device handler
+I: [ncAPI] [    782307] [benchmark_app.p] ncDeviceClose:1705	Removing device...
+I: [watchdog] [    782308] [benchmark_app.p] removeDevice:202	remove device: 0x7ffea7b28990
+
+I: [watchdog] [    782325] [WatchdogThread] watchdogRoutine:295	no active devices to watch, stopping  Watchdog thread
+
+I: [watchdog] [    782325] [WatchdogThread] watchdogRoutine:321	thread ended
+
+I: [xLink] [    782328] [Scheduler01Thr] dispatcherClean:866	Start Clean Dispatcher...
+I: [xLink] [    782328] [Scheduler01Thr] dispatcherClean:896	Clean Dispatcher Successfully...
+I: [xLink] [    782328] [Scheduler01Thr] eventSchedulerRun:636	Scheduler thread stopped
+E: [global] [    782337] [benchmark_app.p] XLink_sem_wait:94	 XLink_sem_inc(sem) method call failed with an error: -1
+E: [global] [    782337] [benchmark_app.p] XLinkResetRemote:257	can't wait dispatcherClosedSem
+
+W: [ncAPI] [    782337] [benchmark_app.p] ncDeviceClose:1789	Failed to reset, rc: X_LINK_ERROR
+I: [ncAPI] [    782778] [benchmark_app.p] destroyDeviceHandle:1648	Destroying device handler
+I: [watchdog] [    782778] [benchmark_app.p] ~WatchdogImpl:125	watchdog terminated
+
+"""
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

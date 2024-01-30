@@ -1,0 +1,118 @@
+ytl@ubuntu:/opt/intel/openvino_2021.4.752/deployment_tools/tools/model_downloader$ python3 converter.py --name mask_rcnn_inception_v2_coco
+========== Converting mask_rcnn_inception_v2_coco to IR (FP16)
+Conversion command: /usr/bin/python3 -m mo --framework=tf --data_type=FP16 --output_dir=/opt/intel/openvino_2021.4.752/deployment_tools/open_model_zoo/tools/downloader/public/mask_rcnn_inception_v2_coco/FP16 --model_name=mask_rcnn_inception_v2_coco --reverse_input_channels '--input_shape=[1,800,1365,3]' --input=image_tensor --transformations_config=/opt/intel/openvino_2021/deployment_tools/model_optimizer/extensions/front/tf/mask_rcnn_support.json --tensorflow_object_detection_api_pipeline_config=/opt/intel/openvino_2021.4.752/deployment_tools/open_model_zoo/tools/downloader/public/mask_rcnn_inception_v2_coco/mask_rcnn_inception_v2_coco_2018_01_28/pipeline.config --input_model=/opt/intel/openvino_2021.4.752/deployment_tools/open_model_zoo/tools/downloader/public/mask_rcnn_inception_v2_coco/mask_rcnn_inception_v2_coco_2018_01_28/frozen_inference_graph.pb
+
+Model Optimizer arguments:
+Common parameters:
+	- Path to the Input Model: 	/opt/intel/openvino_2021.4.752/deployment_tools/open_model_zoo/tools/downloader/public/mask_rcnn_inception_v2_coco/mask_rcnn_inception_v2_coco_2018_01_28/frozen_inference_graph.pb
+	- Path for generated IR: 	/opt/intel/openvino_2021.4.752/deployment_tools/open_model_zoo/tools/downloader/public/mask_rcnn_inception_v2_coco/FP16
+	- IR output name: 	mask_rcnn_inception_v2_coco
+	- Log level: 	ERROR
+	- Batch: 	Not specified, inherited from the model
+	- Input layers: 	image_tensor
+	- Output layers: 	Not specified, inherited from the model
+	- Input shapes: 	[1,800,1365,3]
+	- Mean values: 	Not specified
+	- Scale values: 	Not specified
+	- Scale factor: 	Not specified
+	- Precision of IR: 	FP16
+	- Enable fusing: 	True
+	- Enable grouped convolutions fusing: 	True
+	- Move mean values to preprocess section: 	None
+	- Reverse input channels: 	True
+TensorFlow specific parameters:
+	- Input model in text protobuf format: 	False
+	- Path to model dump for TensorBoard: 	None
+	- List of shared libraries with TensorFlow custom layers implementation: 	None
+	- Update the configuration file with input/output node names: 	None
+	- Use configuration file used to generate the model with Object Detection API: 	/opt/intel/openvino_2021.4.752/deployment_tools/open_model_zoo/tools/downloader/public/mask_rcnn_inception_v2_coco/mask_rcnn_inception_v2_coco_2018_01_28/pipeline.config
+	- Use the config file: 	None
+	- Inference Engine found in: 	/opt/intel/openvino_2021/python/python3.8/openvino
+Inference Engine version: 	2021.4.2-3974-e2a469a3450-releases/2021/4
+Model Optimizer version: 	2021.4.2-3974-e2a469a3450-releases/2021/4
+2022-03-14 21:38:29.351448: W tensorflow/stream_executor/platform/default/dso_loader.cc:64] Could not load dynamic library 'libcudart.so.11.0'; dlerror: libcudart.so.11.0: cannot open shared object file: No such file or directory; LD_LIBRARY_PATH: /opt/intel/openvino_2021/data_processing/dl_streamer/lib:/opt/intel/openvino_2021/data_processing/gstreamer/lib:/opt/intel/openvino_2021/opencv/lib:/opt/intel/openvino_2021/deployment_tools/ngraph/lib:/opt/intel/openvino_2021/deployment_tools/inference_engine/external/tbb/lib::/opt/intel/openvino_2021/deployment_tools/inference_engine/external/hddl/lib:/opt/intel/openvino_2021/deployment_tools/inference_engine/external/omp/lib:/opt/intel/openvino_2021/deployment_tools/inference_engine/external/gna/lib:/opt/intel/openvino_2021/deployment_tools/inference_engine/external/mkltiny_lnx/lib:/opt/intel/openvino_2021/deployment_tools/inference_engine/lib/intel64:/opt/ros/noetic/lib
+2022-03-14 21:38:29.351500: I tensorflow/stream_executor/cuda/cudart_stub.cc:29] Ignore above cudart dlerror if you do not have a GPU set up on your machine.
+/home/ytl/.local/lib/python3.8/site-packages/flatbuffers/compat.py:19: DeprecationWarning: the imp module is deprecated in favour of importlib; see the module's documentation for alternative uses
+  import imp
+[ WARNING ]  
+Detected not satisfied dependencies:
+	tensorflow: installed: 2.7.0, required: ~= 2.4.1
+
+Please install required versions of components or use install_prerequisites script
+/opt/intel/openvino_2021.4.752/deployment_tools/model_optimizer/install_prerequisites/install_prerequisites_tf2.sh
+Note that install_prerequisites scripts may install additional components.
+[ WARNING ] Model Optimizer removes pre-processing block of the model which resizes image keeping aspect ratio. The Inference Engine does not support dynamic image size so the Intermediate Representation file is generated with the input image size of a fixed size.
+The Preprocessor block has been removed. Only nodes performing mean value subtraction and scaling (if applicable) are kept.
+The graph output nodes have been replaced with a single layer of type "DetectionOutput". Refer to the operation set specification documentation for more information about the operation.
+The predicted masks are produced by the "masks" layer for each bounding box generated with a "detection_output" operation.
+ Refer to operation specification in the documentation for information about the DetectionOutput operation output data interpretation.
+The model can be inferred using the dedicated demo "mask_rcnn_demo" from the OpenVINO Open Model Zoo.
+[ WARNING ]  Network has 2 inputs overall, but only 1 of them are suitable for input channels reversing.
+Suitable for input channel reversing inputs are 4-dimensional with 3 channels
+All inputs: {'image_tensor': [1, 3, 800, 1365], 'image_info': [1, 3]}
+Suitable inputs {'image_tensor': [1, 3, 800, 1365]}
+[ SUCCESS ] Generated IR version 10 model.
+[ SUCCESS ] XML file: /opt/intel/openvino_2021.4.752/deployment_tools/open_model_zoo/tools/downloader/public/mask_rcnn_inception_v2_coco/FP16/mask_rcnn_inception_v2_coco.xml
+[ SUCCESS ] BIN file: /opt/intel/openvino_2021.4.752/deployment_tools/open_model_zoo/tools/downloader/public/mask_rcnn_inception_v2_coco/FP16/mask_rcnn_inception_v2_coco.bin
+[ SUCCESS ] Total execution time: 73.58 seconds. 
+[ SUCCESS ] Memory consumed: 928 MB. 
+It's been a while, check for a new version of Intel(R) Distribution of OpenVINO(TM) toolkit here https://software.intel.com/content/www/us/en/develop/tools/openvino-toolkit/download.html?cid=other&source=prod&campid=ww_2022_bu_IOTG_OpenVINO-2022-1&content=upg_all&medium=organic or on the GitHub*
+
+========== Converting mask_rcnn_inception_v2_coco to IR (FP32)
+Conversion command: /usr/bin/python3 -m mo --framework=tf --data_type=FP32 --output_dir=/opt/intel/openvino_2021.4.752/deployment_tools/open_model_zoo/tools/downloader/public/mask_rcnn_inception_v2_coco/FP32 --model_name=mask_rcnn_inception_v2_coco --reverse_input_channels '--input_shape=[1,800,1365,3]' --input=image_tensor --transformations_config=/opt/intel/openvino_2021/deployment_tools/model_optimizer/extensions/front/tf/mask_rcnn_support.json --tensorflow_object_detection_api_pipeline_config=/opt/intel/openvino_2021.4.752/deployment_tools/open_model_zoo/tools/downloader/public/mask_rcnn_inception_v2_coco/mask_rcnn_inception_v2_coco_2018_01_28/pipeline.config --input_model=/opt/intel/openvino_2021.4.752/deployment_tools/open_model_zoo/tools/downloader/public/mask_rcnn_inception_v2_coco/mask_rcnn_inception_v2_coco_2018_01_28/frozen_inference_graph.pb
+
+Model Optimizer arguments:
+Common parameters:
+	- Path to the Input Model: 	/opt/intel/openvino_2021.4.752/deployment_tools/open_model_zoo/tools/downloader/public/mask_rcnn_inception_v2_coco/mask_rcnn_inception_v2_coco_2018_01_28/frozen_inference_graph.pb
+	- Path for generated IR: 	/opt/intel/openvino_2021.4.752/deployment_tools/open_model_zoo/tools/downloader/public/mask_rcnn_inception_v2_coco/FP32
+	- IR output name: 	mask_rcnn_inception_v2_coco
+	- Log level: 	ERROR
+	- Batch: 	Not specified, inherited from the model
+	- Input layers: 	image_tensor
+	- Output layers: 	Not specified, inherited from the model
+	- Input shapes: 	[1,800,1365,3]
+	- Mean values: 	Not specified
+	- Scale values: 	Not specified
+	- Scale factor: 	Not specified
+	- Precision of IR: 	FP32
+	- Enable fusing: 	True
+	- Enable grouped convolutions fusing: 	True
+	- Move mean values to preprocess section: 	None
+	- Reverse input channels: 	True
+TensorFlow specific parameters:
+	- Input model in text protobuf format: 	False
+	- Path to model dump for TensorBoard: 	None
+	- List of shared libraries with TensorFlow custom layers implementation: 	None
+	- Update the configuration file with input/output node names: 	None
+	- Use configuration file used to generate the model with Object Detection API: 	/opt/intel/openvino_2021.4.752/deployment_tools/open_model_zoo/tools/downloader/public/mask_rcnn_inception_v2_coco/mask_rcnn_inception_v2_coco_2018_01_28/pipeline.config
+	- Use the config file: 	None
+	- Inference Engine found in: 	/opt/intel/openvino_2021/python/python3.8/openvino
+Inference Engine version: 	2021.4.2-3974-e2a469a3450-releases/2021/4
+Model Optimizer version: 	2021.4.2-3974-e2a469a3450-releases/2021/4
+2022-03-14 21:39:43.764934: W tensorflow/stream_executor/platform/default/dso_loader.cc:64] Could not load dynamic library 'libcudart.so.11.0'; dlerror: libcudart.so.11.0: cannot open shared object file: No such file or directory; LD_LIBRARY_PATH: /opt/intel/openvino_2021/data_processing/dl_streamer/lib:/opt/intel/openvino_2021/data_processing/gstreamer/lib:/opt/intel/openvino_2021/opencv/lib:/opt/intel/openvino_2021/deployment_tools/ngraph/lib:/opt/intel/openvino_2021/deployment_tools/inference_engine/external/tbb/lib::/opt/intel/openvino_2021/deployment_tools/inference_engine/external/hddl/lib:/opt/intel/openvino_2021/deployment_tools/inference_engine/external/omp/lib:/opt/intel/openvino_2021/deployment_tools/inference_engine/external/gna/lib:/opt/intel/openvino_2021/deployment_tools/inference_engine/external/mkltiny_lnx/lib:/opt/intel/openvino_2021/deployment_tools/inference_engine/lib/intel64:/opt/ros/noetic/lib
+2022-03-14 21:39:43.764982: I tensorflow/stream_executor/cuda/cudart_stub.cc:29] Ignore above cudart dlerror if you do not have a GPU set up on your machine.
+/home/ytl/.local/lib/python3.8/site-packages/flatbuffers/compat.py:19: DeprecationWarning: the imp module is deprecated in favour of importlib; see the module's documentation for alternative uses
+  import imp
+[ WARNING ]  
+Detected not satisfied dependencies:
+	tensorflow: installed: 2.7.0, required: ~= 2.4.1
+
+Please install required versions of components or use install_prerequisites script
+/opt/intel/openvino_2021.4.752/deployment_tools/model_optimizer/install_prerequisites/install_prerequisites_tf2.sh
+Note that install_prerequisites scripts may install additional components.
+[ WARNING ] Model Optimizer removes pre-processing block of the model which resizes image keeping aspect ratio. The Inference Engine does not support dynamic image size so the Intermediate Representation file is generated with the input image size of a fixed size.
+The Preprocessor block has been removed. Only nodes performing mean value subtraction and scaling (if applicable) are kept.
+The graph output nodes have been replaced with a single layer of type "DetectionOutput". Refer to the operation set specification documentation for more information about the operation.
+The predicted masks are produced by the "masks" layer for each bounding box generated with a "detection_output" operation.
+ Refer to operation specification in the documentation for information about the DetectionOutput operation output data interpretation.
+The model can be inferred using the dedicated demo "mask_rcnn_demo" from the OpenVINO Open Model Zoo.
+[ WARNING ]  Network has 2 inputs overall, but only 1 of them are suitable for input channels reversing.
+Suitable for input channel reversing inputs are 4-dimensional with 3 channels
+All inputs: {'image_tensor': [1, 3, 800, 1365], 'image_info': [1, 3]}
+Suitable inputs {'image_tensor': [1, 3, 800, 1365]}
+[ SUCCESS ] Generated IR version 10 model.
+[ SUCCESS ] XML file: /opt/intel/openvino_2021.4.752/deployment_tools/open_model_zoo/tools/downloader/public/mask_rcnn_inception_v2_coco/FP32/mask_rcnn_inception_v2_coco.xml
+[ SUCCESS ] BIN file: /opt/intel/openvino_2021.4.752/deployment_tools/open_model_zoo/tools/downloader/public/mask_rcnn_inception_v2_coco/FP32/mask_rcnn_inception_v2_coco.bin
+[ SUCCESS ] Total execution time: 73.18 seconds. 
+[ SUCCESS ] Memory consumed: 927 MB. 
+It's been a while, check for a new version of Intel(R) Distribution of OpenVINO(TM) toolkit here https://software.intel.com/content/www/us/en/develop/tools/openvino-toolkit/download.html?cid=other&source=prod&campid=ww_2022_bu_IOTG_OpenVINO-2022-1&content=upg_all&medium=organic or on the GitHub*

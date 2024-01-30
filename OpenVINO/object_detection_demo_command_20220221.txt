@@ -1,0 +1,1 @@
+python3 object_detection_demo.py -i /home/ytl/Downloads/1.png -m /opt/intel/openvino_2021.4.752/deployment_tools/open_model_zoo/tools/downloader/public/ssd_mobilenet_v2_coco/FP32/ssd_mobilenet_v2_coco.xml --labels /home/ytl/Downloads/coco.txt -at ssd

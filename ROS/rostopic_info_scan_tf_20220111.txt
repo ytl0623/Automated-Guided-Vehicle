@@ -1,0 +1,18 @@
+ros@rosky06:~$ rostopic info tf
+Type: tf2_msgs/TFMessage
+
+Publishers: 
+ * /base_link_to_laser4 (http://192.168.100.20:38347/)
+
+Subscribers: 
+ * /rviz_1641909595220619355 (http://192.168.100.20:41015/)
+
+
+ros@rosky06:~$ rostopic info scan
+Type: sensor_msgs/LaserScan
+
+Publishers: 
+ * /ydlidar_node (http://192.168.100.20:33981/)
+
+Subscribers: 
+ * /rviz_1641909595220619355 (http://192.168.100.20:41015/)

@@ -1,0 +1,339 @@
+ytl@ytl-VirtualBox:~$ lsusb
+Bus 002 Device 001: ID 1d6b:0003 Linux Foundation 3.0 root hub
+Bus 001 Device 002: ID 80ee:0021 VirtualBox USB Tablet
+Bus 001 Device 001: ID 1d6b:0002 Linux Foundation 2.0 root hub
+ytl@ytl-VirtualBox:~$ lsusb
+Bus 002 Device 001: ID 1d6b:0003 Linux Foundation 3.0 root hub
+========================================================================
+Bus 001 Device 003: ID 03e7:2485
+========================================================================
+Bus 001 Device 002: ID 80ee:0021 VirtualBox USB Tablet
+Bus 001 Device 001: ID 1d6b:0002 Linux Foundation 2.0 root hub
+
+https://www.intel.com/content/www/us/en/developer/articles/guide/get-started-with-neural-compute-stick.html
+
+Get Started with Intel® Neural Compute Stick 2 Linux
+
+cd ~/Downloads
+
+tar xvf l_openvino_toolkit_<VERSION>.tgz
+
+cd l_openvino_toolkit_<VERSION>
+
+sudo -E ./install_openvino_dependencies.sh 
+
+./install_GUI.sh
+
+source ~/intel/openvino_2021/bin/setupvars.sh
+
+cd ~/intel/openvino_2021/install_dependencies
+
+=============================
+./install_NCS_udev_rules.sh
+=============================
+
+cd ~/intel/openvino_2021/deployment_tools/model_optimizer/install_prerequisites/
+
+./install_prerequisites.sh
+
+cd ~/intel/openvino_2021/deployment_tools/demo
+
+./demo_squeezenet_download_convert_run.sh -d MYRIAD
+
+cd ~/intel/openvino_2021/deployment_tools/demo
+
+./demo_security_barrier_camera.sh -d MYRIAD
+
+source ~/intel/openvino/bin/setupvars.sh
+
+cd ~/inference_engine_samples_build/intel64/Release
+
+./security_barrier_camera_demo -i ~/intel/openvino/deployment_tools/demo/car_1.bmp -d MYRIAD -m ~/openvino_models/ir/FP16/Security/object_detection/barrier/0106/dldt/vehicle-license-plate-detection-barrier-0106-fp16.xml -d_va MYRIAD -m_va ~/openvino_models/ir/FP16/Security/object_attributes/vehicle/resnet10_update_1/dldt/vehicle-attributes-recognition-barrier-0039-fp16.xml -d_lpr MYRIAD -m_lpr ~/openvino_models/ir/FP16/Security/optical_character_recognition/license_plate/dldt/license-plate-recognition-barrier-0001-fp16.xml
+
+[ERROR]
+* FATAL ERROR:                                                   *
+* This OpenCV build doesn't support current CPU/HW configuration *
+
+"""
+ytl@ytl-VirtualBox:~/intel/openvino_2021/deployment_tools/demo$ ./demo_squeezenet_download_convert_run.sh -d MYRIAD
+target = MYRIAD
+target_precision = FP16
+[setupvars.sh] OpenVINO environment initialized
+
+
+###################################################
+
+
+
+Downloading the Caffe model and the prototxt
+Installing dependencies
+Hit:1 http://tw.archive.ubuntu.com/ubuntu bionic InRelease
+Hit:2 http://tw.archive.ubuntu.com/ubuntu bionic-updates InRelease                                          
+Hit:3 http://tw.archive.ubuntu.com/ubuntu bionic-backports InRelease                                                                  
+0% [1 InRelease gpgv 242 kB] [Connecting to security.ubuntu.com] [Connecting to packages.ros.org (64.50.236.52)]                      
+Hit:4 http://packages.ros.org/ros/ubuntu bionic InRelease                                                        
+Hit:5 http://packages.ros.org/ros2/ubuntu bionic InRelease                                            
+Hit:6 http://security.ubuntu.com/ubuntu bionic-security InRelease
+Reading package lists... Done                      
+Building dependency tree       
+Reading state information... Done
+9 packages can be upgraded. Run 'apt list --upgradable' to see them.
+Run sudo -E apt -y install build-essential python3-pip virtualenv cmake libcairo2-dev libpango1.0-dev libglib2.0-dev libgtk2.0-dev libswscale-dev libavcodec-dev libavformat-dev libgstreamer1.0-0 gstreamer1.0-plugins-base
+
+Reading package lists... Done
+Building dependency tree       
+Reading state information... Done
+build-essential is already the newest version (12.4ubuntu1).
+libgtk2.0-dev is already the newest version (2.24.32-1ubuntu1).
+virtualenv is already the newest version (15.1.0+ds-1.1).
+cmake is already the newest version (3.10.2-1ubuntu2.18.04.2).
+gstreamer1.0-plugins-base is already the newest version (1.14.5-0ubuntu1~18.04.3).
+libcairo2-dev is already the newest version (1.15.10-2ubuntu0.1).
+libglib2.0-dev is already the newest version (2.56.4-0ubuntu0.18.04.9).
+libgstreamer1.0-0 is already the newest version (1.14.5-0ubuntu1~18.04.2).
+libpango1.0-dev is already the newest version (1.40.14-1ubuntu0.1).
+libavcodec-dev is already the newest version (7:3.4.8-0ubuntu0.2).
+libavformat-dev is already the newest version (7:3.4.8-0ubuntu0.2).
+libswscale-dev is already the newest version (7:3.4.8-0ubuntu0.2).
+python3-pip is already the newest version (9.0.1-2.3~ubuntu1.18.04.5).
+The following packages were automatically installed and are no longer required:
+  linux-headers-5.4.0-90-generic linux-hwe-5.4-headers-5.4.0-42 linux-hwe-5.4-headers-5.4.0-84 linux-hwe-5.4-headers-5.4.0-87 linux-hwe-5.4-headers-5.4.0-89 linux-hwe-5.4-headers-5.4.0-90
+  linux-image-5.4.0-90-generic linux-modules-5.4.0-90-generic linux-modules-extra-5.4.0-90-generic
+Use 'sudo apt autoremove' to remove them.
+0 upgraded, 0 newly installed, 0 to remove and 9 not upgraded.
+Reading package lists... Done
+Building dependency tree       
+Reading state information... Done
+libpng-dev is already the newest version (1.6.34-1ubuntu0.18.04.2).
+The following packages were automatically installed and are no longer required:
+  linux-headers-5.4.0-90-generic linux-hwe-5.4-headers-5.4.0-42 linux-hwe-5.4-headers-5.4.0-84 linux-hwe-5.4-headers-5.4.0-87 linux-hwe-5.4-headers-5.4.0-89 linux-hwe-5.4-headers-5.4.0-90
+  linux-image-5.4.0-90-generic linux-modules-5.4.0-90-generic linux-modules-extra-5.4.0-90-generic
+Use 'sudo apt autoremove' to remove them.
+0 upgraded, 0 newly installed, 0 to remove and 9 not upgraded.
+WARNING: pip is being invoked by an old script wrapper. This will fail in a future version of pip.
+Please see https://github.com/pypa/pip/issues/5599 for advice on fixing the underlying issue.
+To avoid this problem you can invoke Python with '-m pip' instead of running pip directly.
+WARNING: The directory '/home/ytl/.cache/pip' or its parent directory is not owned or is not writable by the current user. The cache has been disabled. Check the permissions and owner of that directory. If executing pip with sudo, you should use sudo's -H flag.
+Collecting pyyaml>=5.4.1
+  Downloading PyYAML-6.0-cp36-cp36m-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_12_x86_64.manylinux2010_x86_64.whl (603 kB)
+     |████████████████████████████████| 603 kB 735 kB/s            
+Requirement already satisfied: requests>=2.25.1 in /home/ytl/.local/lib/python3.6/site-packages (from -r /home/ytl/intel/openvino_2021/deployment_tools/demo/../open_model_zoo/tools/downloader/requirements.in (line 2)) (2.26.0)
+Requirement already satisfied: urllib3<1.27,>=1.21.1 in /home/ytl/.local/lib/python3.6/site-packages (from requests>=2.25.1->-r /home/ytl/intel/openvino_2021/deployment_tools/demo/../open_model_zoo/tools/downloader/requirements.in (line 2)) (1.26.7)
+Requirement already satisfied: idna<4,>=2.5 in /home/ytl/.local/lib/python3.6/site-packages (from requests>=2.25.1->-r /home/ytl/intel/openvino_2021/deployment_tools/demo/../open_model_zoo/tools/downloader/requirements.in (line 2)) (3.3)
+Requirement already satisfied: certifi>=2017.4.17 in /home/ytl/.local/lib/python3.6/site-packages (from requests>=2.25.1->-r /home/ytl/intel/openvino_2021/deployment_tools/demo/../open_model_zoo/tools/downloader/requirements.in (line 2)) (2021.10.8)
+Requirement already satisfied: charset-normalizer~=2.0.0 in /home/ytl/.local/lib/python3.6/site-packages (from requests>=2.25.1->-r /home/ytl/intel/openvino_2021/deployment_tools/demo/../open_model_zoo/tools/downloader/requirements.in (line 2)) (2.0.7)
+Installing collected packages: pyyaml
+Successfully installed pyyaml-6.0
+WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv
+Run python3 /home/ytl/intel/openvino_2021/deployment_tools/open_model_zoo/tools/downloader/downloader.py --name squeezenet1.1 --output_dir /home/ytl/openvino_models/models --cache_dir /home/ytl/openvino_models/cache
+
+################|| Downloading squeezenet1.1 ||################
+
+========== Downloading /home/ytl/openvino_models/models/public/squeezenet1.1/squeezenet1.1.prototxt
+... 100%, 9 KB, 65023 KB/s, 0 seconds passed
+
+========== Downloading /home/ytl/openvino_models/models/public/squeezenet1.1/squeezenet1.1.caffemodel
+... 100%, 4834 KB, 2376 KB/s, 2 seconds passed
+
+========== Replacing text in /home/ytl/openvino_models/models/public/squeezenet1.1/squeezenet1.1.prototxt
+
+
+
+###################################################
+
+Install Model Optimizer dependencies
+
+Hit:1 http://tw.archive.ubuntu.com/ubuntu bionic InRelease
+Hit:2 http://tw.archive.ubuntu.com/ubuntu bionic-updates InRelease                                                          
+Hit:3 http://tw.archive.ubuntu.com/ubuntu bionic-backports InRelease                                                                                  
+Hit:4 http://packages.ros.org/ros/ubuntu bionic InRelease                                                                                             
+Hit:5 http://security.ubuntu.com/ubuntu bionic-security InRelease        
+Hit:6 http://packages.ros.org/ros2/ubuntu bionic InRelease               
+Reading package lists... Done                      
+Building dependency tree       
+Reading state information... Done
+9 packages can be upgraded. Run 'apt list --upgradable' to see them.
+Reading package lists... Done
+Building dependency tree       
+Reading state information... Done
+python3-pip is already the newest version (9.0.1-2.3~ubuntu1.18.04.5).
+python3-venv is already the newest version (3.6.7-1~18.04).
+The following packages were automatically installed and are no longer required:
+  linux-headers-5.4.0-90-generic linux-hwe-5.4-headers-5.4.0-42 linux-hwe-5.4-headers-5.4.0-84 linux-hwe-5.4-headers-5.4.0-87 linux-hwe-5.4-headers-5.4.0-89 linux-hwe-5.4-headers-5.4.0-90
+  linux-image-5.4.0-90-generic linux-modules-5.4.0-90-generic linux-modules-extra-5.4.0-90-generic
+Use 'sudo apt autoremove' to remove them.
+0 upgraded, 0 newly installed, 0 to remove and 9 not upgraded.
+WARNING: The directory '/home/ytl/.cache/pip' or its parent directory is not owned or is not writable by the current user. The cache has been disabled. Check the permissions and owner of that directory. If executing pip with sudo, you should use sudo's -H flag.
+Requirement already satisfied: pip in /home/ytl/.local/lib/python3.6/site-packages (21.3.1)
+WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv
+WARNING: The directory '/home/ytl/.cache/pip' or its parent directory is not owned or is not writable by the current user. The cache has been disabled. Check the permissions and owner of that directory. If executing pip with sudo, you should use sudo's -H flag.
+Requirement already satisfied: networkx~=2.5 in /usr/local/lib/python3.6/dist-packages (from -r /home/ytl/intel/openvino_2021/deployment_tools/model_optimizer/install_prerequisites/../requirements_caffe.txt (line 1)) (2.5.1)
+Requirement already satisfied: numpy<1.20,>=1.16.6 in /home/ytl/.local/lib/python3.6/site-packages (from -r /home/ytl/intel/openvino_2021/deployment_tools/model_optimizer/install_prerequisites/../requirements_caffe.txt (line 2)) (1.19.5)
+Requirement already satisfied: protobuf>=3.15.6 in /home/ytl/.local/lib/python3.6/site-packages (from -r /home/ytl/intel/openvino_2021/deployment_tools/model_optimizer/install_prerequisites/../requirements_caffe.txt (line 3)) (3.19.1)
+Requirement already satisfied: defusedxml>=0.7.1 in /usr/local/lib/python3.6/dist-packages (from -r /home/ytl/intel/openvino_2021/deployment_tools/model_optimizer/install_prerequisites/../requirements_caffe.txt (line 4)) (0.7.1)
+Requirement already satisfied: requests>=2.25.1 in /home/ytl/.local/lib/python3.6/site-packages (from -r /home/ytl/intel/openvino_2021/deployment_tools/model_optimizer/install_prerequisites/../requirements_caffe.txt (line 5)) (2.26.0)
+Requirement already satisfied: decorator<5,>=4.3 in /usr/local/lib/python3.6/dist-packages (from networkx~=2.5->-r /home/ytl/intel/openvino_2021/deployment_tools/model_optimizer/install_prerequisites/../requirements_caffe.txt (line 1)) (4.4.2)
+Requirement already satisfied: urllib3<1.27,>=1.21.1 in /home/ytl/.local/lib/python3.6/site-packages (from requests>=2.25.1->-r /home/ytl/intel/openvino_2021/deployment_tools/model_optimizer/install_prerequisites/../requirements_caffe.txt (line 5)) (1.26.7)
+Requirement already satisfied: certifi>=2017.4.17 in /home/ytl/.local/lib/python3.6/site-packages (from requests>=2.25.1->-r /home/ytl/intel/openvino_2021/deployment_tools/model_optimizer/install_prerequisites/../requirements_caffe.txt (line 5)) (2021.10.8)
+Requirement already satisfied: idna<4,>=2.5 in /home/ytl/.local/lib/python3.6/site-packages (from requests>=2.25.1->-r /home/ytl/intel/openvino_2021/deployment_tools/model_optimizer/install_prerequisites/../requirements_caffe.txt (line 5)) (3.3)
+Requirement already satisfied: charset-normalizer~=2.0.0 in /home/ytl/.local/lib/python3.6/site-packages (from requests>=2.25.1->-r /home/ytl/intel/openvino_2021/deployment_tools/model_optimizer/install_prerequisites/../requirements_caffe.txt (line 5)) (2.0.7)
+WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv
+	- Inference Engine found in: 	/home/ytl/intel/openvino_2021/python/python3.6/openvino
+Inference Engine version: 	2021.4.2-3974-e2a469a3450-releases/2021/4
+Model Optimizer version: 	2021.4.2-3974-e2a469a3450-releases/2021/4
+[WARNING] All Model Optimizer dependencies are installed globally.
+[WARNING] If you want to keep Model Optimizer in separate sandbox
+[WARNING] run install_prerequisites.sh "{caffe|tf|tf2|mxnet|kaldi|onnx}" venv
+
+
+###################################################
+
+Convert a model with Model Optimizer
+
+Run python3 /home/ytl/intel/openvino_2021/deployment_tools/open_model_zoo/tools/downloader/converter.py --mo /home/ytl/intel/openvino_2021/deployment_tools/model_optimizer/mo.py --name squeezenet1.1 -d /home/ytl/openvino_models/models -o /home/ytl/openvino_models/ir --precisions FP16
+
+========== Converting squeezenet1.1 to IR (FP16)
+Conversion command: /usr/bin/python3 -- /home/ytl/intel/openvino_2021/deployment_tools/model_optimizer/mo.py --framework=caffe --data_type=FP16 --output_dir=/home/ytl/openvino_models/ir/public/squeezenet1.1/FP16 --model_name=squeezenet1.1 '--input_shape=[1,3,227,227]' --input=data '--mean_values=data[104.0,117.0,123.0]' --output=prob --input_model=/home/ytl/openvino_models/models/public/squeezenet1.1/squeezenet1.1.caffemodel --input_proto=/home/ytl/openvino_models/models/public/squeezenet1.1/squeezenet1.1.prototxt
+
+Model Optimizer arguments:
+Common parameters:
+	- Path to the Input Model: 	/home/ytl/openvino_models/models/public/squeezenet1.1/squeezenet1.1.caffemodel
+	- Path for generated IR: 	/home/ytl/openvino_models/ir/public/squeezenet1.1/FP16
+	- IR output name: 	squeezenet1.1
+	- Log level: 	ERROR
+	- Batch: 	Not specified, inherited from the model
+	- Input layers: 	data
+	- Output layers: 	prob
+	- Input shapes: 	[1,3,227,227]
+	- Mean values: 	data[104.0,117.0,123.0]
+	- Scale values: 	Not specified
+	- Scale factor: 	Not specified
+	- Precision of IR: 	FP16
+	- Enable fusing: 	True
+	- Enable grouped convolutions fusing: 	True
+	- Move mean values to preprocess section: 	None
+	- Reverse input channels: 	False
+Caffe specific parameters:
+	- Path to Python Caffe* parser generated from caffe.proto: 	/home/ytl/intel/openvino_2021/deployment_tools/model_optimizer/mo/utils/../front/caffe/proto
+	- Enable resnet optimization: 	True
+	- Path to the Input prototxt: 	/home/ytl/openvino_models/models/public/squeezenet1.1/squeezenet1.1.prototxt
+	- Path to CustomLayersMapping.xml: 	/home/ytl/intel/openvino_2021/deployment_tools/model_optimizer/mo/utils/../../extensions/front/caffe/CustomLayersMapping.xml
+	- Path to a mean file: 	Not specified
+	- Offsets for a mean file: 	Not specified
+	- Inference Engine found in: 	/home/ytl/intel/openvino_2021/python/python3.6/openvino
+Inference Engine version: 	2021.4.2-3974-e2a469a3450-releases/2021/4
+Model Optimizer version: 	2021.4.2-3974-e2a469a3450-releases/2021/4
+[ SUCCESS ] Generated IR version 10 model.
+[ SUCCESS ] XML file: /home/ytl/openvino_models/ir/public/squeezenet1.1/FP16/squeezenet1.1.xml
+[ SUCCESS ] BIN file: /home/ytl/openvino_models/ir/public/squeezenet1.1/FP16/squeezenet1.1.bin
+[ SUCCESS ] Total execution time: 5.74 seconds. 
+[ SUCCESS ] Memory consumed: 111 MB. 
+
+
+
+###################################################
+
+Build Inference Engine samples
+
+-- The C compiler identification is GNU 7.5.0
+-- The CXX compiler identification is GNU 7.5.0
+-- Check for working C compiler: /usr/bin/cc
+-- Check for working C compiler: /usr/bin/cc -- works
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Check for working CXX compiler: /usr/bin/c++
+-- Check for working CXX compiler: /usr/bin/c++ -- works
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- Looking for C++ include unistd.h
+-- Looking for C++ include unistd.h - found
+-- Looking for C++ include stdint.h
+-- Looking for C++ include stdint.h - found
+-- Looking for C++ include sys/types.h
+-- Looking for C++ include sys/types.h - found
+-- Looking for C++ include fnmatch.h
+-- Looking for C++ include fnmatch.h - found
+-- Looking for strtoll
+-- Looking for strtoll - found
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /home/ytl/inference_engine_samples_build
+Scanning dependencies of target gflags_nothreads_static
+[  6%] Building CXX object thirdparty/gflags/CMakeFiles/gflags_nothreads_static.dir/src/gflags_reporting.cc.o
+[ 13%] Building CXX object thirdparty/gflags/CMakeFiles/gflags_nothreads_static.dir/src/gflags_completions.cc.o
+[ 20%] Building CXX object thirdparty/gflags/CMakeFiles/gflags_nothreads_static.dir/src/gflags.cc.o
+[ 26%] Linking CXX static library ../../intel64/Release/lib/libgflags_nothreads.a
+[ 26%] Built target gflags_nothreads_static
+Scanning dependencies of target ie_samples_utils
+[ 33%] Building CXX object common/utils/CMakeFiles/ie_samples_utils.dir/src/common.cpp.o
+[ 40%] Building CXX object common/utils/CMakeFiles/ie_samples_utils.dir/src/slog.cpp.o
+[ 46%] Building CXX object common/utils/CMakeFiles/ie_samples_utils.dir/src/args_helper.cpp.o
+[ 53%] Linking CXX static library ../../intel64/Release/lib/libie_samples_utils.a
+[ 53%] Built target ie_samples_utils
+Scanning dependencies of target format_reader
+[ 60%] Building CXX object common/format_reader/CMakeFiles/format_reader.dir/format_reader.cpp.o
+[ 66%] Building CXX object common/format_reader/CMakeFiles/format_reader.dir/opencv_wrapper.cpp.o
+[ 73%] Building CXX object common/format_reader/CMakeFiles/format_reader.dir/bmp.cpp.o
+[ 80%] Building CXX object common/format_reader/CMakeFiles/format_reader.dir/MnistUbyte.cpp.o
+[ 86%] Linking CXX shared library ../../intel64/Release/lib/libformat_reader.so
+[ 86%] Built target format_reader
+Scanning dependencies of target classification_sample_async
+[ 93%] Building CXX object classification_sample_async/CMakeFiles/classification_sample_async.dir/main.cpp.o
+[100%] Linking CXX executable ../intel64/Release/classification_sample_async
+[100%] Built target classification_sample_async
+
+
+###################################################
+
+Run Inference Engine classification sample
+
+Run ./classification_sample_async -d MYRIAD -i /home/ytl/intel/openvino_2021/deployment_tools/demo/car.png -m /home/ytl/openvino_models/ir/public/squeezenet1.1/FP16/squeezenet1.1.xml
+
+
+******************************************************************
+* FATAL ERROR:                                                   *
+* This OpenCV build doesn't support current CPU/HW configuration *
+*                                                                *
+* Use OPENCV_DUMP_CONFIG=1 environment variable for details      *
+******************************************************************
+
+Required baseline features:
+    ID=  2 (SSE) - OK
+    ID=  3 (SSE2) - OK
+    ID=  4 (SSE3) - OK
+    ID=  5 (SSSE3) - OK
+    ID=  6 (SSE4.1) - OK
+    ID=  8 (POPCNT) - NOT AVAILABLE
+    ID=  7 (SSE4.2) - OK
+terminate called after throwing an instance of 'cv::Exception'
+  what():  OpenCV(4.5.3-openvino) ../opencv/modules/core/src/system.cpp:645: error: (-215:Assertion failed) Missing support for required CPU baseline features. Check OpenCV build configuration and required CPU/HW setup. in function 'initialize'
+
+/home/ytl/intel/openvino_2021/deployment_tools/demo/utils.sh: line 14: 23443 Aborted                 (core dumped) "$@"
+Error on or near line 217; exiting with status 1
+
+"""
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
